@@ -104,11 +104,11 @@ then
     ${SRC_DIR}/resto/_install/createAdminUser.sh -u ${RESTO_ADMIN_USER} -p ${RESTO_ADMIN_PASSWORD} -d ${GAUSS_DB_NAME} -S ${GAUSS_DB_SCHEMA_NAME} -s ${DB_SUPERUSER}
   fi
   echo "====> Install S1 collection"
-  curl -X POST -H "Content-Type: application/json" -d @${SRC_DIR}/gauss/collections/S1.json ${SERVER_PROTOCOL}://${RESTO_ADMIN_USER}:${RESTO_ADMIN_PASSWORD}@${GAUSS_SERVER_URL}${GAUSS_VERSION_ENDPOINT}/collections
+  curl -X POST -H "Content-Type: application/json" -d @${SRC_DIR}/gauss.server/collections/S1.json ${SERVER_PROTOCOL}://${RESTO_ADMIN_USER}:${RESTO_ADMIN_PASSWORD}@${GAUSS_SERVER_URL}${GAUSS_VERSION_ENDPOINT}/collections
   echo "====> Install S2 collection"
-  curl -X POST -H "Content-Type: application/json" -d @${SRC_DIR}/gauss/collections/S2.json ${SERVER_PROTOCOL}://${RESTO_ADMIN_USER}:${RESTO_ADMIN_PASSWORD}@${GAUSS_SERVER_URL}${GAUSS_VERSION_ENDPOINT}/collections
+  curl -X POST -H "Content-Type: application/json" -d @${SRC_DIR}/gauss.server/collections/S2.json ${SERVER_PROTOCOL}://${RESTO_ADMIN_USER}:${RESTO_ADMIN_PASSWORD}@${GAUSS_SERVER_URL}${GAUSS_VERSION_ENDPOINT}/collections
   echo "====> Install S3 collection"
-  curl -X POST -H "Content-Type: application/json" -d @${SRC_DIR}/gauss/collections/S3.json ${SERVER_PROTOCOL}://${RESTO_ADMIN_USER}:${RESTO_ADMIN_PASSWORD}@${GAUSS_SERVER_URL}${GAUSS_VERSION_ENDPOINT}/collections
+  curl -X POST -H "Content-Type: application/json" -d @${SRC_DIR}/gauss.server/collections/S3.json ${SERVER_PROTOCOL}://${RESTO_ADMIN_USER}:${RESTO_ADMIN_PASSWORD}@${GAUSS_SERVER_URL}${GAUSS_VERSION_ENDPOINT}/collections
 fi
 
 

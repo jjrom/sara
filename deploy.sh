@@ -97,7 +97,7 @@ then
   ${SRC_DIR}/resto/_install/deploy.sh -s ${SRC_DIR}/resto -t ${GAUSS_ENDPOINT}
 
   echo " ==> Use ${CONFIG} file to generate ${GAUSS_ENDPOINT}/include/config.php";
-  ${SRC_DIR}/gauss/generate_config.sh -C ${CONFIG} > ${GAUSS_ENDPOINT}/include/config.php
+  ${SRC_DIR}/gauss.server/generate_config.sh -C ${CONFIG} > ${GAUSS_ENDPOINT}/include/config.php
 
   echo " ==> Set ${SRC_DIR} rights to ${WWW_USER}"
   chown -R ${WWW_USER} ${GAUSS_ENDPOINT}
