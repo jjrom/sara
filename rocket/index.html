@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html ng-app="rocket">
+    <head>
+        <title ng-bind="'index.title'| translate"></title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="user-scalable=0, initial-scale=1.0">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="shortcut icon" href="favicon.ico.png" />
+        <link href='//fonts.googleapis.com/css?family=Open+Sans|Montserrat:400,700' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="assets/libs/angularjs/angular-datepicker/angular-datepicker.min.css" type="text/css" />
+        <link rel="stylesheet" href="assets/libs/foundation/normalize.css" type="text/css" />
+        <link rel="stylesheet" href="assets/libs/foundation/foundation.min.css" type="text/css" />
+        <link rel="stylesheet" href="assets/libs/fontawesome/css/font-awesome.min.css" type="text/css" />
+        <link rel="stylesheet" href="assets/libs/angularjs/angular-growl-2/angular-growl.min.css" type="text/css" />
+        <link rel="stylesheet" href="assets/libs/angularjs/ngDialog/ngDialog.min.css" type="text/css" />
+        <link rel="stylesheet" href="assets/libs/angularjs/ngDialog/ngDialog-theme-default.min.css" type="text/css" />
+        <link rel="stylesheet" href="assets/libs/ol3/v3.14.2/ol.css" type="text/css" />
+        <link rel="stylesheet" href="assets/css/rocketmap.css" type="text/css" />
+        <link rel="stylesheet" href="assets/css/style.css" type="text/css" />
+    </head>
+
+    <body ng-controller="MainController as mainController">
+        
+        <!-- Loading mask -->
+        <div class="loading-mask" data-loading><span class="fa fa-3x fa fa-circle-o-notch fa-spin"></span></div>
+        
+        <!-- Growl -->
+        <div growl></div>
+        
+        <!-- Mobile menu -->
+        <div id="menuleft" ng-class="{hide:!showmenu,slide:showmenu}" ng-include="'app/shared/menu/leftMenu.html'" class="hide-for-large-up"></div>
+        <div class="overlay" ng-class="{show:showmenu}" ng-swipe-left="showmenu=false"></div>
+        
+        <!-- Main view -->
+        <div ng-include="'app/shared/header/header.html'"></div>
+        <div ui-view autoscroll="true"></div>
+        
+        <!-- jquery -->
+        <script type="text/javascript" src="assets/libs/jquery/jquery-2.1.3.min.js"></script>
+        
+        <!-- masonry -->
+        <script type="text/javascript" src="assets/libs/masonry/imagesloaded.pkgd.min.js"></script>
+        <script type="text/javascript" src="assets/libs/masonry/masonry.pkgd.min.js"></script>
+        
+        <!-- OpenLayers 3 -->
+        <!--<script type="text/javascript" src="assets/libs/ol3-cesium/ol3/ol-debug.js"></script>-->
+        <script type="text/javascript" src="assets/libs/ol3/v3.4.0/ol-debug.js"></script>
+        
+        <!-- Rocket map -->
+        <script type="text/javascript" src="assets/js/rocketmap.Map.js"></script>
+        <script type="text/javascript" src="assets/js/rocketmap.StaticMap.js"></script>
+        <script type="text/javascript" src="assets/js/rocketmap.Menu.js"></script>
+        <script type="text/javascript" src="assets/js/rocketmap.Util.js"></script>
+        
+        <!-- Angular and dependencies -->
+        <script type="text/javascript" src="assets/libs/angularjs/angular.js"></script>
+        <script type="text/javascript" src="assets/libs/angularjs/angular-touch.js"></script>
+        <script type="text/javascript" src="assets/libs/angularjs/angular-animate.js"></script>
+        <script type="text/javascript" src="assets/libs/angularjs/angular-cookies.js"></script>
+        <script type="text/javascript" src="assets/libs/angularjs/ui-router/angular-ui-router.js"></script>
+        <script type="text/javascript" src="assets/libs/angularjs/angular-translate/angular-translate.js"></script>
+        <script type="text/javascript" src="assets/libs/angularjs/angular-translate/angular-translate-loader-static-files.js"></script>
+        <script type="text/javascript" src="assets/libs/angularjs/satellizer/satellizer.js"></script>
+        <script type="text/javascript" src="assets/libs/angularjs/angular-growl-2/angular-growl.js"></script>
+        <script type="text/javascript" src="assets/libs/angularjs/ngDialog/ngDialog.js"></script>
+        <script type="text/javascript" src="assets/libs/angularjs/angular-masonry/angular-masonry.js"></script>
+        <script type="text/javascript" src="assets/libs/angularjs/angular-datepicker/angular-datepicker.min.js"></script>
+        
+        <!-- rocket -->
+        <script type="text/javascript" src="app/app.module.js"></script>
+        <script type="text/javascript" src="app/app.constant.js"></script>
+        <script type="text/javascript" src="app/app.config.js"></script>
+        <script type="text/javascript" src="app/app.routes.js"></script>
+        <script type="text/javascript" src="app/app.filters.js"></script>
+        <script type="text/javascript" src="app/app.services.js"></script>
+        <script type="text/javascript" src="app/app.directives.js"></script>
+        <script type="text/javascript" src="app/app.controller.js"></script>
+        <script type="text/javascript" src="app/services/RocketCache.js"></script>
+        <script type="text/javascript" src="app/services/RocketCart.js"></script>
+        <script type="text/javascript" src="app/services/RocketMap.js"></script>
+        <!-- <script type="text/javascript" src="app/apis/RestoCartAPI.js"></script> -->
+        <script type="text/javascript" src="app/services/Cart.js"></script>
+        <script type="text/javascript" src="app/apis/RestoFeatureAPI.js"></script>
+        <script type="text/javascript" src="app/apis/RestoUsersAPI.js"></script>
+        <script type="text/javascript" src="app/apis/RestoCollectionsAPI.js"></script>
+        <script type="text/javascript" src="app/components/home/HomeController.js"></script>
+        <script type="text/javascript" src="app/components/register/RegisterController.js"></script>
+        <script type="text/javascript" src="app/components/features/SearchController.js"></script>
+        <script type="text/javascript" src="app/components/features/FeatureController.js"></script>
+        <script type="text/javascript" src="app/components/features/LicenseController.js"></script>
+        <script type="text/javascript" src="app/components/features/SearchFiltersController.js"></script>
+        <script type="text/javascript" src="app/components/signin/SignInController.js"></script>
+        <script type="text/javascript" src="app/components/password/LostPasswordController.js"></script>
+        <script type="text/javascript" src="app/components/password/ResetPasswordController.js"></script>
+        <script type="text/javascript" src="app/components/cart/CartController.js"></script>
+        <script type="text/javascript" src="app/components/profile/ProfileController.js"></script>
+    </body>
+</html>

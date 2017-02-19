@@ -1,0 +1,20 @@
+<header class="bgdark">
+    <div class="resto-logo" ui-sref="home" ng-bind="'header.title'| translate"></div>
+    <nav>
+        <div class="show-for-large-up">
+            <ul class="nav__content">
+                <li ui-sref="home" ui-sref-active="active" ng-bind="'header.home'| translate" class="link"></li>
+                <li ui-sref="help" ui-sref-active="active" ng-bind="'header.help'| translate" class="link"></li>
+                <li ng-if="!mainController.isAuthenticated()" ui-sref="signin" ng-bind="'header.signin'| translate" class="link link--signin"></li>
+                <li ng-if="!mainController.isAuthenticated()" class="link link--signup"><a href="https://localhost" ng-bind="'header.signup'| translate"></a></li>
+                <li ng-if="mainController.isAuthenticated()" ui-sref="cart" ui-sref-active="active" class="link"><span class="fa fa-shopping-cart" title="{{'header.cart' | translate}}"></span></li>
+                <li ng-if="mainController.isAuthenticated()" ui-sref="profile" class="link link--signup">{{mainController.userMail()}}</li>
+            </ul>
+        </div>
+        <div class="hide-for-large-up">
+            <ul class="nav__content">
+                <li ng-click="mainController.toggleLeftMenu()" class="link link--showmenu fa fa-2x fa-bars" ng-class="{'fa-bars':!mainController.leftMenuIsVisible(), 'fa-close':mainController.leftMenuIsVisible()}"></li>
+            </ul>
+        </div>
+    </nav>
+</header>

@@ -1,0 +1,9 @@
+<div class="ngdialog-message center">
+    <h2 ng-bind="'license.title' | translate "></h2>
+    <p ng-bind="'license.description'| translate"></p>
+    <a ng-href="{{getLicenseUrl()}}" target="_blank" ng-bind="'license.seelicense'| translate" class="colored"></a>
+</div>
+<div class="ngdialog-buttons center">
+    <a class="button bcancel" ng-click="closeThisDialog()" ng-bind="'license.cancel' | translate"></a>
+    <a class="button bconfirm" ng-click="confirm()" ng-bind="'license.confirm' | translate"></a>
+</div>

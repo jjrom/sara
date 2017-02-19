@@ -1,0 +1,46 @@
+.ol-control button {
+    color:#000;
+    background-color:#fff;
+}
+.ol-control button:hover {
+    background-color:rgba(255, 255, 255, 0.5);
+}
+.ol-rotate {
+    top:45px;
+}
+.toogle-3d {
+    top: 65px;
+    left: .5em;
+}
+.ol-touch .toogle-3d {
+    top: 80px;
+}
+/*
+.ol-zoomslider-thumb {
+    background-color:#fff;
+}
+.ol-zoomslider, .ol-zoomslider:hover {
+    background-color:transparent;
+}
+.ol-zoom .ol-zoom-out {
+    margin-top: 204px;
+}
+.ol-zoomslider {
+    background-color: transparent;
+    top: 2.3em;
+}
+.ol-touch .ol-zoom .ol-zoom-out { 
+    margin-top: 212px;
+}
+.ol-touch .ol-zoomslider {
+    top: 2.75em;
+}
+.ol-zoom-in.ol-has-tooltip:hover [role=tooltip],
+.ol-zoom-in.ol-has-tooltip:focus [role=tooltip] {
+    top: 3px;
+}
+.ol-zoom-out.ol-has-tooltip:hover [role=tooltip],
+.ol-zoom-out.ol-has-tooltip:focus [role=tooltip] {
+    top: 232px;
+}
+*/
