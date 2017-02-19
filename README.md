@@ -17,15 +17,3 @@ We suppose that the sources will be stored under $GAUSS_SRC
     cd $GAUSS_SRC
     git remote set-url origin git+ssh://git@github.com/jjrom/gauss.git
 
-### Update resto repository
-
-    cd $GAUSS_SRC/resto
-    git fetch --all
-    git pull --all
-    for remote in `git branch -r`; do git branch --track ${remote#origin/} $remote; done
-    git checkout v2.4
-    git pull
-    cd ..
-    git commit -am "Update to resto v2.4"
-
-
