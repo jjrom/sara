@@ -1,0 +1,40 @@
+# GAUSS - docker installation
+
+Complete build of GAUSS application through docker installation for test purpose
+
+## Building docker file
+	
+Building the docker file should be done once. It supposes that you have [docker](https://www.docker.com/docker.io) installed on your system 
+
+	export GAUSS_SRC=/Users/jrom/Devel/gauss
+	cd ${GAUSS_SRC}/docker
+	docker build -t gauss --force-rm .
+
+## Install and test GAUSS
+
+### Install GAUSS within docker image
+
+First launch gauss image
+
+	export GAUSS_SRC=/Users/jrom/Devel/gauss
+	docker run -v ${GAUSS_SRC}:/gauss --rm -ti gauss /bin/bash
+
+Within the docker image, launch the following
+
+	export GAUSS_HOME=/gauss
+	cd $GAUSS_HOME
+
+	# Initialize database
+	service postgresql-9.5 initdb
+
+	# Local connection to db without password
+	cat <<EOF > /var/lib/pgsql/9.5/data/pg_hba.conf
+	local   all             all                                     trust
+	host    all             all             127.0.0.1/32            trust
+	host    all             all             ::1/128                 trust
+	EOF
+
+	# Start postgres service
+	service postgresql-9.5 start
+	
+

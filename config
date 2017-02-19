@@ -1,0 +1,39 @@
+## GAUSS configuration
+SERVER_PROTOCOL=http
+GAUSS_SERVER_URL=localhost
+GAUSS_TARGET_DIR=/var/www/gauss.server
+GAUSS_VERSION_ENDPOINT=/1.0
+
+## Email configuration 
+CONTACT_NAME=somebody
+CONTACT_EMAIL=somebody@geoscience.australia
+SMTP_HOST=xxx.xxxx
+SMTP_PORT=465
+SMTP_SECURE_PROTOCOL=ssl
+SMTP_USER=admin@snapplanet.io
+SMTP_PASSWORD=password
+
+## resto/itag configuration
+
+# CentOS 6 comes with PHP 5.3.3 - bcrypt cannot be used :(
+USE_BCRYPT=NO
+
+PASSPHRASE=thisisapassphrase
+UPLOAD_DIRECTORY=/tmp/resto_uploads
+GAUSS_DB_NAME=gauss
+GAUSS_DB_SCHEMA_NAME=resto
+DB_SUPERUSER=postgres
+RESTO_USER=resto
+RESTO_PASSWORD=resto
+RESTO_ADMIN_USER=admin
+RESTO_ADMIN_PASSWORD=admin
+ITAG_DIR=/tmp/itag
+ITAG_USER=itag
+ITAG_PASSWORD=itag
+
+MAPSERVER_URL=https://maps.snapplanet.io
+MAPFILES_DIR=/home/maps/tmp.mapfiles
+MAPFILES_DISPLAY_DIR=/data/tmp.mapfiles
+
+CLIENT_ENDPOINT_RESET_PASSWORD=http://localhost/#/resetPassword
+CLIENT_ENDPOINT_HTML_SEARCH_URL=http://localhost/#/search
