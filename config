@@ -1,8 +1,8 @@
-## GAUSS configuration
+## SARA configuration
 SERVER_PROTOCOL=http
-GAUSS_SERVER_URL=localhost
-GAUSS_TARGET_DIR=/var/www/gauss.server
-GAUSS_VERSION_ENDPOINT=/1.0
+SARA_SERVER_URL=localhost
+SARA_TARGET_DIR=/var/www/sara.server
+SARA_VERSION_ENDPOINT=/1.0
 
 ## Email configuration 
 CONTACT_NAME=somebody
@@ -20,8 +20,8 @@ USE_BCRYPT=NO
 
 PASSPHRASE=thisisapassphrase
 UPLOAD_DIRECTORY=/tmp/resto_uploads
-GAUSS_DB_NAME=gauss
-GAUSS_DB_SCHEMA_NAME=resto
+SARA_DB_NAME=sara
+SARA_DB_SCHEMA_NAME=resto
 DB_SUPERUSER=postgres
 RESTO_USER=resto
 RESTO_PASSWORD=resto

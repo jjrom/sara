@@ -1,6 +1,6 @@
 #! /bin/bash
 #
-# GAUSS - Geoscience AUStralia Sentinel hub
+# SARA - Sentinel Australia Regional Access
 # 
 # Installation script
 #
@@ -16,7 +16,7 @@ SRC_DIR=`pwd`
 
 function showUsage {
     echo ""
-    echo "   GAUSS - Geoscience AUStralia Sentinel hub installation"
+    echo "   SARA - Sentinel Australia Regional Access installation"
     echo ""
     echo "   Usage $0 [options]"
     echo ""
@@ -88,27 +88,27 @@ then
   echo "# Install resto database   "
   echo "###########################"
 
-  echo "====> Install ${GAUSS_DB_NAME} database"
+  echo "====> Install ${SARA_DB_NAME} database"
   if [ "${FORCE}" == "YES" ]
   then
-    ${SRC_DIR}/resto/_install/installDB.sh -d ${GAUSS_DB_NAME} -S ${GAUSS_DB_SCHEMA_NAME} -u ${RESTO_USER} -p ${RESTO_PASSWORD} -s ${DB_SUPERUSER} -F
+    ${SRC_DIR}/resto/_install/installDB.sh -d ${SARA_DB_NAME} -S ${SARA_DB_SCHEMA_NAME} -u ${RESTO_USER} -p ${RESTO_PASSWORD} -s ${DB_SUPERUSER} -F
   else
-    ${SRC_DIR}/resto/_install/installDB.sh -d ${GAUSS_DB_NAME} -S ${GAUSS_DB_SCHEMA_NAME} -u ${RESTO_USER} -p ${RESTO_PASSWORD} -s ${DB_SUPERUSER}
+    ${SRC_DIR}/resto/_install/installDB.sh -d ${SARA_DB_NAME} -S ${SARA_DB_SCHEMA_NAME} -u ${RESTO_USER} -p ${RESTO_PASSWORD} -s ${DB_SUPERUSER}
   fi
   if [ "${USE_BCRYPT}" == "YES" ]
   then
     echo "====> Create admin user ${RESTO_ADMIN_USER} **WITH** bcrypt hashing"
-    ${SRC_DIR}/resto/_install/createAdminUser.sh -u ${RESTO_ADMIN_USER} -p ${RESTO_ADMIN_PASSWORD} -d ${GAUSS_DB_NAME} -S ${GAUSS_DB_SCHEMA_NAME} -s ${DB_SUPERUSER} -B
+    ${SRC_DIR}/resto/_install/createAdminUser.sh -u ${RESTO_ADMIN_USER} -p ${RESTO_ADMIN_PASSWORD} -d ${SARA_DB_NAME} -S ${SARA_DB_SCHEMA_NAME} -s ${DB_SUPERUSER} -B
   else
     echo "====> Create admin user ${RESTO_ADMIN_USER} **WITHOUT** bcrypt hashing"
-    ${SRC_DIR}/resto/_install/createAdminUser.sh -u ${RESTO_ADMIN_USER} -p ${RESTO_ADMIN_PASSWORD} -d ${GAUSS_DB_NAME} -S ${GAUSS_DB_SCHEMA_NAME} -s ${DB_SUPERUSER}
+    ${SRC_DIR}/resto/_install/createAdminUser.sh -u ${RESTO_ADMIN_USER} -p ${RESTO_ADMIN_PASSWORD} -d ${SARA_DB_NAME} -S ${SARA_DB_SCHEMA_NAME} -s ${DB_SUPERUSER}
   fi
   echo "====> Install S1 collection"
-  curl -X POST -H "Content-Type: application/json" -d @${SRC_DIR}/gauss.server/collections/S1.json ${SERVER_PROTOCOL}://${RESTO_ADMIN_USER}:${RESTO_ADMIN_PASSWORD}@${GAUSS_SERVER_URL}${GAUSS_VERSION_ENDPOINT}/collections
+  curl -X POST -H "Content-Type: application/json" -d @${SRC_DIR}/sara.server/collections/S1.json ${SERVER_PROTOCOL}://${RESTO_ADMIN_USER}:${RESTO_ADMIN_PASSWORD}@${SARA_SERVER_URL}${SARA_VERSION_ENDPOINT}/collections
   echo "====> Install S2 collection"
-  curl -X POST -H "Content-Type: application/json" -d @${SRC_DIR}/gauss.server/collections/S2.json ${SERVER_PROTOCOL}://${RESTO_ADMIN_USER}:${RESTO_ADMIN_PASSWORD}@${GAUSS_SERVER_URL}${GAUSS_VERSION_ENDPOINT}/collections
+  curl -X POST -H "Content-Type: application/json" -d @${SRC_DIR}/sara.server/collections/S2.json ${SERVER_PROTOCOL}://${RESTO_ADMIN_USER}:${RESTO_ADMIN_PASSWORD}@${SARA_SERVER_URL}${SARA_VERSION_ENDPOINT}/collections
   echo "====> Install S3 collection"
-  curl -X POST -H "Content-Type: application/json" -d @${SRC_DIR}/gauss.server/collections/S3.json ${SERVER_PROTOCOL}://${RESTO_ADMIN_USER}:${RESTO_ADMIN_PASSWORD}@${GAUSS_SERVER_URL}${GAUSS_VERSION_ENDPOINT}/collections
+  curl -X POST -H "Content-Type: application/json" -d @${SRC_DIR}/sara.server/collections/S3.json ${SERVER_PROTOCOL}://${RESTO_ADMIN_USER}:${RESTO_ADMIN_PASSWORD}@${SARA_SERVER_URL}${SARA_VERSION_ENDPOINT}/collections
 fi
 
 

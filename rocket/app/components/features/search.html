@@ -5,7 +5,7 @@
 
     <!-- List view -->
     <div id="panel-list" ng-show="showList" class="ng-hide rocket-panel panel-list">
-        <h1 class="center color__gauss collection">{{friendlyName}}</h1>
+        <h1 class="center color__sara collection">{{friendlyName}}</h1>
         <!--<p class="row center description">{{Description}}</p>-->
         <div class="large-6 columns">
             <div>
@@ -96,9 +96,9 @@
         <div class="large-12 columns tableContainer margin-top-10 center" style="padding-bottom:100px;" ng-if="features.length > 0">
             <div class="center">
                 <p>
-                    <a class="page color__gauss" ng-show="features.length > 0 && params.page !== 1" ng-click="previousPage()"><{{ ::'previous' | translate}}</a>
+                    <a class="page color__sara" ng-show="features.length > 0 && params.page !== 1" ng-click="previousPage()"><{{ ::'previous' | translate}}</a>
                     {{ ::'from' | translate}} {{resultCounter.start}} {{ ::'to' | translate }} {{resultCounter.end}}
-                    <a class="page color__gauss" ng-show="features.length > 0 && !hasNoMore" ng-click="nextPage()">{{ ::'next' | translate}}></a>
+                    <a class="page color__sara" ng-show="features.length > 0 && !hasNoMore" ng-click="nextPage()">{{ ::'next' | translate}}></a>
                 </p>
             </div>
             <table class="">
@@ -129,16 +129,16 @@
                     <td>{{ ::feature.properties.processingLevel}}</td>
                     <td>{{ ::feature.properties.sensorMode}}</td>
                     <td style="text-align: center;" >
-                        <a class="color__gauss" ng-click="view('metadata', true, feature.properties.collection, feature.id)">{{ ::'details' | translate}}</a>
+                        <a class="color__sara" ng-click="view('metadata', true, feature.properties.collection, feature.id)">{{ ::'details' | translate}}</a>
                         <a ng-if="mainController.isAuthenticated()" class="fa fa-3x fa-cart-plus" ng-click="mainController.addToCart(feature, $event)"></a>
                     </td>
                 </tr>
             </table>
             <div class="center margin-top-10">
                 <p>
-                    <a class="page color__gauss" ng-show="features.length > 0 && params.page !== 1" ng-click="previousPage()"><{{'previous' | translate}}</a>
+                    <a class="page color__sara" ng-show="features.length > 0 && params.page !== 1" ng-click="previousPage()"><{{'previous' | translate}}</a>
                     {{'from' | translate}} {{resultCounter.start}} {{'to' | translate }} {{resultCounter.end}}
-                    <a class="page color__gauss" ng-show="features.length > 0 && !hasNoMore" ng-click="nextPage()">{{'next' | translate}}></a>
+                    <a class="page color__sara" ng-show="features.length > 0 && !hasNoMore" ng-click="nextPage()">{{'next' | translate}}></a>
                 </p>
             </div>
         </div>  

@@ -58,9 +58,9 @@
     "help.download.tools" : "Download tools",
     "help.download.tools.text" : "Some tools to make products download easier",
   
-    "home.title" : "GAUSS",
-    "home.subtitle" : "GAUSS - Geoscience AUStralia Sentinel hub",
-    "home.register" : "Register to GAUSS",
+    "home.title" : "SARA",
+    "home.subtitle" : "SARA - Sentinel Australia Regional Access",
+    "home.register" : "Register to SARA",
     "home.search.example" : "Search example TODO",
     "home.search.hint" : "Search...",
     "home.latest" : "Recently acquired images",
@@ -143,7 +143,7 @@
 
     "signin.email": "Email",
     "signin.external": "Sign in with external provider",
-    "signin.local": "Sign in with your gauss account",
+    "signin.local": "Sign in with your sara account",
     "signin.login.success": "Welcome home !",
     "signin.login.error": "Error during authentication !",
     "signin.lostpassword": "Forgot your password ?",

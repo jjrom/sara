@@ -1,6 +1,6 @@
 #! /bin/bash
 #
-# GAUSS - Geoscience AUStralia Sentinel hub
+# SARA - Sentinel Australia Regional Access
 # 
 # Deployment script
 #
@@ -15,13 +15,13 @@ PWD=`pwd`
 SRC_DIR=`pwd`
 function showUsage {
     echo ""
-    echo "   GAUSS - Geoscience AUStralia Sentinel hub deployment"
+    echo "   SARA - Sentinel Australia Regional Access deployment"
     echo ""
     echo "   Usage $0 [options]"
     echo ""
     echo "      -t | --target : one of 'server' or 'client'"
     echo "      -C | --config : local config file containing parameters to build config.php file"
-    echo "      -F | --force : force suppression of endpoint directory (i.e. ${GAUSS_TARGET_DIR}/${GAUSS_VERSION_ENDPOINT})"
+    echo "      -F | --force : force suppression of endpoint directory (i.e. ${SARA_TARGET_DIR}/${SARA_VERSION_ENDPOINT})"
     echo "      -h | --help : show this help"
     echo ""
     echo ""
@@ -79,7 +79,7 @@ fi
 . ${CONFIG}
 
 # Set endpoints
-GAUSS_ENDPOINT=${GAUSS_TARGET_DIR}${GAUSS_VERSION_ENDPOINT}
+SARA_ENDPOINT=${SARA_TARGET_DIR}${SARA_VERSION_ENDPOINT}
 
 # Server installation
 if [ "${TARGET}" == "server" ]
@@ -87,20 +87,20 @@ then
 
   if [ "${FORCE}" == "YES" ]
   then
-    echo " ==> Suppress ${GAUSS_ENDPOINT}"
-    rm -Rf ${GAUSS_ENDPOINT}
+    echo " ==> Suppress ${SARA_ENDPOINT}"
+    rm -Rf ${SARA_ENDPOINT}
   fi
 
-  mkdir -p ${GAUSS_TARGET_DIR}
+  mkdir -p ${SARA_TARGET_DIR}
 
-  echo " ==> Deploy resto in ${GAUSS_ENDPOINT}"
-  ${SRC_DIR}/resto/_install/deploy.sh -s ${SRC_DIR}/resto -t ${GAUSS_ENDPOINT}
+  echo " ==> Deploy resto in ${SARA_ENDPOINT}"
+  ${SRC_DIR}/resto/_install/deploy.sh -s ${SRC_DIR}/resto -t ${SARA_ENDPOINT}
 
-  echo " ==> Use ${CONFIG} file to generate ${GAUSS_ENDPOINT}/include/config.php";
-  ${SRC_DIR}/gauss.server/generate_config.sh -C ${CONFIG} > ${GAUSS_ENDPOINT}/include/config.php
+  echo " ==> Use ${CONFIG} file to generate ${SARA_ENDPOINT}/include/config.php";
+  ${SRC_DIR}/sara.server/generate_config.sh -C ${CONFIG} > ${SARA_ENDPOINT}/include/config.php
 
   echo " ==> Set ${SRC_DIR} rights to ${WWW_USER}"
-  chown -R ${WWW_USER} ${GAUSS_ENDPOINT}
+  chown -R ${WWW_USER} ${SARA_ENDPOINT}
 
   echo " Done !"
   exit 0

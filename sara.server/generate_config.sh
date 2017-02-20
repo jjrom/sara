@@ -1,7 +1,7 @@
 #!/bin/bash
 function showUsage {
     echo ""
-    echo "   resto config.php generator for GAUSS - Geoscience AUStralia Sentinel hub"
+    echo "   resto config.php generator for SARA - Sentinel Australia Regional Access"
     echo ""
     echo "   Usage $0 [options]"
     echo ""
@@ -47,13 +47,13 @@ cat << EOF
 <?php
 return array(
     'general' => array(
-        'title' => 'gauss',
-        'rootEndpoint' => '${GAUSS_VERSION_ENDPOINT}',
+        'title' => 'sara',
+        'rootEndpoint' => '${SARA_VERSION_ENDPOINT}',
         'languages' => array('en'),
         'osDescription' => array(
             'en' => array(
-                'ShortName' => 'GAUSS',
-                'LongName' => 'Geoscience AUStralia Sentinel hub search service',
+                'ShortName' => 'SARA',
+                'LongName' => 'Sentinel Australia Regional Access search service',
                 'Description' => 'Geoscience Australia Sentinel hub endpoint to Sentinel-1, Sentinel-2 and Sentinel-3 data',
                 'Tags' => 'geoscience australia, sentinel',
                 'Developer' => 'Geoscience Australia',
@@ -83,7 +83,7 @@ return array(
     ),
     'database' => array(
         'driver' => 'PostgreSQL',
-        'dbname' => '${GAUSS_DB_NAME}',
+        'dbname' => '${SARA_DB_NAME}',
         'port' => 5432,
         'resultsPerPage' => 20,
       	'sortKeys' => array('startdate'),

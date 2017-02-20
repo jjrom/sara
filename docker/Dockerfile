@@ -1,5 +1,5 @@
 #
-# GAUSS installation based on centos6 distrib
+# SARA installation based on centos6 distrib
 #
 FROM centos:centos6
 MAINTAINER The CentOS Project <cloud-ops@centos.org>

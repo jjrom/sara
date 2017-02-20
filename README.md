@@ -1,23 +1,23 @@
-# GAUSS - Geoscience AUStralia Sentinel hub
+# SARA - Sentinel Australia Regional Access
 
 ## Description
 
 ## Installation
 
-We suppose that the sources will be stored under $GAUSS_SRC
+We suppose that the sources will be stored under $SARA_SRC
 
-	export GAUSS_SRC=/root/gauss
+	export SARA_SRC=/root/sara
 
 ### Initialize sources repository
 
-**These command should be launch to initialize the GAUSS sources (i.e. for an install from scratch)**
+**These command should be launch to initialize the SARA sources (i.e. for an install from scratch)**
 
-	# Clone repository to "gauss" directory
-    git clone https://github.com/jjrom/gauss.git $GAUSS_SRC
+	# Clone repository to "sara" directory
+    git clone https://github.com/jjrom/sara.git $SARA_SRC
 
     # Avoid to ask for password everytime you update the local repository
-    cd $GAUSS_SRC
-    git remote set-url origin git+ssh://git@github.com/jjrom/gauss.git
+    cd $SARA_SRC
+    git remote set-url origin git+ssh://git@github.com/jjrom/sara.git
 
     # Update resto
     git submodule init
