@@ -15,9 +15,207 @@ angular.module('app', [
     // Library modules.
     'olMap',
     // Application modules.
-    'app.components.footer',
-    'app.components.header',
-    'app.templates']);
+    // 'app.components.home',
+    // 'app.components.header',
+    // 'rocketCacheServiceModule',
+    // 'app.components.main',
+    // 'rocketConstantModule',
+    // 'restoFeatureAPIModule',
+    // 'angular-cookies',
+    // 'app.components.left.menu',
+    // 'restoCartAPIModule',
+    // 'rocketMapModule',
+    'ngTouch',
+    'ngCookies',
+    'ngAnimate',
+    'ui.router',
+    'pascalprecht.translate',
+    'satellizer',
+    'angular-growl',
+    'ngDialog',
+    'wu.masonry',
+    '720kb.datepicker',
+    'rocket.filters',
+    'AppDirectives',
+    'app.templates'])
+    .config(RocketConfig)
+    .config(RocketRoutes);
+
+
+
+    // Config
+    RocketConfig.$inject = ['$translateProvider', '$authProvider', 'growlProvider', 'config'];
+    function RocketConfig($translateProvider, $authProvider, growlProvider, config) {
+
+        var token = function() {
+            return Math.random().toString(36).substr(2) + Math.random().toString(36).substr(2);
+        };
+
+        /*
+         * Internationalization
+         * (See i18n/{lang}.json)
+         */
+        var availableLanguages = config.availableLanguages || ['en'];
+        $translateProvider.useStaticFilesLoader({
+            prefix: 'i18n/',
+            suffix: '.json'
+        }).registerAvailableLanguageKeys(availableLanguages);
+        /*
+         * Automatically detects browser language.
+         * If not available, fallback to the first available language
+         * (default is english)
+         */
+        if (config.detectLanguage) {
+            $translateProvider.determinePreferredLanguage().fallbackLanguage(availableLanguages[0]);
+        }
+        else {
+            $translateProvider.preferredLanguage(availableLanguages[0]);
+        }
+
+        /*
+         * Authentication configuration
+         */
+        $authProvider.baseUrl = '';
+        $authProvider.loginUrl = config['restoServerUrl'] + '/api/users/connect';
+        $authProvider.loginRedirect = null;
+        var redirectUri = config['restoServerUrl'] + 'api/oauth/callback';
+
+        /*
+         * Authentication providers
+         */
+        if (config.auth) {
+            for (var key in config.auth) {
+                switch (key) {
+                    case 'google':
+                        $authProvider.google({
+                            url: config['restoServerUrl'] + '/api/auth/google',
+                            redirectUri:redirectUri,
+                            clientId: config.auth[key]['clientId'],
+                            requiredUrlParams:['scope', 'state'],
+                            state:token()
+                        });
+                        break;
+                    case 'linkedin':
+                        $authProvider.linkedin({
+                            url: config['restoServerUrl'] + '/api/auth/linkedin',
+                            redirectUri:redirectUri,
+                            clientId: config.auth[key]['clientId'],
+                            requiredUrlParams:['state'],
+                            state:token()
+                        });
+                        break;
+                    default:
+                        var requiredUrlParams = config.auth[key]['requiredUrlParams'] ? config.auth[key]['requiredUrlParams'] : [];
+                        requiredUrlParams.push('state');
+                        $authProvider.oauth2({
+                            name: key,
+                            url: config['restoServerUrl'] + '/api/auth/' + key,
+                            redirectUri:redirectUri,
+                            clientId: config.auth[key]['clientId'],
+                            authorizationEndpoint: config.auth[key]['authorizeUrl'],
+                            scope:config.auth[key]['scope'] || null,
+                            requiredUrlParams: requiredUrlParams,
+                            state:token(),
+                            popupOptions: { width: 900, height: 500 }
+                        });
+
+                }
+            }
+        }
+        growlProvider.globalPosition('top-center');
+
+    }
+
+
+
+    // Routes Config
+    RocketRoutes.$inject = ['$stateProvider', '$urlRouterProvider'];
+    function RocketRoutes($stateProvider, $urlRouterProvider) {
+
+        var resolve = {
+            authenticated: ['$q', '$location', 'rocketServices', function ($q, $location, rocketServices) {
+                var deferred = $q.defer();
+                if (!rocketServices.isAuthenticated()) {
+                    $location.path('/signin');
+                }
+                else {
+                    deferred.resolve();
+                }
+                return deferred.promise;
+            }]
+        };
+
+        /*
+         * For any unmatched url, redirect to /home
+         */
+        $urlRouterProvider.otherwise('home');
+
+        /*
+         * Routes
+         */
+        $stateProvider
+            .state('about', {
+                url: "/about",
+                templateUrl: "app/components/help/about.html"
+            })
+            .state('cart', {
+                url: "/cart",
+                controller: 'CartController',
+                templateUrl: "app/components/cart/cart.html",
+                resolve:resolve
+            })
+            .state('collections', {
+                url: "/collections/:collectionName",
+                templateUrl: "app/components/collections/collections.html"
+            })
+            .state('help', {
+                url: "/help",
+                templateUrl: "app/components/help/help.html"
+            })
+            .state('home', {
+                url: "/home",
+                controller: 'HomeController',
+                templateUrl: "app/components/home/home.html"
+            })
+            .state('lostPassword', {
+                url: '/lostPassword',
+                templateUrl: "app/components/password/lostPassword.html",
+                controller:"LostPasswordController"
+            })
+            .state('feature', {
+                url: '/collections/:collectionName/:featureId',
+                templateUrl: 'app/components/features/feature.html',
+                controller: 'FeatureController'
+            })
+            .state('profile', {
+                url: '/profile',
+                templateUrl: 'app/components/profile/profile.html',
+                controller: 'ProfileController',
+                resolve:resolve
+            })
+            .state('register', {
+                url: '/register',
+                templateUrl: "app/components/register/register.html",
+                controller:"RegisterController"
+            })
+            .state('resetPassword', {
+                url: '/resetPassword/:email',
+                templateUrl: "app/components/password/resetPassword.html",
+                controller:"ResetPasswordController"
+            })
+            .state('search', {
+                url: "/search?q&lang&view&collection&platform&instrument&productType&processingLevel&sensorMode&page&startDate&completionDate&geometry",
+                templateUrl: "app/components/features/search.html",
+                controller: 'SearchController',
+                reloadOnSearch: false
+            })
+            .state('signin', {
+                url: '/signin',
+                templateUrl: "app/components/signin/signIn.html",
+                controller:"SignInController"
+            });
+    }
+
 
 /**
  * In order to have more control over the initialization process, we use the manual bootstrapping
@@ -35,4 +233,10 @@ function bootstrap(config) {
     angular.bootstrap(window.document, ['app']);
 }
 $.getJSON('config.json', bootstrap); // loading configuration...
+
+
+
+
+
+
 

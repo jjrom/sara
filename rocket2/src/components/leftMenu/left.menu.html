@@ -1,0 +1,16 @@
+<div id="menuleft" ng-class="{hide:!mainCtrl.showmenu,slide:mainCtrl.showmenu}" class="hide-for-large-up">
+    <nav class="left-menu">
+        <ul>
+            <li ui-sref="search" ui-sref-active="active" ng-click="mainCtrl.toggleLeftMenu()" ng-bind="'header.explore'| translate" class="link"></li>
+            <!--<li ui-sref="about" ui-sref-active="active" ng-click="mainCtrl.toggleLeftMenu()" ng-bind="'header.about'| translate" class="link"></li>-->
+            <li ui-sref="help" ui-sref-active="active" ng-click="mainCtrl.toggleLeftMenu()" ng-bind="'header.help'| translate" class="link"></li>
+            <li ng-if="!mainCtrl.isAuthenticated()" ng-click="mainCtrl.toggleLeftMenu()" ui-sref="signin" ui-sref-active="active" ng-bind="'header.signin'| translate" class="link"></li>
+            <li ng-if="!mainCtrl.isAuthenticated()" ng-click="mainCtrl.toggleLeftMenu()" ui-sref="register" ui-sref-active="active" ng-bind="'header.signup'| translate" class="link"></li>
+            <li ng-if="mainCtrl.isAuthenticated()" ng-click="mainCtrl.toggleLeftMenu()" ui-sref="cart" ui-sref-active="active" ng-bind="'header.cart'| translate" class="link"></li>
+            <li ng-if="mainCtrl.isAuthenticated()" ng-click="mainCtrl.toggleLeftMenu()" ui-sref="profile" ui-sref-active="active" ng-bind="'header.profile'| translate" class="link"></li>
+            <li ng-if="mainCtrl.isAuthenticated()" ng-click="mainCtrl.logout()" ng-bind="'header.signout'| translate" class="link"></li>
+        </ul>
+    </nav>
+</div>
+
+<div class="overlay" ng-class="{show:mainCtrl.showmenu}" ng-swipe-left="mainCtrl.showmenu=false"></div>
