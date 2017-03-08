@@ -1,5 +1,5 @@
 
-angular.module('rocketCartModule',['rocketConstantModule','satellizer','angular-cookies'])
+angular.module('rocketCartModule',['rocketConstantModule','satellizer','ngCookies'])
         .factory('rocketCart', Cart);
 
     Cart.$inject = ['config', '$cookies', '$cookieStore', '$http', '$auth'];

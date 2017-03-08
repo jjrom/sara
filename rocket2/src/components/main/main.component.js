@@ -1,17 +1,25 @@
 angular.module('app.components.main',['restoFeatureAPIModule','rocketServicesModule','rocketCartModule','restoUsersAPIModule','rocketCacheServiceModule'])
-    .directive("main",mainDirective);
+    .directive("mainController",mainController);
 
 
-/**
- * @ngdoc directive
- */
-function mainDirective() {
-    return {
-        restrict: 'E',
-        controller: mainController,
-        controllerAs: 'mainCtrl'
-    };
-}
+// angular.module('app.components.main',[])
+//     .directive("mainController",mainController);
+
+
+// /**
+//  * @ngdoc directive
+//  */
+// function mainDirective() {
+//     return {
+//         restrict: 'E',
+//         controller: mainController,
+//         controllerAs: 'mainCtrl'
+//     };
+// }
+
+
+// function mainController($rootScope, $scope, restoFeatureAPI, rocketServices, rocketCart, restoUsersAPI, rocketCache) {}
+
 
 mainController.$inject= ['$rootScope', '$scope', 'restoFeatureAPI', 'rocketServices', 'rocketCart', 'restoUsersAPI', 'rocketCache'];
 
