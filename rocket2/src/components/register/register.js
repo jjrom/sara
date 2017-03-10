@@ -1,8 +1,8 @@
- angular.module('app.component.register')
+ angular.module('app.component.register',[])
             .directive('register', registerDirective);
 
 
- registerDirective = function () {
+    function registerDirective(){
      return {
          restrict : "E",
          controller : registerController,
@@ -10,7 +10,7 @@
          templateUrl : "components/register/register.html"
      };
 
- };
+ }
 
  registerController.$inject = ['$scope', 'rocketServices', 'restoUsersAPI'];
 

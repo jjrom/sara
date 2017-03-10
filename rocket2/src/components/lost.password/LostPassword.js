@@ -1,15 +1,15 @@
- angular.module('app.components.lost.password')
+ angular.module('app.components.lost.password',[])
             .directive('lostPassword',lostPasswordDirective);
 
 
- lostPasswordDirective = function () {
+ function lostPasswordDirective () {
      return {
          restrict : "E",
          controller : lostPasswordController,
          controllerAs : "lostPW",
          templateUrl : "components/lost.password/lostPassword.html"
      };
- };
+ }
 
     lostPasswordController.$inject = ['rocketServices', 'restoUsersAPI'];
 

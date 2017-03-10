@@ -2,14 +2,14 @@ angular.module('app.components.main',['restoFeatureAPIModule','rocketServicesMod
     .directive('main',mainDirective);
 
 
-    mainDirective = function () {
+    function mainDirective () {
         return {
             restrict : "E",
             controller : mainController,
             controllerAs : 'mainDirective'
         };
 
-    };
+    }
 
 mainController.$inject= ['$rootScope', '$scope', 'restoFeatureAPI', 'rocketServices', 'rocketCart', 'restoUsersAPI', 'rocketCache'];
 

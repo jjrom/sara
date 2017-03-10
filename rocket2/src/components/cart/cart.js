@@ -1,10 +1,10 @@
-    angular.module('rocketCartCompModule')
+    angular.module('app.component.cart',[])
         .directive('cart',cartDirective);
 
     function cartDirective() {
         return {
             restrict: 'E',
-            templateUrl: 'components/cart/cart.component.html',
+            templateUrl: 'components/cart/cart.html',
             controller : CartController,
             controllerAs : 'cartCtrl'
             };

@@ -1,7 +1,7 @@
- angular.module('app.component.sign.in')
+ angular.module('app.component.sign.in',[])
             .directive('signIn', signInDirective);
 
-    signInDirective = function () {
+    function signInDirective(){
         return {
             restrict : "E",
             controller : signInController,
@@ -9,7 +9,7 @@
             templateUrl :"components/signin/signIn.html"
         };
 
-    };
+    }
 
 
     signInController.$inject = ['$rootScope', 'restoUsersAPI', 'rocketServices'];

@@ -1,14 +1,14 @@
- angular.module('app.components.profile')
+ angular.module('app.components.profile',[])
             .directive('profile',profileDirective);
 
-    profileDirective = function () {
+    function profileDirective (){
         return {
             restrict : "E",
             controller : profileController,
             controllerAS : "profileCtrl",
             templateUrl : "components/profile/profile.html"
         };
-    };
+    }
 
     profileController.$inject = ['$scope', 'restoUsersAPI', 'rocketServices'];
 

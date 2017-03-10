@@ -1,7 +1,7 @@
- angular.module('app.components.reset.password')
+ angular.module('app.components.reset.password',[])
             .directive('resetPassword',resetPasswordDirective);
 
-    resetPasswordDirective = function () {
+ function resetPasswordDirective(){
         return {
             restrict : "E",
             controller : resetPasswordController,
@@ -9,7 +9,7 @@
             templateUrl : "components/reset.password/resetPassword.html"
         };
 
-    };
+    }
 
     resetPasswordController.$inject = ['$state', '$location', 'rocketServices', 'restoUsersAPI'];
 

@@ -39,8 +39,8 @@ angular.module('app', [
     'rocket.filters',
     'AppDirectives',
     //Components Loading
-    'rocketCartCompModule',
-    'collectionsComponentModule',
+    'app.component.cart',
+    'app.component.collections',
     'app.components.home',
     'app.components.lost.password',
     'app.components.reset.password',
