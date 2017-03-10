@@ -51,6 +51,8 @@ angular.module('app', [
     'app.component.license',
     'app.component.search',
     'app.components.search.filters',
+    'app.components.help',
+    'app.components.about',
     'app.templates'])
     .config(RocketConfig)
     .config(RocketRoutes);
@@ -140,8 +142,6 @@ angular.module('app', [
 
     }
 
-
-
     // Routes Config
     RocketRoutes.$inject = ['$stateProvider', '$urlRouterProvider'];
     function RocketRoutes($stateProvider, $urlRouterProvider) {
@@ -170,7 +170,7 @@ angular.module('app', [
         $stateProvider
             .state('about', {
                 url: "/about",
-                templateUrl: "src/components/help/about.html"
+                template: "<about></about>"
             })
             .state('cart', {
                 url: "/cart",
@@ -183,7 +183,7 @@ angular.module('app', [
             })
             .state('help', {
                 url: "/help",
-                templateUrl: "src/components/help/help.html"
+                template: "<help></help>"
             })
             .state('home', {
                 url: "/home",

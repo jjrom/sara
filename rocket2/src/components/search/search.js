@@ -1,5 +1,5 @@
 
-angular.module('app.component.search')
+angular.module('app.component.search',[])
             .directive('search', searchDirective);
 
     function searchDirective() {

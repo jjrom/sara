@@ -101,7 +101,9 @@
             <div class="center">
                 <p>
                     <a class="page color__sara" ng-show="searchCtrl.features.length > 0 && searchCtrl.params.page !== 1"
-                       ng-click="searchCtrl.previousPage()"><{{ ::'previous' | translate}}</a>
+                       ng-click="searchCtrl.previousPage()">
+                        {{ ::'previous' | translate}}
+                    </a>
                     {{ ::'from' | translate}} {{searchCtrl.resultCounter.start}} {{ ::'to' | translate }} {{searchCtrl.resultCounter.end}}
                     <a class="page color__sara" ng-show="searchCtrl.features.length > 0 && !searchCtrl.hasNoMore"
                        ng-click="searchCtrl.nextPage()">
@@ -147,7 +149,7 @@
             <div class="center margin-top-10">
                 <p>
                     <a class="page color__sara" ng-show="searchCtrl.features.length > 0 && searchCtrl.params.page !== 1"
-                       ng-click="searchCtrl.previousPage()"><{{'previous' | translate}}</a>
+                       ng-click="searchCtrl.previousPage()">{{'previous' | translate}}</a>
                     {{'from' | translate}} {{searchCtrl.resultCounter.start}} {{'to' | translate }} {{searchCtrl.resultCounter.end}}
                     <a class="page color__sara" ng-show="searchCtrl.features.length > 0 && !searchCtrl.hasNoMore"
                        ng-click="searchCtrl.nextPage()">{{'next' | translate}}></a>
