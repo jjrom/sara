@@ -39,6 +39,9 @@ angular.module('app', [
     '720kb.datepicker',
     'rocket.filters',
     'AppDirectives',
+    //Components Loading
+    'rocketCartCompModule',
+    'collectionsComponentModule',
     'app.templates'])
     .config(RocketConfig)
     .config(RocketRoutes);
@@ -158,21 +161,20 @@ angular.module('app', [
         $stateProvider
             .state('about', {
                 url: "/about",
-                templateUrl: "app/components/help/about.html"
+                templateUrl: "src/components/help/about.html"
             })
             .state('cart', {
                 url: "/cart",
-                controller: 'CartController',
-                templateUrl: "app/components/cart/cart.html",
+                template: '<cart></cart>',
                 resolve:resolve
             })
             .state('collections', {
                 url: "/collections/:collectionName",
-                templateUrl: "app/components/collections/collections.html"
+                template: '<collections></collections>'
             })
             .state('help', {
                 url: "/help",
-                templateUrl: "app/components/help/help.html"
+                templateUrl: "src/components/help/help.html"
             })
             .state('home', {
                 url: "/home",
