@@ -1,0 +1,33 @@
+<div class="padded-bottom">
+    <h5><span class="fa fa-globe"></span>&nbsp;{{'search.where'| translate}}</h5>
+    <div ng-if="ngDialogData.location.name" class="padded-left padded-small-bottom">
+        <b>{{ngDialogData.location.name}}{{ngDialogData.location.country| prefixcomma}}</b>
+    </div>
+</div>
+<div class="padded-bottom">
+    <h5><span class="fa fa-clock-o"></span>&nbsp;{{'search.when'| translate}}</h5>
+    <div ng-if="ngDialogData.searchFilters['time:start'] || ngDialogData.searchFilters['time:end']" class="padded-left padded-small-bottom">
+        {{ngDialogData.searchFilters['time:start']| nicedate | notime}} | {{ngDialogData.searchFilters['time:end']| nicedate | notime}}
+    </div>
+</div>
+<div class="padded-bottom">
+    <h5><span class="fa fa-flag"></span>&nbsp;{{'search.what'| translate}}</h5>
+    <div class="padded-left">
+        <span ng-repeat="searchTerm in ngDialogData.searchFilters.searchTerms.split(' ')" ng-if="searchTerm.indexOf(':') !== - 1">
+            <b>{{searchTerm| translate}}</b>&nbsp;
+        </span>
+        <span ng-repeat="(key, value) in ngDialogData.searchFilters" ng-if="key.substring(0, 2) === 'eo' || key.substring(0, 5) === 'resto'">
+            <b>{{key}}={{value}}</b>&nbsp;
+        </span>
+    </div>
+</div>
+<div class="padded-bottom">
+    <div ng-if="ngDialogData.errors.length > 0" class="redalert">
+        <h5><span class="fa fa-exclamation"></span>&nbsp;{{'search.notunderstood'| translate}}</h5>
+        <div class="padded-left">
+            <span ng-repeat="error in ngDialogData.errors">
+                <b>{{error.message}}</b>&nbsp;
+            </span>
+        </div>
+    </div>
+</div>

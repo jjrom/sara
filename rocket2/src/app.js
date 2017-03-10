@@ -47,6 +47,10 @@ angular.module('app', [
     'app.components.profile',
     'app.component.register',
     'app.component.sign.in',
+    'app.components.feature',
+    'app.component.license',
+    'app.component.search',
+    'app.components.search.filters',
     'app.templates'])
     .config(RocketConfig)
     .config(RocketRoutes);
@@ -191,8 +195,7 @@ angular.module('app', [
             })
             .state('feature', {
                 url: '/collections/:collectionName/:featureId',
-                templateUrl: 'app/components/features/feature.html',
-                controller: 'FeatureController'
+                template : "<feature></feature>"
             })
             .state('profile', {
                 url: '/profile',
@@ -209,8 +212,7 @@ angular.module('app', [
             })
             .state('search', {
                 url: "/search?q&lang&view&collection&platform&instrument&productType&processingLevel&sensorMode&page&startDate&completionDate&geometry",
-                templateUrl: "app/components/features/search.html",
-                controller: 'SearchController',
+                template : "<search></search>",
                 reloadOnSearch: false
             })
             .state('signin', {
