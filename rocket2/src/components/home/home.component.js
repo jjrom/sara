@@ -18,9 +18,9 @@ function homeDirective() {
 //Supporter avec la minification
 //Injecter le nom de la service dans le dépendence de la controller
 
-HomeController.$inject=['$scope','rocketServices','rocketCache','restoCollectionsAPI'];
+HomeController.$inject=['rocketServices','rocketCache','restoCollectionsAPI'];
 
-function HomeController($scope, rocketServices, rocketCache, restoCollectionsAPI) {
+function HomeController(rocketServices, rocketCache, restoCollectionsAPI) {
 
     /**
      * Got to product function
@@ -28,7 +28,8 @@ function HomeController($scope, rocketServices, rocketCache, restoCollectionsAPI
      * @param {string} featureId
      * @param {string} collectionName
      */
-    $scope.viewProduct = function (featureId, collectionName) {
+    var self = this;
+    self.viewProduct = function (featureId, collectionName) {
         rocketServices.go('feature', {
                 collectionName: collectionName,
                 featureId: featureId
@@ -41,18 +42,18 @@ function HomeController($scope, rocketServices, rocketCache, restoCollectionsAPI
     /**
      * Search function
      */
-    $scope.search = function () {
+    self.search = function () {
         rocketCache.remove('lastSearch');
         rocketServices.go('search', {
-            q: $scope.query
+            q: self.query
         });
     };
     /**
      * Initialize 20 empty squares grid
      */
-    $scope.features = [];
+    self.features = [];
     for (var i = 0, ii = 20; i < ii; i++) {
-        $scope.features.push({
+        self.features.push({
             id: -1
         });
     }
@@ -64,7 +65,7 @@ function HomeController($scope, rocketServices, rocketCache, restoCollectionsAPI
             cacheName: 'latest'
         },
         function (data) {
-            $scope.features = data.features;
+            self.features = data.features;
         },
         function (data) {
         });
@@ -73,7 +74,7 @@ function HomeController($scope, rocketServices, rocketCache, restoCollectionsAPI
      * Get collections
      */
     restoCollectionsAPI.getCollections(function (data) {
-            $scope.collections = [];
+            self.collections = [];
             var length = data.collections.length;
             for (var i = 0; i < length; i++) {
                 var item = [];
@@ -86,7 +87,7 @@ function HomeController($scope, rocketServices, rocketCache, restoCollectionsAPI
                     item.friendlyName = data.collections[i].osDescription.LongName;
                     item.Description = data.collections[i].osDescription.Description;
                 }
-                $scope.collections.push(item);
+                self.collections.push(item);
             }
         },
         function (error) {

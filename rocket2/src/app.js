@@ -15,7 +15,6 @@ angular.module('app', [
     // Library modules.
     'olMap',
     // Application modules.
-    'app.components.home',
     'app.components.header',
     'rocketCacheServiceModule',
     'app.components.main',
@@ -42,6 +41,10 @@ angular.module('app', [
     //Components Loading
     'rocketCartCompModule',
     'collectionsComponentModule',
+    'app.components.home',
+    'app.components.lost.password',
+    'app.components.reset.password',
+    'app.components.profile',
     'app.templates'])
     .config(RocketConfig)
     .config(RocketRoutes);
@@ -178,13 +181,11 @@ angular.module('app', [
             })
             .state('home', {
                 url: "/home",
-                controller: 'HomeController',
-                templateUrl: "app/components/home/home.html"
+                template: "<home></home>"
             })
             .state('lostPassword', {
                 url: '/lostPassword',
-                templateUrl: "app/components/password/lostPassword.html",
-                controller:"LostPasswordController"
+                template: "<lost-password></lost-password>"
             })
             .state('feature', {
                 url: '/collections/:collectionName/:featureId',
@@ -193,8 +194,7 @@ angular.module('app', [
             })
             .state('profile', {
                 url: '/profile',
-                templateUrl: 'app/components/profile/profile.html',
-                controller: 'ProfileController',
+                template : "<profile></profile>",
                 resolve:resolve
             })
             .state('register', {
@@ -204,8 +204,7 @@ angular.module('app', [
             })
             .state('resetPassword', {
                 url: '/resetPassword/:email',
-                templateUrl: "app/components/password/resetPassword.html",
-                controller:"ResetPasswordController"
+                template : "<reset-password></reset-password>"
             })
             .state('search', {
                 url: "/search?q&lang&view&collection&platform&instrument&productType&processingLevel&sensorMode&page&startDate&completionDate&geometry",

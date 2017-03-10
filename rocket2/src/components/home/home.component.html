@@ -6,7 +6,8 @@
             <p ng-bind="'home.subtitle'|translate" class="show-for-large-up"></p>
             <div class="content__search">
                 <form method="get" ng-submit="homeCtrl.search()" name="searchForm">
-                    <span class="resto-search"><input id="searchinput" type="search" ng-model="query" class="form-control" required="required" placeholder="{{'home.search.hint' | translate}}" style="font-size:1.5em;height:50px;max-width:800px;width:80%;"/></span>
+                    <span class="resto-search">
+                        <input id="searchinput" type="search" ng-model="homeCtrl.query" class="form-control" required="required" placeholder="{{'home.search.hint' | translate}}" style="font-size:1.5em;height:50px;max-width:800px;width:80%;"/></span>
                 </form>
                 <!--<p class="text-light"><span ng-bind="'eg'|translate"></span> "<a href="?q={{'home.search.example' | translate | urlencode}}&lang={{mainController.getLang()}}">{{'home.search.example' | translate}}</a>"</p>-->
             </div>
@@ -29,7 +30,7 @@
     -->
     
     <ul class="center feature-square__collection small-block-grid-1 large-block-grid-3">
-        <li ng-repeat="coll in collections" ng-if="coll.friendlyName">
+        <li ng-repeat="coll in homeCtrl.collections" ng-if="coll.friendlyName">
             <div class="feature-square__collection--content" ng-click="mainController.search('collection', coll.name)">
                 <b>{{coll.friendlyName}}</b>
                 <h3>{{coll.counter}}</h3>
@@ -42,8 +43,8 @@
     <div class="content__search--last">
         <h4 class="latest" ng-bind="'home.latest' | translate"></h4>
         <ul class="feature-square">
-            <li class="feature" ng-repeat="feature in features" bg-image="{{ feature.properties.quicklook }}">
-                <a ng-click="viewProduct(feature.id, feature.properties.collection)">
+            <li class="feature" ng-repeat="feature in homeCtrl.features" bg-image="{{ feature.properties.quicklook }}">
+                <a ng-click="homeCtrl.viewProduct(feature.id, feature.properties.collection)">
                     <div class="feature-square-info">
                         <div class="title">
                             <p>
@@ -77,6 +78,6 @@
     </div>
 </div>
 
-<div class="footer">
-    Powered by <a href="http://github.com/jjrom/resto2" class="colored">resto</a>, <a href="http://github.com/jjrom/itag" class="colored">iTag</a> and <a href="http://mapshup.com/projects/rocket" class="colored">rocket</a>
-</div>
+<!--<div class="footer">-->
+    <!--Powered by <a href="http://github.com/jjrom/resto2" class="colored">resto</a>, <a href="http://github.com/jjrom/itag" class="colored">iTag</a> and <a href="http://mapshup.com/projects/rocket" class="colored">rocket</a>-->
+<!--</div>-->
