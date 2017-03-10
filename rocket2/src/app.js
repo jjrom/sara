@@ -45,6 +45,8 @@ angular.module('app', [
     'app.components.lost.password',
     'app.components.reset.password',
     'app.components.profile',
+    'app.component.register',
+    'app.component.sign.in',
     'app.templates'])
     .config(RocketConfig)
     .config(RocketRoutes);
@@ -199,8 +201,7 @@ angular.module('app', [
             })
             .state('register', {
                 url: '/register',
-                templateUrl: "app/components/register/register.html",
-                controller:"RegisterController"
+                template : "<register></register>"
             })
             .state('resetPassword', {
                 url: '/resetPassword/:email',
@@ -214,8 +215,7 @@ angular.module('app', [
             })
             .state('signin', {
                 url: '/signin',
-                templateUrl: "app/components/signin/signIn.html",
-                controller:"SignInController"
+                template : "<sign-in></sign-in>"
             });
     }
 
