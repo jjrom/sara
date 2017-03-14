@@ -1,4 +1,4 @@
-<div class="content__page almostcovered" style="overflow: hidden;">
+<div class="content__page almostcovered" style="overflow: hidden; height: 400px;">
     <div class="coverbg"></div>
     <div class="content__description">
         <div class="content__start">
@@ -13,6 +13,7 @@
                                required="required" placeholder="{{'home.search.hint' | translate}}"
                                style="font-size:1.5em;height:50px;max-width:800px;width:80%;
                                background-color: rgba(30,54,78,0.8);
+                               border-radius: 5px;
                                color: #ffffff;"/>
                         <i class="fa fa-search fa-3x search_icon" aria-hidden="true"></i>
                     </span>
@@ -88,10 +89,12 @@
 <div class="content__register bglight show-for-large-up">
     <div class="content__register--text" >
         <a ng-click="mainController.search()" class="button bcancel"
-           style="background-color: rgba(30,54,78,1); border-radius: 5px; color: white"
+           style="background-color: rgba(30,54,78,1);
+           border-radius: 5px; color: white"
            ng-bind="'home.browse'|translate"></a>
         <a ui-sref="signin" class="button bconfirm"
-           style="background-color: rgba(30,54,78,1); border-radius: 5px; color: white"
+           style="background-color: rgba(30,54,78,1);
+           border-radius: 5px; color: white"
            ng-bind="'home.register'|translate"></a>
     </div>
 </div>
