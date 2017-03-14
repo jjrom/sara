@@ -1,18 +1,52 @@
-<div class="resto-logo" ui-sref="home" ng-bind="'header.title'| translate"></div>
-    <nav>
-        <div class="show-for-large-up">
-            <ul class="nav__content">
-                <li ui-sref="home" ui-sref-active="active" ng-bind="'header.home'| translate" class="link"></li>
-                <li ui-sref="help" ui-sref-active="active" ng-bind="'header.help'| translate" class="link"></li>
-                <li ng-if="!mainCtrl.isAuthenticated()" ui-sref="signin" ng-bind="'header.signin'| translate" class="link link--signin"></li>
-                <li ng-if="!mainCtrl.isAuthenticated()" class="link link--signup"><a href="https://localhost" ng-bind="'header.signup'| translate"></a></li>
-                <li ng-if="mainCtrl.isAuthenticated()" ui-sref="cart" ui-sref-active="active" class="link"><span class="fa fa-shopping-cart" title="{{'header.cart' | translate}}"></span></li>
-                <li ng-if="mainCtrl.isAuthenticated()" ui-sref="profile" class="link link--signup">{{mainCtrl.userMail()}}</li>
-            </ul>
-        </div>
-        <div class="hide-for-large-up">
-            <ul class="nav__content">
-                <li ng-click="mainCtrl.toggleLeftMenu()" class="link link--showmenu fa fa-2x fa-bars" ng-class="{'fa-bars':!mainCtrl.leftMenuIsVisible(), 'fa-close':mainCtrl.leftMenuIsVisible()}"></li>
-            </ul>
-        </div>
-    </nav>
+<!--<div class="resto-logo" ui-sref="home" ng-bind="'header.title'| translate"></div>-->
+    <!--<nav>-->
+        <!--<div class="show-for-large-up">-->
+            <!--<ul class="nav__content">-->
+                <!--<li ui-sref="home" ui-sref-active="active" ng-bind="'header.home'| translate" class="link"></li>-->
+                <!--<li ui-sref="help" ui-sref-active="active" ng-bind="'header.help'| translate" class="link"></li>-->
+                <!--<li ng-if="!mainCtrl.isAuthenticated()" ui-sref="signin" ng-bind="'header.signin'| translate" class="link link&#45;&#45;signin"></li>-->
+                <!--<li ng-if="!mainCtrl.isAuthenticated()" class="link link&#45;&#45;signup">-->
+                    <!--<a href="https://localhost" ng-bind="'header.signup'| translate"></a>-->
+                <!--</li>-->
+                <!--<li ng-if="mainCtrl.isAuthenticated()" ui-sref="cart" ui-sref-active="active" class="link"><span class="fa fa-shopping-cart" title="{{'header.cart' | translate}}"></span></li>-->
+                <!--<li ng-if="mainCtrl.isAuthenticated()" ui-sref="profile" class="link link&#45;&#45;signup">{{mainCtrl.userMail()}}</li>-->
+            <!--</ul>-->
+        <!--</div>-->
+        <!--<div class="hide-for-large-up">-->
+            <!--<ul class="nav__content">-->
+                <!--<li ng-click="mainCtrl.toggleLeftMenu()" class="link link&#45;&#45;showmenu fa fa-2x fa-bars" ng-class="{'fa-bars':!mainCtrl.leftMenuIsVisible(), 'fa-close':mainCtrl.leftMenuIsVisible()}"></li>-->
+            <!--</ul>-->
+        <!--</div>-->
+    <!--</nav>-->
+
+<nav>
+    <div class="show-for-large-up">
+        <!--pull the icons in the left-->
+        <a href="#">
+            <img alt="Brand" class="space_icons"
+                 src="img/australian_gov.png" >
+        </a>
+        <a><img alt="Brand" class="space_icons"
+                src="img/european_commision.png"></a>
+        <a><img alt="Brand" class="space_icons"
+                src="img/copernicus.png"></a>
+        <!--@hb-->
+        <ul class="nav__content">
+            <li ui-sref="Home" ui-sref-active="active" ng-bind="'header.home'| translate" class="link"></li>
+            <li ui-sref="Explore" ui-sref-active="active" ng-bind="'header.explore'| translate" class="link"></li>
+            <li ui-sref="More" ui-sref-active="active" ng-bind="'header.more'| translate" class="link"></li>
+            <li ng-if="!mainController.isAuthenticated()" ui-sref="login" ng-bind="'header.login'| translate" class="link link--signin"></li>
+            <li ng-if="!mainController.isAuthenticated()" class="link link--signup"><a href="https://localhost" ng-bind="'header.signup'| translate"></a></li>
+            <li ng-if="mainController.isAuthenticated()" ui-sref="cart" ui-sref-active="active" class="link"><span class="fa fa-shopping-cart" title="{{'header.cart' | translate}}"></span></li>
+            <li ng-if="mainController.isAuthenticated()" ui-sref="profile" class="link link--signup">{{mainController.userMail()}}</li>
+        </ul>
+    </div>
+    <div class="hide-for-large-up">
+        <ul class="nav__content">
+            <li ng-click="mainController.toggleLeftMenu()" class="link link--showmenu fa fa-2x fa-bars" ng-class="{'fa-bars':!mainController.leftMenuIsVisible(), 'fa-close':mainController.leftMenuIsVisible()}"></li>
+        </ul>
+    </div>
+</nav>
+
+
+

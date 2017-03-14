@@ -6,7 +6,7 @@ angular.module('app.components.main',['restoFeatureAPIModule','rocketServicesMod
         return {
             restrict : "E",
             controller : mainController,
-            controllerAs : 'mainDirective'
+            controllerAs : 'mainController'
         };
 
     }
