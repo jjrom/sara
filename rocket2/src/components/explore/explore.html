@@ -22,15 +22,27 @@
                 <p style="margin-left: 12px;">{{ ::'date.title' | translate | uppercase}}</p>
 
                 <div class="large-6 columns">
-                    <!--{{ ::'date.min' | translate | uppercase}}-->
                     <datepicker date-format="yyyy-MM-dd">
-                        <input ng-model="exploreCtrl.params.startDate" type="text" placeholder="date..."/>
+                        <!--<div class="input-group">-->
+                            <!--<span class="input-group-addon" >@</span>-->
+                            <!--<input type="text" class="form-control"-->
+                                   <!--ng-model="exploreCtrl.params.startDate"-->
+                                   <!--placeholder="" >-->
+                        <!--</div>-->
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" style="padding: 10px;" type="button">Begin</button>
+                            </span>
+                            <input type="text" class="form-control"
+                                   ng-model="exploreCtrl.params.startDate"
+                                   placeholder="" >
+                        </div>
+
                     </datepicker>
                 </div>
                 <div class="large-6 columns">
-                    <!--{{ ::'date.max' | translate | uppercase}}-->
                     <datepicker date-format="yyyy-MM-dd">
-                        <input ng-model="exploreCtrl.params.completionDate" type="text" placeholder="date..."/>
+                        <input ng-model="exploreCtrl.params.completionDate" type="text" placeholder=""/>
                     </datepicker>
                 </div>
                 <div class="large-12 columns">

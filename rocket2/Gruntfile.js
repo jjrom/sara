@@ -65,7 +65,8 @@ module.exports = function(grunt) {
                     {
                         src: [
                             './node_modules/font-awesome/css/font-awesome.min.css',
-                            './node_modules/openlayers/dist/ol.css'
+                            './node_modules/openlayers/dist/ol.css',
+                            './node_modules/bootstrap/dist/css/bootstrap.min.css'
                         ],
                         dest: '<%= dist_dir %>/css',
                         expand: true,

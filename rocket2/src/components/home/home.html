@@ -38,8 +38,8 @@
     <ul class="center feature-square__collection small-block-grid-1 large-block-grid-3">
         <li ng-repeat="coll in homeCtrl.collections" ng-if="coll.friendlyName">
             <div class="feature-square__collection--content" ng-click="mainController.search('collection', coll.name)">
-                <b>{{coll.friendlyName}}</b>
-                <h3>{{coll.counter}}</h3>
+                <b style="color: white">{{coll.friendlyName}}</b>
+                <h3 style="color: white">{{coll.counter}}</h3>
             </div>
         </li>
     </ul>
