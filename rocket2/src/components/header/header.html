@@ -32,9 +32,9 @@
                 src="img/copernicus_logo.png"></a>
         <!--@hb-->
         <ul class="nav__content">
-            <li ui-sref="Home" ui-sref-active="active" ng-bind="'header.home'| translate" class="link"></li>
-            <li ui-sref="Explore" ui-sref-active="active" ng-bind="'header.explore'| translate" class="link"></li>
-            <li ui-sref="More" ui-sref-active="active" ng-bind="'header.more'| translate" class="link"></li>
+            <li ui-sref="home" ui-sref-active="active" ng-bind="'header.home'| translate" class="link"></li>
+            <li ui-sref="explore" ui-sref-active="active" ng-bind="'header.explore'| translate" class="link"></li>
+            <li ui-sref="more" ui-sref-active="active" ng-bind="'header.more'| translate" class="link"></li>
             <li ng-if="!mainController.isAuthenticated()" ui-sref="login" ng-bind="'header.login'| translate" class="link link--signin"></li>
             <li ng-if="!mainController.isAuthenticated()" class="link link--signup"><a href="https://localhost" ng-bind="'header.signup'| translate"></a></li>
             <li ng-if="mainController.isAuthenticated()" ui-sref="cart" ui-sref-active="active" class="link"><span class="fa fa-shopping-cart" title="{{'header.cart' | translate}}"></span></li>

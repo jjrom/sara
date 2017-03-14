@@ -6,7 +6,8 @@
     "next": "next",
     "over": "over",
     "details": "details",
-    
+
+    "date.title" : "acquisition period",
     "date.min": "Date min",
     "date.max": "Date max",
     

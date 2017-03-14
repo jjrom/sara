@@ -53,6 +53,7 @@ angular.module('app', [
     'app.components.search.filters',
     'app.components.help',
     'app.components.about',
+    'app.component.explore',
     'app.templates'])
     .config(RocketConfig)
     .config(RocketRoutes);
@@ -218,7 +219,12 @@ angular.module('app', [
             .state('signin', {
                 url: '/signin',
                 template : "<sign-in></sign-in>"
-            });
+            })
+            // Add custom routes
+            .state('explore', {
+            url: '/explore',
+            template : "<explore></explore>"
+        });
     }
 
 
