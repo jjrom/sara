@@ -46,7 +46,7 @@ angular.module('app', [
     'app.components.reset.password',
     'app.components.profile',
     'app.component.register',
-    'app.component.sign.in',
+    'app.component.login',
     'app.components.feature',
     'app.component.license',
     'app.component.search',
@@ -209,8 +209,8 @@ angular.module('app', [
                 template : "<reset-password></reset-password>"
             })
             .state('login', {
-                url: '/signin',
-                template : "<sign-in></sign-in>"
+                url: '/login',
+                template : "<login></login>"
             })
             // Add custom routes
             .state('explore', {

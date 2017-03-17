@@ -1,20 +1,20 @@
- angular.module('app.component.sign.in',[])
-            .directive('signIn', signInDirective);
+ angular.module('app.component.login',[])
+            .directive('login', loginDirective);
 
-    function signInDirective(){
+    function loginDirective(){
         return {
             restrict : "E",
-            controller : signInController,
-            controllerAS : "signInCtrl",
-            templateUrl :"components/signin/signIn.html"
+            controller : loginController,
+            controllerAS : "loginCtrl",
+            templateUrl :"components/login/login.html"
         };
 
     }
 
 
-    signInController.$inject = ['$rootScope', 'restoUsersAPI', 'rocketServices'];
+    loginController.$inject = ['$rootScope', 'restoUsersAPI', 'rocketServices'];
 
-    function signInController($rootScope, restoUsersAPI, rocketServices) {
+    function loginController($rootScope, restoUsersAPI, rocketServices) {
         var self = this;
 
         self.login = function () {
