@@ -10,13 +10,13 @@ angular.module('app.components.feature',[])
         };
     }
 
-    featureController.$inject = ['$state', '$timeout', 'rocketServices', 'restoCollectionsAPI', 'config'];
+    featureController.$inject = ['$scope','$state', '$timeout', 'rocketServices', 'restoCollectionsAPI', 'config'];
 
-    function featureController($state, $timeout, rocketServices, restoCollectionsAPI , config) {
+    function featureController($scope, $state, $timeout, rocketServices, restoCollectionsAPI , config) {
         
         /*
          * Show property
-         * 
+         *
          * @param {string} item : property name
          * @returns {Boolean}
          */
@@ -31,15 +31,16 @@ angular.module('app.components.feature',[])
                 return false;
             }
         };
-        
+
         /*
          * Initialize view
          */
         self.init = function() {
             if (self.feature) {
-                  
+                console.log(self.feature);
+
                 var keywords = rebuildKeywords(self.feature.properties.keywords);
-                
+
                 /*
                  * resto doesn't translate location and season names
                  */
@@ -53,7 +54,7 @@ angular.module('app.components.feature',[])
                 }
                 self.keywords = keywords;
             }
-            
+
             /*
              * Set map
              */
@@ -74,21 +75,21 @@ angular.module('app.components.feature',[])
                 });
             }, 400);
         };
-        
+
         /**
          * Show feature on map
-         * 
+         *
          * @param {Object} feature
          * @param {Object} $event
          */
         self.viewOnMap = function(feature, $event) {
-		if (rocketServices.isAuthenticated()) {
-			restoCollectionsAPI.canVisualize(feature,function() {
-				self.staticMap.addProductLayer(feature);
-			},function() {}); 
-		}
+		    if (rocketServices.isAuthenticated()) {
+			    restoCollectionsAPI.canVisualize(feature,function() {
+				    self.staticMap.addProductLayer(feature);
+			    },function() {});
+		    }
         };
-        
+
         /**
          * Quote input string if it contains white spaces
          * @param {String} input
@@ -96,15 +97,15 @@ angular.module('app.components.feature',[])
         self.quote = function (input) {
             return input.indexOf(' ') >= 0 ? '"' + input + '"' : input;
         };
-        
+
         /*
          * Return a structured keywords object from flat keywords object
-         * 
+         *
          * @param {Object} keywords
          * @returns {Object}
          */
         var rebuildKeywords = function(keywords) {
-            
+
             /*
              * From http://stackoverflow.com/questions/21342596/tree-structure-from-adjacency-list
              */
@@ -133,10 +134,10 @@ angular.module('app.components.feature',[])
                     }, {catalog: {}, tree: {}}).tree;
                 };
             })();
-            
+
             /**
              * Return cleaned keyword
-             * 
+             *
              * @param {Object} keywords
              * @param {String} hash
              * @returns {Object}
@@ -158,7 +159,7 @@ angular.module('app.components.feature',[])
 
             /**
              * Convert associative array to simple array
-             * 
+             *
              * @param {Object} keywords
              * @returns {Array}
              */
@@ -172,7 +173,7 @@ angular.module('app.components.feature',[])
 
             /**
              * Convert keyword tree to structured list
-             * 
+             *
              * @param {Object} keywords
              * @returns {Array}
              */
@@ -189,7 +190,7 @@ angular.module('app.components.feature',[])
 
             return structure(makeTree(flatify(keywords)));
         };
-        
+
         /*
          * Get feature from server/cache
          */
@@ -205,7 +206,7 @@ angular.module('app.components.feature',[])
                 reload:true
             });
         });
-        
+
         /*
          * Get collections
          */
@@ -219,5 +220,5 @@ angular.module('app.components.feature',[])
         },
         function(error){
         });
-        
+
     }

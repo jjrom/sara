@@ -53,6 +53,7 @@ angular.module('app.component.explore',[])
         };
 
         /**
+         * @hb
          * Change panel view
          *
          * @param {string} panel
@@ -64,7 +65,7 @@ angular.module('app.component.explore',[])
 
             switch (panel) {
                 case 'metadata':
-                    rocketServices.go('feature', {
+                    rocketServices.go('result', {
                             collectionName: collectionName,
                             featureId: featureId
                         },

@@ -170,7 +170,7 @@ function mainController($rootScope, $scope, restoFeatureAPI, rocketServices, roc
                     params[key] = value;
                 }
                 rocketCache.remove('lastSearch');
-                rocketServices.go('search', params);
+                rocketServices.go('explore', params);
             };
 
 

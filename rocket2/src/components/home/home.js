@@ -41,10 +41,11 @@ function HomeController(rocketServices, rocketCache, restoCollectionsAPI) {
 
     /**
      * Search function
+     * @hb
      */
     self.search = function () {
         rocketCache.remove('lastSearch');
-        rocketServices.go('search', {
+        rocketServices.go('explore', {
             q: self.query
         });
     };
