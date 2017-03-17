@@ -636,7 +636,7 @@ angular.module('app.component.explore',[])
                 title: 'View metadata',
                 callback: function (feature) {
                     if (feature) {
-                        rocketServices.go('feature', {
+                        rocketServices.go('result', {
                                 collectionName: feature.getProperties().collection,
                                 featureId: feature.getId()
                             },

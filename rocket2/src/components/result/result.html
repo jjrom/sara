@@ -51,8 +51,8 @@
             <!-- Keywords -->
             <div style="padding-bottom:20px;" class="fullWidth padded-top">
                 <!-- Keywords -->
-                <div class="padded bglight row feature-keywords">
-                    <div class="medium-6 columns" style="background-color: darkgray;">
+                <div class="padded bglight row feature-keywords"  style="background-color: darkgray;">
+                    <div class="medium-6 columns">
                         <h5><span class="fa fa-flag"></span>&nbsp;{{'feature.keywords' | translate}}</h5>
                         <div class="padded-left">
                         <span ng-repeat="(keyword, value) in resultCtrl.keywords.location">
@@ -62,7 +62,7 @@
                             <a ng-click="mainController.search('q', keyword)" class="keyword">{{keyword}}</a><br/></span>
                         </div>
                     </div>
-                    <div class="medium-6 columns" style="background-color: darkgray;">
+                    <div class="medium-6 columns" >
                         <h5><span class="fa fa-globe"></span>&nbsp;{{'feature.location' | translate}}</h5>
                         <div class="padded-left">
                             <div ng-repeat="(continent, continentValue) in resultCtrl.keywords.continent">
@@ -82,7 +82,7 @@
                 </div>
 
                  <!--Landuse-->
-                <div class="row feature-keywords center margin-top-20">
+                <div class="row feature-keywords center margin-top-20" style="margin-top: 15px;">
                     <div class="small-12 columns bgmiddle padded">
                         <h5><span class="fa fa-tree"></span>&nbsp;{{'feature.landuse' | translate}}</h5>
                             <div class="padded-left">
@@ -211,7 +211,7 @@
     <div style="margin-top:20px;" class="row fullWidth padded bglight show-for-large-up">
         <!-- Properties -->
         <div class="row padded margin-top-10 margin-bottom-20 bglight tableContainer">
-            <h5 ng-bind="'properties' | translate"></h5>
+            <h5 style="color: white; background-color: #1e364e;" ng-bind="'properties' | translate"></h5>
 
             <table class="niceTable">
                 <tbody>

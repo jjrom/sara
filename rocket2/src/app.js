@@ -208,7 +208,7 @@ angular.module('app', [
                 url: '/resetPassword/:email',
                 template : "<reset-password></reset-password>"
             })
-            .state('signin', {
+            .state('login', {
                 url: '/signin',
                 template : "<sign-in></sign-in>"
             })

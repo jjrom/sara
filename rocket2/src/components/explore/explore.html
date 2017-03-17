@@ -6,24 +6,28 @@
     <!-- List view -->
     <div id="panel-list" ng-show="exploreCtrl.showList" class="ng-hide rocket-panel panel-list">
         <h1 class="center color__sara collection">{{exploreCtrl.friendlyName}}</h1>
-        <!--@hb The half of the page for the form & buttons-->
-        <div class="large-6 columns">
-            <!--@hb Part of Explore Form-->
-            <form class="search-list margin-top-10">
-                <div class="large-12 columns center" ng-if="exploreCtrl.features.length === 0">
-                    <!--@hb Sara Title part-->
-                    <p ng-bind="'home.subtitle'|translate"
-                       class="chicago" style="font-size: x-large" ></p>
 
-                    <h3>{{'search.over' | translate}} {{exploreCtrl.count}} {{'search.products' | translate}}</h3>
-                </div>
+        <!--The title of explore Page-->
+        <div class="large-12 columns center" ng-if="exploreCtrl.features.length === 0">
+            <!--@hb Sara Title part-->
+            <p ng-bind="'home.subtitle'|translate"
+               class="chicago" style="font-size: x-large" ></p>
 
-                <p style="margin-left: 12px;">{{ 'date.title' | translate | uppercase}}</p>
-                <!-- Begin date section-->
-                <div class="large-6 columns">
-                    <datepicker date-format="yyyy-MM-dd">
+            <h3>{{'search.over' | translate}} {{exploreCtrl.count}} {{'search.products' | translate}}</h3>
+        </div>
 
-                        <div class="input-group">
+        <div class="large-12 columns" style="padding-top: 10px;">
+            <!--@hb The half of the page for the form & buttons-->
+            <div class="large-6 columns">
+                <!--@hb Part of Explore Form-->
+                <form class="search-list margin-top-10">
+
+                    <p style="margin-left: 12px;">{{ 'date.title' | translate | uppercase}}</p>
+                    <!-- Begin date section-->
+                    <div class="large-6 columns">
+                        <datepicker date-format="yyyy-MM-dd">
+
+                            <div class="input-group">
                             <span class="input-group-btn">
                                 <button class="btn btn-primary" style="height: 40px;
                                                                 width: 100px;
@@ -32,19 +36,19 @@
                                                                 border-bottom-left-radius: 0;border-top-width: 2px; border-top-color: #666666;"
                                         type="button">Begin</button>
                             </span>
-                            <input id="explore_input" type="text" class="form-control"
-                                   ng-model="exploreCtrl.params.startDate"
-                                   style="height: 40px; border-top-width: 2px; border-top-color: #666666;"
-                                   placeholder="" >
-                        </div>
+                                <input id="explore_input" type="text" class="form-control"
+                                       ng-model="exploreCtrl.params.startDate"
+                                       style="height: 40px; border-top-width: 2px; border-top-color: #666666;"
+                                       placeholder="" >
+                            </div>
 
-                    </datepicker>
-                </div>
-                <!-- End date section-->
-                <div class="large-6 columns">
-                    <datepicker date-format="yyyy-MM-dd">
+                        </datepicker>
+                    </div>
+                    <!-- End date section-->
+                    <div class="large-6 columns">
+                        <datepicker date-format="yyyy-MM-dd">
 
-                        <div class="input-group">
+                            <div class="input-group">
                             <span class="input-group-btn">
                                 <button class="btn btn-primary" style="height: 40px;
                                                                 width: 100px;
@@ -53,99 +57,99 @@
                                                                 border-bottom-left-radius: 0;border-top-width: 2px; border-top-color: #666666;"
                                         type="button">End</button>
                             </span>
-                            <input id="explore_input" type="text" class="form-control"
-                                   ng-model="exploreCtrl.params.completionDate"
-                                   style="height: 40px; border-top-width: 2px; border-top-color: #666666;"
-                                   placeholder="" >
-                        </div>
+                                <input id="explore_input" type="text" class="form-control"
+                                       ng-model="exploreCtrl.params.completionDate"
+                                       style="height: 40px; border-top-width: 2px; border-top-color: #666666;"
+                                       placeholder="" >
+                            </div>
 
-                    </datepicker>
-                </div>
-                <!-- Collection section-->
-                <div class="large-12 columns" style="margin-top : 10px;">
-                    {{ ::'collection'| translate | uppercase }}
-                    <select ng-model="exploreCtrl.params.collection" style="background-color: #F2F2F2; border-top-width: 2px; border-top-color: #666666;"
-                            ng-options="name as name for (name, count) in exploreCtrl.statistics.collection">
-                        <option value="">-----</option>
-                    </select>
-                </div>
-                <!-- Platform section-->
-                <div class="large-6 columns">
-                    {{ ::'platform'| translate | uppercase }}
-                    <select ng-model="exploreCtrl.params.platform" style="background-color: #F2F2F2; border-top-width: 2px; border-top-color: #666666;"
-                            ng-options="name as name for (name, count) in exploreCtrl.statistics.platform">
-                        <option value="">-----</option>
-                    </select>
-                </div>
-                <!-- Instrument section-->
-                <div class="large-6 columns">
-                    {{ ::'instrument'| translate | uppercase }}
-                    <select ng-model="exploreCtrl.params.instrument" style="background-color: #F2F2F2; border-top-width: 2px; border-top-color: #666666;"
-                            ng-options="name as name for (name, count) in exploreCtrl.statistics.instrument">
-                        <option value="">-----</option>
-                    </select>
-                </div>
-                <div class="large-12 columns">
-                    {{ ::'processingLevel'| translate | uppercase }}
-                    <select ng-model="exploreCtrl.params.processingLevel" style="background-color: #F2F2F2; border-top-width: 2px; border-top-color: #666666;"
-                            ng-options="name as name for (name, count) in exploreCtrl.statistics.processingLevel">
-                        <option value="">-----</option>
-                    </select>
-                </div>
-                <div class="large-6 columns">
-                    {{ ::'productType'| translate | uppercase }}
-                    <select ng-model="exploreCtrl.params.productType" style="background-color: #F2F2F2; border-top-width: 2px; border-top-color: #666666;"
-                            ng-options="name as name for (name, count) in exploreCtrl.statistics.productType">
-                        <option value="">-----</option>
-                    </select>
-                </div>
-                <div class="large-6 columns">
-                    {{'sensorMode'| translate | uppercase }}
-                    <select ng-model="exploreCtrl.params.sensorMode" style="background-color: #F2F2F2; border-top-width: 2px; border-top-color: #666666;"
-                            ng-options="name as name for (name, count) in exploreCtrl.statistics.sensorMode">
-                        <option value="">-----</option>
-                    </select>
-                </div>
-                <div class="large-12 columns">
-                    {{'search.location' | translate | uppercase}}
-                    <form method="get" ng-submit="exploreCtrl.search()" name="searchForm">
+                        </datepicker>
+                    </div>
+                    <!-- Collection section-->
+                    <div class="large-12 columns" style="margin-top : 10px;">
+                        {{ ::'collection'| translate | uppercase }}
+                        <select ng-model="exploreCtrl.params.collection" style="background-color: #F2F2F2; border-top-width: 2px; border-top-color: #666666;"
+                                ng-options="name as name for (name, count) in exploreCtrl.statistics.collection">
+                            <option value="">-----</option>
+                        </select>
+                    </div>
+                    <!-- Platform section-->
+                    <div class="large-6 columns">
+                        {{ ::'platform'| translate | uppercase }}
+                        <select ng-model="exploreCtrl.params.platform" style="background-color: #F2F2F2; border-top-width: 2px; border-top-color: #666666;"
+                                ng-options="name as name for (name, count) in exploreCtrl.statistics.platform">
+                            <option value="">-----</option>
+                        </select>
+                    </div>
+                    <!-- Instrument section-->
+                    <div class="large-6 columns">
+                        {{ ::'instrument'| translate | uppercase }}
+                        <select ng-model="exploreCtrl.params.instrument" style="background-color: #F2F2F2; border-top-width: 2px; border-top-color: #666666;"
+                                ng-options="name as name for (name, count) in exploreCtrl.statistics.instrument">
+                            <option value="">-----</option>
+                        </select>
+                    </div>
+                    <div class="large-12 columns">
+                        {{ ::'processingLevel'| translate | uppercase }}
+                        <select ng-model="exploreCtrl.params.processingLevel" style="background-color: #F2F2F2; border-top-width: 2px; border-top-color: #666666;"
+                                ng-options="name as name for (name, count) in exploreCtrl.statistics.processingLevel">
+                            <option value="">-----</option>
+                        </select>
+                    </div>
+                    <div class="large-6 columns">
+                        {{ ::'productType'| translate | uppercase }}
+                        <select ng-model="exploreCtrl.params.productType" style="background-color: #F2F2F2; border-top-width: 2px; border-top-color: #666666;"
+                                ng-options="name as name for (name, count) in exploreCtrl.statistics.productType">
+                            <option value="">-----</option>
+                        </select>
+                    </div>
+                    <div class="large-6 columns">
+                        {{'sensorMode'| translate | uppercase }}
+                        <select ng-model="exploreCtrl.params.sensorMode" style="background-color: #F2F2F2; border-top-width: 2px; border-top-color: #666666;"
+                                ng-options="name as name for (name, count) in exploreCtrl.statistics.sensorMode">
+                            <option value="">-----</option>
+                        </select>
+                    </div>
+                    <div class="large-12 columns">
+                        {{'search.location' | translate | uppercase}}
+                        <form method="get" ng-submit="exploreCtrl.search()" name="searchForm">
                         <span>
                             <input id="searchLocation" type="search" style="background-color: #F2F2F2; border-top-width: 2px; border-top-color: #666666;"
                                    ng-model="exploreCtrl.params.location" class="form-control" required="required"
                                    placeholder="{{'search.ex' | translate}} T31TFM"/>
                         </span>
-                    </form>
-                </div>
-                <div class="large-12 columns">
-                    {{'search.keywords' | translate | uppercase}}
-                    <form method="get" ng-submit="exploreCtrl.search()" name="searchForm">
+                        </form>
+                    </div>
+                    <div class="large-12 columns">
+                        {{'search.keywords' | translate | uppercase}}
+                        <form method="get" ng-submit="exploreCtrl.search()" name="searchForm">
                         <span>
                             <input id="searchinput" type="search" style="background-color: #F2F2F2; border-top-width: 2px; border-top-color: #666666;"
                                    ng-model="exploreCtrl.params.q" class="form-control"
                                    required="required" placeholder="{{'search.ex' | translate}} Toulouse"/>
                         </span>
-                    </form>
+                        </form>
+                    </div>
+                </form>
+                <!--Part of search Buttons-->
+                <div class="large-12">
+                    <div class="center">
+                        <a class="button margin-top-20"
+                           style="background-color: #1e364e; padding:20px 60px;"
+                           ng-click="exploreCtrl.activatePolygonDrawning()">
+                            {{exploreCtrl.polygonDrawningActivated === true ? 'search.deactivate.polygonDrawning' : 'search.activate.polygonDrawning'| translate}}</a>
+                    </div>
                 </div>
-            </form>
-            <!--Part of search Buttons-->
-            <div class="large-12">
-                <div class="center">
-                    <a class="button margin-top-20"
-                       style="background-color: #1e364e; padding:20px 60px;"
-                       ng-click="exploreCtrl.activatePolygonDrawning()">
-                        {{exploreCtrl.polygonDrawningActivated === true ? 'search.deactivate.polygonDrawning' : 'search.activate.polygonDrawning'| translate}}</a>
-                </div>
-            </div>
 
 
-            <div class="large-12">
-                <div class="center">
+                <div class="large-12">
+                    <div class="center">
                     <span ng-click="exploreCtrl.reset()" class="pull-left">
                         <a class="button bcancel margin-top-20"
-                            style="background-color: rgba(215, 215, 215, 1); color : #666666; padding-top:20px;
+                           style="background-color: rgba(215, 215, 215, 1); color : #666666; padding-top:20px;
                             padding-bottom : 20px; padding-left: 60px; padding-right:10px;
                             margin-right: -5px; margin-left: 15px;"
-                            ng-bind="'search.resetfilters'|translate | uppercase">
+                           ng-bind="'search.resetfilters'|translate | uppercase">
                         </a>
 
                         <i style="background-color: rgba(215, 215, 215, 1);
@@ -155,11 +159,11 @@
                             padding-left: 11px;
                             margin-left: 0px;
                             font-size: x-large;"
-                            class="fa fa-repeat" aria-hidden="true"></i>
+                           class="fa fa-repeat" aria-hidden="true"></i>
                     </span>
-                    <span ng-click="exploreCtrl.search()" class="pull-right">
+                        <span ng-click="exploreCtrl.search()" class="pull-right">
                         <a class="button bconfirm margin-top-20"
-                            style="background-color: green;
+                           style="background-color: green;
                             padding-top:20px;
                             padding-bottom : 20px; padding-left: 130px; padding-right:10px;
                             margin-right: -5px;"
@@ -174,28 +178,27 @@
                             margin-left: 0px;
                             margin-right: 15px;
                             font-size: x-large;"
-                            class="fa fa-search" aria-hidden="true"></i>
+                           class="fa fa-search" aria-hidden="true"></i>
 
                     </span>
+                    </div>
                 </div>
             </div>
-        </div>
-        <!--Map Part-->
-        <div class="large-6 columns" style="margin-top: 125px;">
-            <div>
-                <div id="staticmap"></div>
+            <!--Map Part-->
+            <div class="large-6 columns" style="">
+                <div>
+                    <div id="staticmap"></div>
+                </div>
+                <div  class="center" style="height:50px;">
+                    <span ng-show="exploreCtrl.polygonDrawningActivated" class="ng-hide">{{'search.tip.draw' | translate}}</span>
+                </div>
+                <div class="center">
+                    <!--<a ng-show="searchPolygon" class="ng-hide button" ng-click="resetSearchPolygon()" ng-bind="'search.reset.PolygonDrawning'|translate"></a>
+                    -->
+                </div>
             </div>
-            <div  class="center" style="height:50px;">
-                <span ng-show="exploreCtrl.polygonDrawningActivated" class="ng-hide">{{'search.tip.draw' | translate}}</span>
-            </div>
-            <div class="center">
-                <!--<a ng-show="searchPolygon" class="ng-hide button" ng-click="resetSearchPolygon()" ng-bind="'search.reset.PolygonDrawning'|translate"></a>
-                -->
-            </div>
-        </div>
-        <!--<div class="large-12 columns">-->
 
-        <!--</div>-->
+        </div>
         <!-- The search result section-->
         <div class="large-12 columns tableContainer margin-top-10 center" style="padding-bottom:100px;"
              ng-if="exploreCtrl.features.length > 0">
@@ -206,13 +209,13 @@
                 <p><b>
                     <a class="page color__sara" ng-show="exploreCtrl.features.length > 0 && exploreCtrl.params.page !== 1"
                        ng-click="exploreCtrl.previousPage()">
-                        {{ ::'previous' | translate}}
+                        <i class="fa fa-angle-double-left" aria-hidden="true"></i>
                     </a>
                 <span style="color: green;">
                 {{ ::'from' | translate}} {{exploreCtrl.resultCounter.start}} {{ ::'to' | translate }} {{exploreCtrl.resultCounter.end}}</span>
                     <a class="page color__sara" ng-show="exploreCtrl.features.length > 0 && !exploreCtrl.hasNoMore"
                        ng-click="exploreCtrl.nextPage()">
-                        {{ ::'next' | translate}}</a>
+                        <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
                 </b></p>
             </div>
             <table class="">
@@ -257,12 +260,16 @@
             <div class="center margin-top-10">
                 <p><b>
                     <a class="page color__sara" ng-show="exploreCtrl.features.length > 0 && exploreCtrl.params.page !== 1"
-                       ng-click="exploreCtrl.previousPage()">{{'previous' | translate}}</a>
+                       ng-click="exploreCtrl.previousPage()">
+                        <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                    </a>
                     <span style="color: green;">
                     {{'from' | translate}} {{exploreCtrl.resultCounter.start}} {{'to' | translate }} {{exploreCtrl.resultCounter.end}}
                     </span>
                     <a class="page color__sara" ng-show="exploreCtrl.features.length > 0 && !exploreCtrl.hasNoMore"
-                       ng-click="exploreCtrl.nextPage()">{{'next' | translate}}></a>
+                       ng-click="exploreCtrl.nextPage()">
+                        <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    </a>
                 </b></p>
             </div>
         </div>
