@@ -13,7 +13,7 @@ angular.module('app', [
     // Official modules.
     'ng',
     // Library modules.
-    'olMap',
+    // 'olMap',
     // Application modules.
     'app.components.header',
     'rocketCacheServiceModule',
@@ -54,6 +54,7 @@ angular.module('app', [
     'app.components.help',
     'app.components.about',
     'app.component.explore',
+    'app.components.result',
     'app.templates'])
     .config(RocketConfig)
     .config(RocketRoutes);
@@ -194,10 +195,6 @@ angular.module('app', [
                 url: '/lostPassword',
                 template: "<lost-password></lost-password>"
             })
-            .state('feature', {
-                url: '/collections/:collectionName/:featureId',
-                template : "<feature></feature>"
-            })
             .state('profile', {
                 url: '/profile',
                 template : "<profile></profile>",
@@ -211,20 +208,20 @@ angular.module('app', [
                 url: '/resetPassword/:email',
                 template : "<reset-password></reset-password>"
             })
-            .state('search', {
-                url: "/search?q&lang&view&collection&platform&instrument&productType&processingLevel&sensorMode&page&startDate&completionDate&geometry",
-                template : "<search></search>",
-                reloadOnSearch: false
-            })
             .state('signin', {
                 url: '/signin',
                 template : "<sign-in></sign-in>"
             })
             // Add custom routes
             .state('explore', {
-            url: '/explore',
-            template : "<explore></explore>"
-        });
+            url: '/explore?q&lang&view&collection&platform&instrument&productType&processingLevel&sensorMode&page&startDate&completionDate&geometry',
+            template : "<explore></explore>",
+            reloadOnSearch: false
+        })
+            .state('result', {
+                url: '/collections/:collectionName/:featureId',
+                template : "<result></result>"
+            });
     }
 
 

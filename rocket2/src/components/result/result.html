@@ -1,0 +1,249 @@
+<div class="content content__feature">
+    <!-- Metadata -->
+    <div style="margin-top:20px;" class="row fullWidth padded bglight show-for-large-up">
+
+        <div id="leftColumn" class="small-6 medium-6 large-4 columns">
+                <div class="center">
+                    <h2>
+                        <a class="chicago" style="color: green"
+                           ng-click="mainController.search('collection', resultCtrl.feature.properties.collection)">
+                        {{resultCtrl.collection.osDescription.LongName}}
+                        </a>
+                    </h2>
+                    <h4 class="silom">{{resultCtrl.feature.properties.keywords | extractlocation}}</h4>
+                    <h5 class="silom">{{resultCtrl.feature.properties.startDate | nicedate}}</h5>
+
+                    <p>
+                        <a ng-if="mainController.isAuthenticated()" title="{{'feature.download' | translate}}"
+                            href="" class="fa fa-3x fa-cloud-download padded-small"  ng-click="mainController.download(resultCtrl.feature, $event)"></a>
+                        <a ng-if="mainController.isAuthenticated()" title="{{'feature.addToCart' | translate}}"
+                            href="" class="fa fa-3x fa-cart-plus padded-small"
+                            ng-click="mainController.addToCart(resultCtrl.feature, $event)"></a>
+                    </p>
+                </div>
+        </div>
+
+        <!--Description section of the -->
+        <div id="rightColumn" class="small-6 medium-6 large-8 columns">
+            <p style="color: rgba(30,54,78,1); font-family: Cambria; font-size: x-large; padding: 10px;">
+                {{resultCtrl.collection.osDescription.Description}}
+            </p>
+        </div>
+
+        <!--Map-->
+        <div class="row fullWidth">
+            <div class="large-12 columns padded-top padded-bottom">
+                <div id="feature-staticmap" style="width:100%;height:450px;"></div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div style="margin-top:20px;" class="row fullWidth padded bglight show-for-large-up">
+        <div id="leftColumn" class="small-12 medium-12 large-6 columns">
+            <!--Quicklook section-->
+            <div class="center" style="margin-bottom:20px;">
+                <img style="max-width: 40vw;" ng-src="{{resultCtrl.feature.properties.quicklook}}" title="{{resultCtrl.feature.id}}"/>
+            </div>
+        </div>
+
+        <div id="rightColumn" class="small-12 medium-12 large-6 columns">
+            <!-- Keywords -->
+            <div style="padding-bottom:20px;" class="fullWidth padded-top">
+                <!-- Keywords -->
+                <div class="padded bglight row feature-keywords">
+                    <div class="medium-6 columns">
+                        <h5><span class="fa fa-flag"></span>&nbsp;{{'feature.keywords' | translate}}</h5>
+                        <div class="padded-left">
+                        <span ng-repeat="(keyword, value) in resultCtrl.keywords.location">
+                            <a ng-click="mainController.search('q', keyword)" class="keyword">
+                                {{keyword}}</a><br/></span>
+                            <span ng-repeat="(keyword, value) in resultCtrl.keywords.season">
+                            <a ng-click="mainController.search('q', keyword)" class="keyword">{{keyword}}</a><br/></span>
+                        </div>
+                    </div>
+                    <div class="medium-6 columns">
+                        <h5><span class="fa fa-globe"></span>&nbsp;{{'feature.location' | translate}}</h5>
+                        <div class="padded-left">
+                            <div ng-repeat="(continent, continentValue) in resultCtrl.keywords.continent">
+                                <a ng-click="mainController.search('q', quote(continent))" class="keyword">{{continent}}</a>
+                                <div ng-repeat="(country, countryValue) in continentValue.children" class="padded-left">
+                                    <a ng-click="mainController.search('q', quote(country))" class="keyword">{{country}}</a>
+                                    <div ng-repeat="(region, regionValue) in countryValue.children" class="padded-left">
+                                        <a ng-click="mainController.search('q', quote(region))" class="keyword" ng-if="region !== '_all'">{{region}}</a>
+                                        <div ng-repeat="(state, stateValue) in regionValue.children" class="padded-left">
+                                            <a ng-click="mainController.search('q', quote(state))" class="keyword">{{state}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Landuse -->
+                <!--<div class="row feature-keywords center margin-top-20">-->
+                <!--<div class="small-12 columns bgmiddle padded">-->
+                <!--<h5><span class="fa fa-tree"></span>&nbsp;{{'feature.landuse' | translate}}</h5>-->
+                <!--<div class="padded-left">-->
+                <!--<span ng-repeat="(landuse, value) in resultCtrl.keywords.landuse" class="padded-left padded-right">-->
+                <!--<span class="unbreakable"><a ng-click="mainController.search('q', landuse)" class="keyword">{{landuse}}</a>-->
+                <!--{{value.value}}%</span>-->
+                <!--</span>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <div style="margin-top:20px;" class="row fullWidth padded bglight show-for-large-up">
+        <div id="leftColumn" class="small-12 medium-12 large-6 columns">
+            <!--Satellite section-->
+            <div class="medium-12 columns">
+                <table class="medium-12">
+                    <thead><h5 ng-bind="'satellite' | translate" style="color: white; background-color: #1e364e" ></h5></thead>
+                    <tbody>
+                    <tr>
+                        <td><span class="light">{{'platform' | translate | uppercase}}</span> :</td>
+                        <td><a ng-click="mainController.search('platform', resultCtrl.feature.properties.platform)">
+                            {{resultCtrl.feature.properties.platform}}</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="light">{{'instrument' | uppercase}}</span> :</td>
+                        <td><a ng-click="mainController.search('instrument', resultCtrl.feature.properties.instrument)">
+                            {{resultCtrl.feature.properties.instrument}}</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="light">{{'productType' | uppercase}}</span> :</td>
+                        <td><a ng-click="mainController.search('productType', resultCtrl.feature.properties.productType)">
+                            {{resultCtrl.feature.properties.productType}}</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="light">{{'processingLevel' | uppercase}}</span> :</td>
+                        <td><a ng-click="mainController.search('processingLevel', resultCtrl.feature.properties.processingLevel)">
+                            {{resultCtrl.feature.properties.processingLevel}}</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="light">{{'sensorMode' | uppercase}}</span> :</td>
+                        <td><a ng-click="mainController.search('sensorMode', resultCtrl.feature.properties.sensorMode)">
+                            {{resultCtrl.feature.properties.sensorMode}}</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+
+        <div id="rightColumn" class="small-12 medium-12 large-6 columns">
+            <!--Charaectristic section-->
+            <div class="medium-12 columns">
+
+                <table class="medium-12">
+                    <thead><h5 ng-bind="'characteristics' | translate" style="color: white; background-color: #1e364e" ></h5></thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="light">{{'startDate' | uppercase}}</span> :</td>
+                            <td><a ng-click="mainController.search('q', resultCtrl.feature.properties.startDate.substring(0, 10))">
+                                {{resultCtrl.feature.properties.startDate}}</a></td>
+                        </tr>
+                        <tr>
+                            <td><span class="light">{{'resolution' | uppercase}}</span> :</td>
+                            <td>{{resultCtrl.feature.properties.resolution}} m</td>
+                        </tr>
+                        <tr>
+                            <td><span class="light">{{'snowCover' | uppercase}}</span> :</td>
+                            <td>{{resultCtrl.feature.properties.snowCover}} %</td>
+                        </tr>
+                        <tr>
+                            <td><span class="light">{{'cloudCover' | uppercase}}</span> :</td>
+                            <td>{{resultCtrl.feature.properties.cloudCover}} %</td>
+                        </tr>
+                        <tr>
+                            <td><span class="light">{{'waterCover' | uppercase}}</span> :</td>
+                            <td>{{resultCtrl.feature.properties.waterCover}} %</td>
+                        </tr>
+                        <tr>
+                            <td><span class="light">{{'orbitNumber' | uppercase}}</span> :</td>
+                            <td>{{resultCtrl.feature.properties.orbitNumber}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+    <div id="leftColumn" class="small-12 medium-12 large-6 columns">
+
+        <!--<div class="center padded-top show-for-large-up">-->
+            <!--&lt;!&ndash; Collection description &ndash;&gt;-->
+            <!--<div class="row fullWidth">-->
+                <!--<div class="large-12 columns center collection-description">-->
+                    <!--&lt;!&ndash;<h4><a ng-click="mainController.search('collection', collection['Name'])">{{collection.description['ShortName']}}</a></h4>&ndash;&gt;-->
+                    <!--<h4></h4>-->
+                    <!--<p class="justified">{{resultCtrl.collection.description['Description']}}</p>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+
+
+
+
+
+    </div>
+
+
+
+    <div id="rightColumn" class="small-12 medium-12 large-6 columns">
+
+
+
+
+        <!-- Properties -->
+        <!--<div class="row padded margin-top-10 margin-bottom-20 bglight tableContainer">-->
+            <!--<h5 ng-bind="'properties' | translate"></h5>-->
+
+            <!--<table class="niceTable">-->
+                <!--<tbody>-->
+                <!--<tr ng-repeat="(name,property) in resultCtrl.feature.properties"-->
+                    <!--ng-if="resultCtrl.showProperty(property) && name !== 'thumbnail' && name !== 'quicklook'">-->
+                    <!--<td ng-bind="'{{ name | translate }}'"> </td>-->
+                    <!--<td>{{ property }} </td>-->
+                <!--</tr>-->
+                <!--</tbody>-->
+            <!--</table>-->
+        <!--</div>-->
+
+
+        <!-- Main Section-->
+        <!--<div class="medium-4 columns">-->
+            <!--<h5 ng-bind="'main' | translate"></h5>-->
+            <!--<span class="light">{{'collection' | uppercase}}</span> : <a ng-click="mainController.search('collection', resultCtrl.feature.properties.collection)">-->
+            <!--{{resultCtrl.feature.properties.collection}}</a><br/>-->
+            <!--<span class="light">{{'productIdentifier' | uppercase}}</span> :-->
+            <!--<span title="{{resultCtrl.feature.properties.productIdentifier}}">-->
+                <!--{{resultCtrl.feature.properties.productIdentifier | ellipsis}}</span><br/>-->
+            <!--<span class="light">{{'organisationName' | uppercase}}</span> : {{resultCtrl.feature.properties.organisationName}}<br/>-->
+            <!--<span class="light">{{'published' | uppercase}}</span> : {{resultCtrl.feature.properties.published}}<br/>-->
+            <!--<span ng-show="resultCtrl.feature.properties.archive"><span class="light">{{'archive' | uppercase}}</span> :-->
+                <!--{{resultCtrl.feature.properties.archive}}<br/></span>-->
+        <!--</div>-->
+
+
+
+    </div>
+
+</div>
