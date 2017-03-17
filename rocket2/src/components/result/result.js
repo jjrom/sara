@@ -10,9 +10,9 @@ angular.module('app.components.result',[])
         };
     }
 
-    resultController.$inject = ['$state', '$timeout', 'rocketServices', 'restoCollectionsAPI', 'config'];
+    resultController.$inject = ['$state', '$timeout', 'rocketServices', 'restoCollectionsAPI', 'config','$sce'];
 
-    function resultController($state, $timeout, rocketServices, restoCollectionsAPI , config) {
+    function resultController($state, $timeout, rocketServices, restoCollectionsAPI , config, $sce) {
         /*
          * Show property
          *
@@ -20,6 +20,16 @@ angular.module('app.components.result',[])
          * @returns {Boolean}
          */
         var self = this;
+
+        /**@hb
+         * Use of Strict Contextual Escaping for make trusted Html
+         * to use with angular ng-bind-html directive for bind html
+         * @param html
+         * @returns {*}
+         */
+        self.trustedHtml = function (html) {
+            return $sce.trustAsHtml(html);
+        };
 
         self.showProperty = function (item) {
             if (angular.isString(item)) {
