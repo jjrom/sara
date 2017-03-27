@@ -10,7 +10,7 @@ angular.module('app.component.explore',[])
         };
     }
 
-    exploreController.$inject = searchController.$inject = ['$scope', '$state', '$location', '$timeout', 'ngDialog',
+    exploreController.$inject = ['$scope', '$state', '$location', '$timeout', 'ngDialog',
         'rocketServices', 'rocketMap', 'rocketCart', 'restoCollectionsAPI', 'restoFeatureAPI', 'config'];
 
     function exploreController ($scope, $state, $location, $timeout, ngDialog, rocketServices,

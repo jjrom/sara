@@ -24,7 +24,7 @@ angular.module('app.components.result',[])
         /**@hb
          * Use of Strict Contextual Escaping for make trusted Html
          * to use with angular ng-bind-html directive for bind html
-         * @param html
+         * @param html : html text
          * @returns {*}
          */
         self.trustedHtml = function (html) {
@@ -41,12 +41,16 @@ angular.module('app.components.result',[])
             }
         };
 
+        /**@hb
+         *
+         */
+        self.collectionName = $state.params.collectionName;
+
         /*
          * Initialize view
          */
         self.init = function() {
             if (self.feature) {
-                console.log(self.feature);
 
                 var keywords = rebuildKeywords(self.feature.properties.keywords);
 
