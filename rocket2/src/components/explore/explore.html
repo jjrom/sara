@@ -110,26 +110,7 @@
                             <option value="">-----</option>
                         </select>
                     </div>
-                    <div class="large-12 columns">
-                        {{'search.location' | translate | uppercase}}
-                        <form method="get" ng-submit="exploreCtrl.search()" name="searchForm">
-                        <span>
-                            <input id="searchLocation" type="search" style="background-color: #F2F2F2; border-top-width: 2px; border-top-color: #666666;"
-                                   ng-model="exploreCtrl.params.location" class="form-control" required="required"
-                                   placeholder="{{'search.ex' | translate}} T31TFM"/>
-                        </span>
-                        </form>
-                    </div>
-                    <div class="large-12 columns">
-                        {{'search.keywords' | translate | uppercase}}
-                        <form method="get" ng-submit="exploreCtrl.search()" name="searchForm">
-                        <span>
-                            <input id="searchinput" type="search" style="background-color: #F2F2F2; border-top-width: 2px; border-top-color: #666666;"
-                                   ng-model="exploreCtrl.params.q" class="form-control"
-                                   required="required" placeholder="{{'search.ex' | translate}} Toulouse"/>
-                        </span>
-                        </form>
-                    </div>
+
                 </form>
                 <!--Part of search Buttons-->
                 <div class="large-12">
