@@ -192,6 +192,7 @@
     "processingLevel": "Processing level",
     "productIdentifier": "Product identifier",
     "productType": "Product type",
+    "product Name": "Product Name",
     "properties" : "Properties",
     "published": "Published",
     "resolution": "Resolution",
@@ -199,7 +200,9 @@
     "sensorMode": "Sensor mode",
     "snowCover": "Snow cover",
     "waterCover": "Water cover",
-    "startDate": "Start date",  
+    "startDate": "Start date",
+    "Orbit Direction": "Orbit Direction",
+    "Polarization": "Polarization",
     
     "error.server.connect": "Connection server error",
 	"percentSaturatedPixelsMax": "Percent saturated pixels max",

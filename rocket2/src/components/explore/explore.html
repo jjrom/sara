@@ -25,18 +25,19 @@
                     <p style="margin-left: 12px;">{{ 'date.title' | translate | uppercase}}</p>
                     <!-- Begin date section-->
                     <div class="large-6 columns">
-                        <datepicker date-format="yyyy-MM-dd">
+                        <datepicker date-format="yyyy-MM-dd" selector="form-control">
 
                             <div class="input-group">
                             <span class="input-group-btn">
-                                <button class="btn btn-primary" style="height: 40px;
-                                                                width: 100px;
-                                                                padding: 10px; color: white; background-color: #1e364e;
-                                                                border-top-left-radius: 0;
-                                                                border-bottom-left-radius: 0;border-top-width: 2px; border-top-color: #666666;"
+                                <button class="btn btn-primary"
+                                        style="height: 40px;
+                                               width: 100px;
+                                               padding: 10px; color: white; background-color: #1e364e;
+                                               border-top-left-radius: 0;
+                                               border-bottom-left-radius: 0;border-top-width: 2px; border-top-color: #666666;"
                                         type="button">Begin</button>
                             </span>
-                                <input id="explore_input" type="text" class="form-control"
+                                <input id="explore_input_date_begin" type="text" class="form-control"
                                        ng-model="exploreCtrl.params.startDate"
                                        style="height: 40px; border-top-width: 2px; border-top-color: #666666;"
                                        placeholder="" >
@@ -46,7 +47,7 @@
                     </div>
                     <!-- End date section-->
                     <div class="large-6 columns">
-                        <datepicker date-format="yyyy-MM-dd">
+                        <datepicker date-format="yyyy-MM-dd" selector="form-control" datepicker-show="exploreCtrl.dateEnd_Flag">
 
                             <div class="input-group">
                             <span class="input-group-btn">
@@ -57,7 +58,7 @@
                                                                 border-bottom-left-radius: 0;border-top-width: 2px; border-top-color: #666666;"
                                         type="button">End</button>
                             </span>
-                                <input id="explore_input" type="text" class="form-control"
+                                <input id="explore_input_date_end" type="text" class="form-control"
                                        ng-model="exploreCtrl.params.completionDate"
                                        style="height: 40px; border-top-width: 2px; border-top-color: #666666;"
                                        placeholder="" >
@@ -89,24 +90,36 @@
                             <option value="">-----</option>
                         </select>
                     </div>
-                    <div class="large-12 columns">
-                        {{ ::'processingLevel'| translate | uppercase }}
-                        <select ng-model="exploreCtrl.params.processingLevel" style="background-color: #F2F2F2; border-top-width: 2px; border-top-color: #666666;"
-                                ng-options="name as name for (name, count) in exploreCtrl.statistics.processingLevel">
-                            <option value="">-----</option>
-                        </select>
-                    </div>
+                    <!--Product name-->
                     <div class="large-6 columns">
-                        {{ ::'productType'| translate | uppercase }}
+                        {{'product Name'| translate | uppercase }}
                         <select ng-model="exploreCtrl.params.productType" style="background-color: #F2F2F2; border-top-width: 2px; border-top-color: #666666;"
                                 ng-options="name as name for (name, count) in exploreCtrl.statistics.productType">
                             <option value="">-----</option>
                         </select>
                     </div>
+                    <!--Sensor mode-->
                     <div class="large-6 columns">
                         {{'sensorMode'| translate | uppercase }}
                         <select ng-model="exploreCtrl.params.sensorMode" style="background-color: #F2F2F2; border-top-width: 2px; border-top-color: #666666;"
                                 ng-options="name as name for (name, count) in exploreCtrl.statistics.sensorMode">
+                            <option value="">-----</option>
+                        </select>
+                    </div>
+                    <!--Orbit direction-->
+                    <div class="large-12 columns">
+                        {{'Orbit Direction'| translate | uppercase }}
+                        <select ng-model="exploreCtrl.params.processingLevel" style="background-color: #F2F2F2; border-top-width: 2px; border-top-color: #666666;"
+                                ng-options="name as name for (name, count) in exploreCtrl.statistics.processingLevel">
+                            <option value="">-----</option>
+                        </select>
+                    </div>
+                    <!--Polarization-->
+                    <div ng-if="exploreCtrl.params.collection === 'S1' || exploreCtrl.params.platform === 'S1A' || exploreCtrl.params.platform === 'S1B'"
+                         class="large-12 columns">
+                        {{'Polarization'| translate | uppercase }}
+                        <select ng-model="exploreCtrl.params.processingLevel" style="background-color: #F2F2F2; border-top-width: 2px; border-top-color: #666666;"
+                                ng-options="name as name for (name, count) in exploreCtrl.statistics.processingLevel">
                             <option value="">-----</option>
                         </select>
                     </div>
