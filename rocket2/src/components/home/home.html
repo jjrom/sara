@@ -70,7 +70,7 @@
             style="color: green; font-size: xx-large"
             ng-bind="'home.latest' | translate"></h4>
         <ul class="feature-square">
-            <li class="feature" ng-repeat="feature in homeCtrl.features" bg-image="{{ feature.properties.quicklook }}">
+            <li class="feature" ng-repeat="feature in homeCtrl.features" bg-image="{{feature.properties.quicklook}}">
                 <a ng-click="homeCtrl.viewProduct(feature.id, feature.properties.collection)">
                     <div class="feature-square-info">
                         <div class="title">

@@ -50,7 +50,6 @@ angular.module('app', [
     'app.component.license',
     'app.components.search.filters',
     'app.components.help',
-    'app.components.about',
     'app.component.explore',
     'app.components.result',
     'app.templates'])
@@ -168,10 +167,6 @@ angular.module('app', [
          * Routes
          */
         $stateProvider
-            .state('about', {
-                url: "/about",
-                template: "<about></about>"
-            })
             .state('cart', {
                 url: "/cart",
                 template: '<cart></cart>',
