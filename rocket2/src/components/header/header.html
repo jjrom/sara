@@ -13,7 +13,7 @@
         <ul class="nav__content">
             <li ui-sref="home" ui-sref-active="active" ng-bind="'header.home'| translate" class="link"></li>
             <li ui-sref="explore" ui-sref-active="active" ng-bind="'header.explore'| translate" class="link"></li>
-            <li ui-sref="more" ui-sref-active="active" ng-bind="'header.more'| translate" class="link"></li>
+            <li ui-sref="help" ui-sref-active="active" ng-bind="'header.help'| translate" class="link"></li>
             <li ng-if="!mainController.isAuthenticated()" ui-sref="login" ng-bind="'header.login'| translate" class="link link--signin"></li>
             <li ng-if="!mainController.isAuthenticated()" ui-sref="register" class="link link--signup" ng-bind="'header.signup'| translate"></li>
             <li ng-if="mainController.isAuthenticated()" ui-sref="cart" ui-sref-active="active" class="link"><span class="fa fa-shopping-cart" title="{{'header.cart' | translate}}"></span></li>
