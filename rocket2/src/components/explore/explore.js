@@ -378,7 +378,6 @@ angular.module('app.component.explore',[])
              * Get collections
              */
             restoCollectionsAPI.getCollections(function (data) {
-                console.debug("data",data);
                 /*
                  * Is a collection selected ?
                  */
@@ -433,7 +432,6 @@ angular.module('app.component.explore',[])
                     for (var i = 0; i < length; i++) {
                         if (data.collections[i].name === self.params.collection) {
                             self.statistics = data.collections[i].statistics.facets;
-                            console.log(self.statistics);
                         }
                     }
                 }
