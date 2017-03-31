@@ -33,6 +33,10 @@ angular.module('app.component.explore',[])
         self.searchPolygon = null;
         self.polygonDrawningActivated = false;
 
+        self.orbitDirections = {'ASC':'ASC','DESC' : 'DESC'};
+
+        self.polarisations = {'HH':'HH','HH+HV':'HH+HV', 'HV':'HV','VH':'VH','VV':'VV', 'VV+VH':'VV+VH'};
+
         // nb of items in current collection
         self.count = 0;
 
