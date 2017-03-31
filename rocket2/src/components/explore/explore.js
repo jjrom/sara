@@ -374,6 +374,7 @@ angular.module('app.component.explore',[])
              * Get collections
              */
             restoCollectionsAPI.getCollections(function (data) {
+                console.debug("data",data);
                 /*
                  * Is a collection selected ?
                  */
@@ -391,6 +392,7 @@ angular.module('app.component.explore',[])
                     }
                 } else {
                     self.statistics = data.synthesis.statistics.facets;
+                    self.globalStatistics = data.synthesis.statistics.facets;
                     if (data.synthesis.statistics.count){
                         self.count = data.synthesis.statistics.count;
                     }
@@ -414,6 +416,29 @@ angular.module('app.component.explore',[])
             }
         };
 
+        self.initForCollection = function () {
+            /*
+             * Get Data for collection
+             */
+            restoCollectionsAPI.getCollections(function (data) {
+                /*
+                 * Is a collection selected ?
+                 */
+                if (self.params && self.params.collection) {
+                    var length = data.collections.length;
+                    for (var i = 0; i < length; i++) {
+                        if (data.collections[i].name === self.params.collection) {
+                            self.statistics = data.collections[i].statistics.facets;
+                            console.log(self.statistics);
+                        }
+                    }
+                }
+            }, function () {
+                rocketServices.success('error.server.connect');
+            });
+
+        };
+
         /**
          * Initialize page values
          */
@@ -422,6 +447,7 @@ angular.module('app.component.explore',[])
             self.params.page = 1;
             self.hasNoMore = false;
         };
+
 
         /**
          * Return current params without page

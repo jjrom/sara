@@ -26,29 +26,8 @@
         <!--Description section -->
         <div id="rightColumn" class="small-6 medium-6 large-8 columns">
             <!--Use the binding of collection description variable-->
-            <p ng-if="resultCtrl.collectionName !== 'S1' && resultCtrl.collectionName !== 'S2' && resultCtrl.collectionName !== 'S3'" ng-bind-html = "resultCtrl.trustedHtml(resultCtrl.collection.osDescription.Description)"
+            <p ng-bind-html = "resultCtrl.trustedHtml(resultCtrl.collection.osDescription.Description)"
                     style="color: rgba(30,54,78,1); font-family: Cambria; font-size: x-large; padding: 10px;">
-            </p>
-            <!-- Use fixe texts-->
-            <!--S1-->
-            <p ng-if="resultCtrl.collectionName === 'S1'" style="color: rgba(30,54,78,1); font-family: Cambria; font-size: x-large; padding: 10px;">
-                The SENTINEL-1 mission comprises a constellation of two polar-orbiting satellites,
-                performing C-band Synthetic Aperture Radar (SAR) imaging day and night, regardless of the weather.
-                Sentinel-1 operates in four imaging modes with different resolutions (down to 5 m) and coverage (up to 400 km swath).
-            </p>
-            <!--S2-->
-            <p ng-if="resultCtrl.collectionName === 'S2'" style="color: rgba(30,54,78,1); font-family: Cambria; font-size: x-large; padding: 10px;">
-                The SENTINEL-2 mission is a land monitoring constellation of two polar-orbiting satellites,
-                each equipped with a Multispectral Imager (MSI) instrument.
-                Sentinel-2 acquires images in 13 spectral bands with a swath width of 290 km and a spatial resolution of 10 , 20 and 60 m.
-            </p>
-            <!--S3-->
-            <p ng-if="resultCtrl.collectionName === 'S3'" style="color: rgba(30,54,78,1); font-family: Cambria; font-size: x-large; padding: 10px;">
-                The SENTINEL-3 mission is an ocean and land monitoring constellation of two identical polar-orbiting satellites.
-                Each satellite carries a suite of instruments, including the Ocean and Land Colour Instrument (OLCI),
-                the Sea and Land Surface Temperature Radiometer (SLSTR)  and the SAR Radar ALtimeter (SRAL).
-                The European Organisation for the Exploitation of Meteorological Satellites operates the satellites and delivers the marine data and services,
-                while the European Space Agency delivers the land observation services.
             </p>
         </div>
 

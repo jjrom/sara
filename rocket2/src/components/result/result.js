@@ -224,12 +224,10 @@ angular.module('app.components.result',[])
          * Get collections
          */
         restoCollectionsAPI.getCollections(function(data){
-            console.log(data);
                 for (var i = 0, ii = data.collections.length; i < ii; i++) {
                     if (data.collections[i].name === $state.params.collectionName) {
                         self.collection = data.collections[i];
                         self.collection.description = data.collections[i].osDescription[rocketServices.getLang()];
-                        console.log(self.collection);
                     }
                 }
             },
