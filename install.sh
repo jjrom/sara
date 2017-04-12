@@ -85,6 +85,32 @@ if [ "${TARGET}" == "resto" ]
 then
 
   echo "###########################"
+  echo "# Configure nginx   "
+  echo "###########################"
+  echo "   ==> Create configuration file /etc/nginx/default.d/sara.conf"
+cat <<EOF > /etc/nginx/default.d/sara.conf
+  location ~ \.php\$ {
+      include /etc/nginx/fastcgi_params;
+      fastcgi_param   SCRIPT_FILENAME  \$document_root\$fastcgi_script_name;
+      fastcgi_split_path_info ^(.+\.php)(/.+)\$;
+      fastcgi_pass  127.0.0.1:9000;
+      fastcgi_index index.php;
+  }
+  location /sara.server/1.0/ {
+    if (!-e \$request_filename) {
+      rewrite ^/sara.server/1.0/(.*)\$ /sara.server/1.0/index.php?RESToURL=\$1 last; break;
+    }
+  }
+  location ~ /\.ht {
+    deny all;
+  }
+  # Protect config files
+  location ~* ^config.\.php\$ {
+    return 404;
+  }
+EOF
+
+  echo "###########################"
   echo "# Install resto database   "
   echo "###########################"
 
@@ -103,12 +129,6 @@ then
     echo "====> Create admin user ${RESTO_ADMIN_USER} **WITHOUT** bcrypt hashing"
     ${SRC_DIR}/resto/_install/createAdminUser.sh -u ${RESTO_ADMIN_USER} -p ${RESTO_ADMIN_PASSWORD} -d ${SARA_DB_NAME} -S ${SARA_DB_SCHEMA_NAME} -s ${DB_SUPERUSER}
   fi
-  echo "====> Install S1 collection"
-  curl -X POST -H "Content-Type: application/json" -d @${SRC_DIR}/sara.server/collections/S1.json ${SERVER_PROTOCOL}://${RESTO_ADMIN_USER}:${RESTO_ADMIN_PASSWORD}@${SARA_SERVER_URL}${SARA_VERSION_ENDPOINT}/collections
-  echo "====> Install S2 collection"
-  curl -X POST -H "Content-Type: application/json" -d @${SRC_DIR}/sara.server/collections/S2.json ${SERVER_PROTOCOL}://${RESTO_ADMIN_USER}:${RESTO_ADMIN_PASSWORD}@${SARA_SERVER_URL}${SARA_VERSION_ENDPOINT}/collections
-  echo "====> Install S3 collection"
-  curl -X POST -H "Content-Type: application/json" -d @${SRC_DIR}/sara.server/collections/S3.json ${SERVER_PROTOCOL}://${RESTO_ADMIN_USER}:${RESTO_ADMIN_PASSWORD}@${SARA_SERVER_URL}${SARA_VERSION_ENDPOINT}/collections
 fi
 
 
@@ -192,6 +212,6 @@ then
   $ITAG_HOME/_install/installDatasources.sh -F -D ${ITAG_DATA} -s ${DB_SUPERUSER}
 
   # Gazetteer
-  $ITAG_HOME/_install/installGazetteerDB.sh -F -D ${ITAG_DATA} -s ${DB_SUPERUSER}
+  #$ITAG_HOME/_install/installGazetteerDB.sh -F -D ${ITAG_DATA} -s ${DB_SUPERUSER}
 
 fi

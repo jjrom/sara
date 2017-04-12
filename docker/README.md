@@ -17,12 +17,10 @@ Building the docker file should be done once. It supposes that you have [docker]
 First launch sara image
 
 	export SARA_SRC=/Users/jrom/Devel/sara
-	docker run -v ${SARA_SRC}:/sara --rm -ti sara /bin/bash
+	export PGSQL_DIR=/Users/jrom/tmp/SARA
+	docker run -v ${SARA_SRC}:/sara -v ${PGSQL_DIR}:/var/lib/pgsql --rm -ti sara /bin/bash
 
 Within the docker image, launch the following
-
-	export SARA_HOME=/sara
-	cd $SARA_HOME
 
 	# Initialize database
 	service postgresql-9.5 initdb
@@ -36,5 +34,20 @@ Within the docker image, launch the following
 
 	# Start postgres service
 	service postgresql-9.5 start
-	
+
+	# Start php-fpm service
+	service php-fpm start
+
+	# Start nginx service
+	service nginx start
+
+	export SARA_HOME=/sara
+	cd $SARA_HOME
+
+	# Install iTag database (First time only)
+	./install.sh -t itag
+
+	# Install resto database (first time only)
+	./install.sh -t resto
+		
 

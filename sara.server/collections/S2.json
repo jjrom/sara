@@ -1,0 +1,17 @@
+{
+    "name": "S2",
+    "model": "RestoModel_S2",
+    "status": "public",
+    "osDescription": {
+        "en": {
+            "ShortName": "Sentinel-2",
+            "LongName": "Sentinel-2",
+            "Description": "The SENTINEL-2 mission is a land monitoring constellation of two polar-orbiting satellites, each equipped with a Multispectral Imager (MSI) instrument. Sentinel-2 acquires images in 13 spectral bands with a swath width of 290 km and a spatial resolution of 10 , 20 and 60 m.",
+            "Tags": "ESA sentinel2 optical",
+            "Developer": "Geoscience Australia",
+            "Contact": "saracontact@ga.gov.au",
+            "Query": "Australia",
+            "Attribution": "Copernicus Sentinel data 2017"
+        }
+    }
+}

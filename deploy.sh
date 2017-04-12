@@ -10,7 +10,7 @@
 #
 CONFIG=config
 FORCE=NO
-WWW_USER=www-data:www-data
+WWW_USER=nginx:nginx
 PWD=`pwd`
 SRC_DIR=`pwd`
 function showUsage {
@@ -96,12 +96,27 @@ then
   echo " ==> Deploy resto in ${SARA_ENDPOINT}"
   ${SRC_DIR}/resto/_install/deploy.sh -s ${SRC_DIR}/resto -t ${SARA_ENDPOINT}
 
+  echo " ==> Copy models under ${SARA_ENDPOINT}/include/resto/Models"
+  cp -R ${SRC_DIR}/sara.server/Models/*.php ${SARA_ENDPOINT}/include/resto/Models/
+
   echo " ==> Use ${CONFIG} file to generate ${SARA_ENDPOINT}/include/config.php";
   ${SRC_DIR}/sara.server/generate_config.sh -C ${CONFIG} > ${SARA_ENDPOINT}/include/config.php
 
   echo " ==> Set ${SRC_DIR} rights to ${WWW_USER}"
   chown -R ${WWW_USER} ${SARA_ENDPOINT}
 
+  echo " ==> Install S1 collection"
+  curl -X POST -H "Content-Type: application/json" -d @${SRC_DIR}/sara.server/collections/S1.json ${SERVER_PROTOCOL}://${RESTO_ADMIN_USER}:${RESTO_ADMIN_PASSWORD}@${SARA_SERVER_URL}${SARA_VERSION_ENDPOINT}/collections
+  echo ""
+
+  echo " ==> Install S2 collection"
+  curl -X POST -H "Content-Type: application/json" -d @${SRC_DIR}/sara.server/collections/S2.json ${SERVER_PROTOCOL}://${RESTO_ADMIN_USER}:${RESTO_ADMIN_PASSWORD}@${SARA_SERVER_URL}${SARA_VERSION_ENDPOINT}/collections
+  echo ""
+
+  echo " ==> Install S3 collection"
+  curl -X POST -H "Content-Type: application/json" -d @${SRC_DIR}/sara.server/collections/S3.json ${SERVER_PROTOCOL}://${RESTO_ADMIN_USER}:${RESTO_ADMIN_PASSWORD}@${SARA_SERVER_URL}${SARA_VERSION_ENDPOINT}/collections
+  echo ""
+  
   echo " Done !"
   exit 0
 

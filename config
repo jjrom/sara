@@ -1,12 +1,12 @@
 ## SARA configuration
 SERVER_PROTOCOL=http
-SARA_SERVER_URL=localhost
-SARA_TARGET_DIR=/var/www/sara.server
+SARA_SERVER_URL=localhost/sara.server
+SARA_TARGET_DIR=/usr/share/nginx/html/sara.server
 SARA_VERSION_ENDPOINT=/1.0
 
 ## Email configuration 
 CONTACT_NAME=somebody
-CONTACT_EMAIL=somebody@geoscience.australia
+CONTACT_EMAIL=saracontact@ga.gov.au
 SMTP_HOST=xxx.xxxx
 SMTP_PORT=465
 SMTP_SECURE_PROTOCOL=ssl

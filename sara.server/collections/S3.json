@@ -1,0 +1,17 @@
+{
+    "name": "S3",
+    "model": "RestoModel_S3",
+    "status": "public",
+    "osDescription": {
+        "en": {
+            "ShortName": "Sentinel-3",
+            "LongName": "Sentinel-3",
+            "Description": "The SENTINEL-3 mission is an ocean and land monitoring constellation of two identical polar-orbiting satellites. Each satellite carries a suite of instruments, including the Ocean and Land Colour Instrument (OLCI), the Sea and Land Surface Temperature Radiometer (SLSTR)  and the SAR Radar ALtimeter (SRAL). The European Organisation for the Exploitation of Meteorological Satellites operates the satellites and delivers the marine data and services, while the European Space Agency delivers the land observation services.",
+            "Tags": "ESA sentinel3 altimeter",
+            "Developer": "Geoscience Australia",
+            "Contact": "saracontact@ga.gov.au",
+            "Query": "Australia",
+            "Attribution": "Copernicus Sentinel data 2017"
+        }
+    }
+}

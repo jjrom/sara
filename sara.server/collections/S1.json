@@ -1,0 +1,17 @@
+{
+    "name": "S1",
+    "model": "RestoModel_S1",
+    "status": "public",
+    "osDescription": {
+        "en": {
+            "ShortName": "Sentinel-1",
+            "LongName": "Sentinel-1",
+            "Description": "The SENTINEL-1 mission comprises a constellation of two polar-orbiting satellites, performing C-band Synthetic Aperture Radar (SAR) imaging day and night, regardless of the weather. Sentinel-1 operates in four imaging modes with different resolutions (down to 5 m) and coverage (up to 400 km swath).",
+            "Tags": "ESA sentinel1 radar",
+            "Developer": "Geoscience Australia",
+            "Contact": "saracontact@ga.gov.au",
+            "Query": "Australia",
+            "Attribution": "Copernicus Sentinel data 2017"
+        }
+    }
+}
