@@ -91,7 +91,7 @@ angular.module('app', [
          * Authentication configuration
          */
         $authProvider.baseUrl = '';
-        $authProvider.loginUrl = config['restoServerUrl'] + '/api/users/connect';
+        $authProvider.loginUrl = config['restoServerUrl'] + '/api/user/connect';
         $authProvider.loginRedirect = null;
         var redirectUri = config['restoServerUrl'] + 'api/oauth/callback';
 

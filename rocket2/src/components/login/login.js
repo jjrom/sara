@@ -3,7 +3,7 @@
 
     function loginDirective(){
         return {
-            restrict : "E",
+            restrict : "EA",
             controller : loginController,
             controllerAS : "loginCtrl",
             templateUrl :"components/login/login.html"
@@ -12,15 +12,15 @@
     }
 
 
-    loginController.$inject = ['$rootScope', 'restoUsersAPI', 'rocketServices'];
+    loginController.$inject = ['$scope','$rootScope', 'restoUsersAPI', 'rocketServices'];
 
-    function loginController($rootScope, restoUsersAPI, rocketServices) {
+    function loginController($scope,$rootScope, restoUsersAPI, rocketServices) {
         var self = this;
 
-        self.login = function () {
+        $scope.login = function () {
             restoUsersAPI.login({
-                email: self.email,
-                password: self.password
+                email: $scope.email,
+                password: $scope.password
             },
             function(result) {
                 rocketServices.go($rootScope.previousState.name, $rootScope.previousState.params, {
@@ -29,21 +29,11 @@
                 rocketServices.success('signin.login.success');
             },
             function(result) {
+                console.debug('error of login',result);
                 rocketServices.error('signin.login.error');
             });
         };
-        self.authenticate = function (provider) {
-            restoUsersAPI.authenticate(provider, function(){
-                rocketServices.go($rootScope.previousState.name, $rootScope.previousState.params, {
-                    reload:true
-                });
-                rocketServices.success('signin.login.success');
-            },
-            function(){
-                rocketServices.error('signin.login.error');
-            });
-        };
-        
+
         /*
          * Focus on email
          */

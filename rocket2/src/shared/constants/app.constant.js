@@ -2,7 +2,7 @@
 angular.module('rocketConstantModule',[])
     .constant('config',
         {
-            "restoServerUrl": "http://resto.mapshup.com/2.2/",
+            "restoServerUrl": "https://resto.mapshup.com/2.2/",
             "contactEmail": "somebody@localhost",
             "cartSynchronization": true,
             "detectLanguage": false,

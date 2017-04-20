@@ -7,7 +7,6 @@ restoUsersAPI.$inject = ['$http', '$auth', '$timeout', 'rocketServices', 'rocket
     function restoUsersAPI($http, $auth, $timeout, rocketServices, rocketCart) {
 
         var api = {
-            authenticate:authenticate,
             connect: connect,
             disconnect: disconnect,
             getOrders:getOrders,
@@ -24,27 +23,6 @@ restoUsersAPI.$inject = ['$http', '$auth', '$timeout', 'rocketServices', 'rocket
         return api;
 
         ////////////
-
-        /**
-         * Authenticate user with provider
-         *
-         * @param {Object} provider
-         * @param {Function} callback
-         * @param {Function} error
-         *
-         */
-        function authenticate(provider, callback, error) {
-            $auth.authenticate(provider)
-                .then(function (result) {
-                    setToken(result.data.token, false);
-                    refreshToken();
-                    callback(result);
-                })
-                ["catch"](function (result) {
-                error(result);
-            });
-        }
-
         /**
          * Login to resto
          *

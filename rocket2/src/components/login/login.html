@@ -1,14 +1,28 @@
-<div class="content_signin">
-    <div class="row">
+<!--The login page Information header part-->
+<div class="fullWidth bgcolored gradient">
+    <div class="row padded-vertical-large">
         <div class="large-12 columns">
-
-            <div class="center">
-                <button class="colored" ng-click="loginCtrl.authenticate('sara')">{{'signin.authenticate'| translate}}</button>
-            </div>
-            <h4 class="center" ng-bind="'signin.or' | translate"></h4>
-            <div class="large-12 columns padded-small-top center">
-                <a href="https://localhost" ng-bind="'signin.noaccountyet' | translate" class="colored"></a>
-            </div>
+            <h1 >Hilmi</h1>
+            <p class="small"><span translate-once="signin.noaccountyet"></span>&nbsp;<a translate-once="header.signup" ui-sref="register" class="white"></a></p>
         </div>
+    </div>
+</div>
+<!--The login form part-->
+<div class="row padded">
+    <div class="large-12 columns">
+        <h3 translate="signin.local" class="padded-bottom"></h3>
+        <form method="get" ng-submit="login()" name="loginForm">
+            <input type="email" id="email" name="email" ng-model="email"
+                   class="form-control" placeholder="{{'signin.email' | translate}}" required autofocus/>
+            <input type="password" name="password" ng-model="password"
+                   class="form-control" placeholder="{{ 'signin.password' | translate}}" required/>
+            <a ui-sref="lostPassword" style=""
+               translate="signin.lostpassword" class="small"></a><br/>
+            <div class="padded center">
+                <button type="submit" class="button round"
+                        ng-disabled="loginForm.$invalid" translate="signin.submit"></button>
+            </div>
+        </form>
+
     </div>
 </div>

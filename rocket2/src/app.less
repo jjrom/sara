@@ -22,13 +22,13 @@ h4.small {
 }
 
 a {
-  color:#fff;
+  color:green;
 }
 a.fa, a.colored {
   color:green;
 }
 a:hover {
-  color:green;
+  color:#1e364e;;
 }
 a.fa:hover {
   opacity:0.8;
@@ -117,14 +117,15 @@ a.dark:hover {
   background-color: green;
   padding:10px 20px;
 }
-.button.disabled, .button[disabled] {
-  background-color: green;
-  border-color: green;
+.button.disabled, .button[disabled],.button.disabled:hover, .button[disabled]:hover {
+  background-color: #d3d3d3;
+  border-color: #d3d3d3;
   box-shadow: none;
   color: #fff;
-  cursor: default;
+  cursor: no-drop;
   opacity: 0.7;
 }
+
 .smaller{
   font-size:0.6em;
 }
@@ -898,7 +899,7 @@ div.feature-square__collection--content:hover {
  * Hover implementation only for non touch devices
  */
 @media only screen and (min-width: 64.063em) {
-  .button:hover, .button.disabled:hover, .button[disabled]:hover {
+  .button:hover {
     background-color: rgba(252, 76, 2, 0.8);
   }
   nav .link:hover {
