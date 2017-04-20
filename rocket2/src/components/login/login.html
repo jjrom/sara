@@ -1,12 +1,15 @@
 <!--The login page Information header part-->
 <div class="fullWidth bgcolored gradient">
     <div class="row padded-vertical-large">
-        <div class="large-12 columns">
-            <h1 >Hilmi</h1>
-            <p class="small"><span translate-once="signin.noaccountyet"></span>&nbsp;<a translate-once="header.signup" ui-sref="register" class="white"></a></p>
+        <div class="large-12 columns" style="margin-top: 100px;">
+            <h1 translate="header.login"></h1>
+            <p class="small">
+                <span style="color:#1e364e;">{{'label.no.account' | translate}}</span>&nbsp;<a translate="header.signup" ui-sref="register" class="white"></a>
+            </p>
         </div>
     </div>
 </div>
+
 <!--The login form part-->
 <div class="row padded">
     <div class="large-12 columns">
