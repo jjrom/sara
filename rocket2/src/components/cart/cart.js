@@ -24,7 +24,7 @@
          * @param {String} featureIdentifier
          */
         self.view = function(collectionName, id) {
-            rocketServices.go('feature', {
+            rocketServices.go('result', {
                 collectionName: collectionName,
                 featureId: id
             }, {
@@ -40,7 +40,8 @@
         self.removeFromCart = function(feature) {
             rocketCart.remove(feature,
                     function() {
-                        self.content = rocketCart.getCartContent();
+                        // self.content = rocketCart.getCartContent();
+                        self.content = rocketCart.getContent();
                         rocketServices.success('cart.remove.success');
                     },
                     function() {

@@ -1,4 +1,4 @@
-
+(function(Storage, localStorage) {
 angular.module('rocketCartModule',['rocketConstantModule','satellizer','ngCookies'])
         .factory('rocketCart', Cart);
 
@@ -441,3 +441,5 @@ angular.module('rocketCartModule',['rocketConstantModule','satellizer','ngCookie
 
         return cart;
     }
+
+})(Storage, localStorage);
