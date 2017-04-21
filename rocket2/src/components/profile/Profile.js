@@ -19,25 +19,25 @@
          */
         var self = this;
 
-        self.profile = rocketServices.getProfile();
+        $scope.profile = rocketServices.getProfile();
         
         /**
          * Download orderId
          * 
          * @param {String} orderId
          */
-        self.downloadOrder = function(orderId) {
+        $scope.downloadOrder = function(orderId) {
             rocketServices.download(rocketServices.getMetalinkUrl({
-                userid : self.profile.userid,
-                orderId:orderId
+                userid : $scope.profile.userid,
+                orderId: orderId
             }));
         };
         
         restoUsersAPI.getOrders({
-            userid : self.profile.userid
+            userid : $scope.profile.userid
         },
         function (result) {
-            self.orders = result.orders;
+            $scope.orders = result.orders;
         },
         function (result) {
             rocketServices.error('profile.orders.error');
