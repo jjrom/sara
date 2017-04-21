@@ -21,7 +21,8 @@ rocketServices.$inject = ['$auth', '$translate', '$state', '$timeout', 'config',
             translate:translate,
             showGrowl :showGrowl,
             warning: warning,
-            download:download
+            download:download,
+            decode_base64 : decode_base64
         };
 
         var options = {
@@ -222,6 +223,10 @@ rocketServices.$inject = ['$auth', '$translate', '$state', '$timeout', 'config',
                 }
             });
             return false;
+        }
+
+        function decode_base64(encodedEmail){
+            return atob(encodedEmail);
         }
 
     }

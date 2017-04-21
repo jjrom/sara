@@ -74,7 +74,6 @@
     "lostPassword.title" : "Forgot your password",
     "lostPassword.email": "Email",
     "lostPassword.submit": "Reset password",
-    "lost.password.success" : "Reset link sent to hilmi.bouallegue@geomatys.com",
     "lostPassword.error" : "Error ! Problem when sending the reset link ",
     
     "header.cart": "My cart",
@@ -124,6 +123,9 @@
     
     "resetPassword.password": "New password",
     "resetPassword.submit": "Update password",
+    "resetPassword.title" : "Reset the password",
+    "resetPassword.success" : "Password updated",
+    "resetPassword.error" : "Error can not update the password",
     
     "search.error": "Search error",
     "search.more": "More",

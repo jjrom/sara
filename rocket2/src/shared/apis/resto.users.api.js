@@ -54,7 +54,7 @@ restoUsersAPI.$inject = ['$http', '$auth', '$timeout', 'rocketServices', 'rocket
          */
         function connect(callback, error) {
             $http({
-                url:rocketServices.restoEndPoint() + '/api/users/connect',
+                url:rocketServices.restoEndPoint() + '/api/user/connect',
                 method:'GET'
             }).
             success(function (result) {
@@ -88,7 +88,7 @@ restoUsersAPI.$inject = ['$http', '$auth', '$timeout', 'rocketServices', 'rocket
         /**
          * Ask for a new password
          *
-         * GET /api/users/resetPassword
+         * GET /api/user/resetPassword
          *
          * @param {Object} params : must contains 'email'
          * @param {Function} callback
@@ -99,6 +99,7 @@ restoUsersAPI.$inject = ['$http', '$auth', '$timeout', 'rocketServices', 'rocket
                 url:rocketServices.restoEndPoint() + 'api/user/resetPassword',
                 method:'GET',
                 params:{
+                    lang: rocketServices.getLang(),
                     email: params.email
                 }
             }).
@@ -113,7 +114,7 @@ restoUsersAPI.$inject = ['$http', '$auth', '$timeout', 'rocketServices', 'rocket
         /**
          * Reset password
          *
-         * POST /api/users/resetPassword
+         * POST /api/user/resetPassword
          *
          * @param {Object} params : must contains 'url' and 'password'
          * @param {Function} callback
@@ -121,12 +122,12 @@ restoUsersAPI.$inject = ['$http', '$auth', '$timeout', 'rocketServices', 'rocket
          */
         function resetPassword(params, callback, error) {
             $http({
-                url:rocketServices.restoEndPoint() + '/api/users/resetPassword',
+                url:rocketServices.restoEndPoint() + 'api/user/resetPassword',
                 method:'POST',
                 data:{
-                    url:params.url,
-                    email:params.email,
-                    password:params.password
+                    url: params.url,
+                    email: params.email,
+                    password: params.password
                 },
                 headers:{
                     'Content-Type': 'application/json'
@@ -149,7 +150,7 @@ restoUsersAPI.$inject = ['$http', '$auth', '$timeout', 'rocketServices', 'rocket
          */
         function signup(params, callback, error) {
             $http({
-                url:rocketServices.restoEndPoint() + '/users',
+                url: rocketServices.restoEndPoint() + '/users?lang=' + rocketServices.getLang(),
                 method:'POST',
                 data:{
                     givenname: params.givenname,
@@ -182,7 +183,7 @@ restoUsersAPI.$inject = ['$http', '$auth', '$timeout', 'rocketServices', 'rocket
          */
         function hasToSignLicense(params, callback) {
             $http({
-                url:rocketServices.restoEndPoint() + '/users/' + params.userid + '/signatures/' + params.collectionName,
+                url:rocketServices.restoEndPoint() + '/user/' + params.userid + '/signatures/' + params.collectionName,
                 method:'GET'
             }).
             success(function (result) {
@@ -209,7 +210,7 @@ restoUsersAPI.$inject = ['$http', '$auth', '$timeout', 'rocketServices', 'rocket
          */
         function licensesToSign(params, callback, error) {
             $http({
-                url:rocketServices.restoEndPoint() + '/users/' + params.userid + '/signatures/' ,
+                url:rocketServices.restoEndPoint() + '/user/' + params.userid + '/signatures/' ,
                 method:'GET'
             }).
             success(function (result) {
