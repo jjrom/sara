@@ -19,6 +19,7 @@ rocketServices.$inject = ['$auth', '$translate', '$state', '$timeout', 'config',
             restoEndPoint:restoEndPoint,
             success: success,
             translate:translate,
+            showGrowl :showGrowl,
             warning: warning,
             download:download
         };
@@ -136,6 +137,15 @@ rocketServices.$inject = ['$auth', '$translate', '$state', '$timeout', 'config',
             $translate(message).then(function (translation) {
                 growl.success(translation, options);
             });
+        }
+
+        /**
+         * Display success
+         *
+         * @param {string} message
+         */
+        function showGrowl(message) {
+            growl.success(message, options);
         }
 
         /**

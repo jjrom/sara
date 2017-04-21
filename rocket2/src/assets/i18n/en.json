@@ -70,9 +70,12 @@
             
     "logout.success": "Bye bye !",
     "logout.error": "Error during logout",
-    
+
+    "lostPassword.title" : "Forgot your password",
     "lostPassword.email": "Email",
     "lostPassword.submit": "Reset password",
+    "lost.password.success" : "Reset link sent to hilmi.bouallegue@geomatys.com",
+    "lostPassword.error" : "Error ! Problem when sending the reset link ",
     
     "header.cart": "My cart",
     "header.collections": "Collections",

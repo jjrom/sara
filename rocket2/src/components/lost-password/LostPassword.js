@@ -7,21 +7,23 @@
          restrict : "E",
          controller : lostPasswordController,
          controllerAs : "lostPW",
-         templateUrl : "components/lost.password/lostPassword.html"
+         templateUrl : "components/lost-password/lostPassword.html"
      };
  }
 
-    lostPasswordController.$inject = ['rocketServices', 'restoUsersAPI'];
+    lostPasswordController.$inject = ['$scope','rocketServices', 'restoUsersAPI'];
 
-    function lostPasswordController(rocketServices, restoUsersAPI) {
+    function lostPasswordController($scope,rocketServices, restoUsersAPI) {
 
         var self = this;
-        self.lostPassword = function () {
+        $scope.lostPassword = function () {
             restoUsersAPI.lostPassword({
-                email: self.email
+                email: $scope.email
             },
             function(result){
-                rocketServices.success('lostPassword.success');
+                console.debug("result of lost password",result);
+
+                rocketServices.showGrowl(result.message);
             },
             function(error){
                 rocketServices.error('lostPassword.error');

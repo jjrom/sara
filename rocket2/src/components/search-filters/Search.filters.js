@@ -7,7 +7,7 @@ angular.module('app.components.search.filters', [])
             restrict : "E",
             // controller : searchFiltersController,
             // controllerAs : "searchFiltersCtrl",
-            templateUrl : "components/search.filters/search.filters.html"
+            templateUrl : "components/search-filters/search.filters.html"
         };
     }
 

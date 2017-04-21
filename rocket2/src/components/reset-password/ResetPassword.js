@@ -6,7 +6,7 @@
             restrict : "E",
             controller : resetPasswordController,
             controllerAS : "resetPW",
-            templateUrl : "components/reset.password/resetPassword.html"
+            templateUrl : "components/reset-password/resetPassword.html"
         };
 
     }

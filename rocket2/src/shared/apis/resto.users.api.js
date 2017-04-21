@@ -96,7 +96,7 @@ restoUsersAPI.$inject = ['$http', '$auth', '$timeout', 'rocketServices', 'rocket
          */
         function lostPassword(params, callback, error) {
             $http({
-                url:rocketServices.restoEndPoint() + '/api/users/resetPassword',
+                url:rocketServices.restoEndPoint() + 'api/user/resetPassword',
                 method:'GET',
                 params:{
                     email: params.email
