@@ -161,7 +161,7 @@ restoUsersAPI.$inject = ['$http', '$auth', '$timeout', 'rocketServices', 'rocket
                     topics: params.topics,
                     email: params.email,
                     password: params.password,
-                    activateUrl: rocketServices.baseUrl() + '#/signin'
+                    activateUrl: rocketServices.baseUrl() + '#/login'
                 },
                 headers:{
                     'Content-Type': 'application/json'

@@ -16,20 +16,23 @@
 
     function registerController($scope, rocketServices, restoUsersAPI) {
         var self = this;
-        self.registration = {};
-        self.signup = function () {
-            restoUsersAPI.signup(self.registration,
-            function(result) {
-                rocketServices.go('home', null, {
-                    reload:true
+
+        // Object to bind all the form fields
+        $scope.registration = {};
+
+        $scope.signup = function () {
+            restoUsersAPI.signup($scope.registration,
+                function(result) {
+                    rocketServices.go('home', null, {
+                        reload:true
+                    });
+                    rocketServices.success('register.success');
+                },
+                function(result){
+                    rocketServices.error('error' + result.ErrorCode);
                 });
-                rocketServices.success('register.success');
-            },
-            function(result){
-                rocketServices.error('error' + result.ErrorCode);
-            });
         };
-        
+
         /*
          * Focus on username
          */
