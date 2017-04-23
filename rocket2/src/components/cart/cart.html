@@ -1,0 +1,74 @@
+<div class="content__cart">
+    <div class="row content__cart-header">
+        <h2>{{'cart.myCart' | translate}}</h2>
+        <p><i>{{'cart.metalinkhelp' | translate}}</i></p>
+    </div>
+    <div class="row fullWidth cart" ng-show="cartCtrl.content && !cartCtrl.downloadableItems && !cartCtrl.undownloadableItems">
+        <a class="checkout" ng-click="cartCtrl.checkout()">{{'cart.checkout' | translate}}</a>
+        <table class="niceTable">
+            <tr>
+                <th ng-bind="'cart.item' | translate"></th>
+                <th ng-bind="'cart.description' | translate"></th>
+                <th ng-bind="'cart.characteristics' | translate"></th>
+                <th ng-bind="'cart.actions' | translate"></th>
+            </tr>
+            <tr ng-repeat="(key, item) in cartCtrl.content">
+                <td style="text-align: center;"><img class="thumbs" ng-src="{{ ::item.properties.quicklook}}" title="{{ ::item.properties.productIdentifier }}" ng-click="cartCtrl.view(item.properties.collection, item.id)"></td>
+                <td>
+                    <span class="light">{{'collection' | translate | uppercase}}</span> : {{ ::item.properties.collection }}<br/>
+                    <span class="light">{{'location' | translate | uppercase}}</span> : {{ ::item.properties.keywords | extractlocation }}<br/>
+                    <span class="light">{{'date' | translate | uppercase}}</span> : {{ ::item.properties.startDate | nicedate }}<br/>
+                </td>
+                <td>
+                    <span class="light">{{'platform' | uppercase}}</span> : {{item.properties.platform}}<br/>
+                    <span class="light">{{'instrument' | uppercase}}</span> : {{item.properties.instrument}}<br/>
+                    <span class="light">{{'productType' | uppercase}}</span> : {{item.properties.productType}}<br/>
+                    <span class="light">{{'processingLevel' | uppercase}}</span> : {{item.properties.processingLevel}}<br/>
+                    <span class="light">{{'sensorMode' | uppercase}}</span> : {{item.properties.sensorMode}}<br/>
+                    <span class="light">{{'resolution'| uppercase}}</span> : {{item.properties.resolution}} m<br/>
+                    <span class="light">{{'orbitNumber'| uppercase}}</span> : {{item.properties.orbitNumber}}<br/>
+                </td>
+                <td style="text-align: center;"><a class="button fa fa-trash alert" ng-click="cartCtrl.removeFromCart(item.id)"></a></td>
+            </tr>
+        </table>
+        <a class="checkout" ng-click="cartCtrl.checkout()">{{'cart.checkout' | translate}}</a>
+    </div>
+    <div class="row fullWidth cart" ng-show="cartCtrl.downloadableItems && cartCtrl.undownloadableItems" style='margin-top: 20px;'>
+        <p>
+            {{'cart.doawnloadable.count1' | translate}} {{cartCtrl.downloadableItems.length}} {{'cart.doawnloadable.count2' | translate}} <br/>
+        </p>
+        <p class='center'>
+            <a ng-if='cartCtrl.downloadableItems.length > 0 && orderId' class="checkout__download" ng-click="cartCtrl.downloadOrder(orderId)">{{'cart.checkout.1' | translate}} {{cartCtrl.downloadableItems.length}} {{'cart.checkout.2' | translate}}</a>
+        </p>
+        <table class="niceTable">
+            <tr>
+                <th ng-bind="'cart.errors.id' | translate"></th>
+                <th ng-bind="'cart.errors.collection' | translate"></th>
+                <th ng-bind="'cart.errors.date' | translate"></th>
+                <th ng-bind="'cart.errors' | translate"></th>
+                <th ng-bind="'cart.actions' | translate"></th>
+            </tr>
+            <tr ng-repeat="(key, item) in cartCtrl.undownloadableItems">
+                <td style="text-align: center;">
+                    {{ ::item.id }}
+                </td>
+                <td style="text-align: center;">
+                    {{ ::item.properties.collection }}
+                </td>
+                <td style="text-align: center;">
+                    {{ ::item.properties.startDate | nicedate }}
+                </td>
+                <td style="text-align: center;">
+                    {{ ::item.ErrorMessage }}
+                </td>
+                <td style="text-align: center;">
+                    <a ng-if="item.ErrorCode === 3002 && item.license.description.url" ng-href="{{item.license.description.url}}" target="_blank" ng-bind="'license.seelicense'| translate" class="colored"></a>
+                    <a ng-if="item.ErrorCode === 3002 && item.license.description.url" class="button" ng-click="cartCtrl.signLicense(item.license.licenseId, item.license.description.url)">{{'cart.signLicense' | translate}}</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="row fullWidth" ng-show="!cartCtrl.content">
+        {{'cart.empty' | translate}}
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<!--The login page Information header part-->
+<div class="fullWidth bgcolored gradient">
+    <div class="row padded-vertical-large">
+        <div class="large-12 columns" style="margin-top: 100px;">
+            <h1 translate="header.login"></h1>
+            <p class="small">
+                <span style="color:#1e364e;">{{'label.no.account' | translate}}</span>&nbsp;<a translate="header.signup" ui-sref="register" class="white"></a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<!--The login form part-->
+<div class="row padded">
+    <div class="large-12 columns">
+        <h3 translate="signin.local" class="padded-bottom"></h3>
+        <form method="get" ng-submit="login()" name="loginForm">
+            <input type="email" id="email" name="email" ng-model="email"
+                   class="form-control" placeholder="{{'signin.email' | translate}}" required autofocus/>
+            <input type="password" name="password" ng-model="password"
+                   class="form-control" placeholder="{{ 'signin.password' | translate}}" required/>
+            <a ui-sref="lostPassword" style=""
+               translate="signin.lostpassword" class="small"></a><br/>
+            <div class="padded center">
+                <button type="submit" class="button round"
+                        ng-disabled="loginForm.$invalid" translate="signin.submit"></button>
+            </div>
+        </form>
+
+    </div>
+</div>

@@ -21,38 +21,38 @@
     </head>
 
     <body ng-controller="MainController as mainController">
-        
+
         <!-- Loading mask -->
         <div class="loading-mask" data-loading><span class="fa fa-3x fa fa-circle-o-notch fa-spin"></span></div>
-        
+
         <!-- Growl -->
         <div growl></div>
-        
+
         <!-- Mobile menu -->
         <div id="menuleft" ng-class="{hide:!showmenu,slide:showmenu}" ng-include="'app/shared/menu/leftMenu.html'" class="hide-for-large-up"></div>
         <div class="overlay" ng-class="{show:showmenu}" ng-swipe-left="showmenu=false"></div>
-        
+
         <!-- Main view -->
         <div ng-include="'app/shared/header/header.html'"></div>
         <div ui-view autoscroll="true"></div>
-        
+
         <!-- jquery -->
         <script type="text/javascript" src="assets/libs/jquery/jquery-2.1.3.min.js"></script>
-        
+
         <!-- masonry -->
         <script type="text/javascript" src="assets/libs/masonry/imagesloaded.pkgd.min.js"></script>
         <script type="text/javascript" src="assets/libs/masonry/masonry.pkgd.min.js"></script>
-        
+
         <!-- OpenLayers 3 -->
         <!--<script type="text/javascript" src="assets/libs/ol3-cesium/ol3/ol-debug.js"></script>-->
         <script type="text/javascript" src="assets/libs/ol3/v3.4.0/ol-debug.js"></script>
-        
+
         <!-- Rocket map -->
         <script type="text/javascript" src="assets/js/rocketmap.Map.js"></script>
         <script type="text/javascript" src="assets/js/rocketmap.StaticMap.js"></script>
         <script type="text/javascript" src="assets/js/rocketmap.Menu.js"></script>
         <script type="text/javascript" src="assets/js/rocketmap.Util.js"></script>
-        
+
         <!-- Angular and dependencies -->
         <script type="text/javascript" src="assets/libs/angularjs/angular.js"></script>
         <script type="text/javascript" src="assets/libs/angularjs/angular-touch.js"></script>
@@ -66,7 +66,7 @@
         <script type="text/javascript" src="assets/libs/angularjs/ngDialog/ngDialog.js"></script>
         <script type="text/javascript" src="assets/libs/angularjs/angular-masonry/angular-masonry.js"></script>
         <script type="text/javascript" src="assets/libs/angularjs/angular-datepicker/angular-datepicker.min.js"></script>
-        
+
         <!-- rocket -->
         <script type="text/javascript" src="app/app.module.js"></script>
         <script type="text/javascript" src="app/app.constant.js"></script>

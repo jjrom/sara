@@ -1,0 +1,40 @@
+<div class="content__profile">
+    <div class="row content__profile-header center" style="margin-top: 20px;">
+        <div class="large-4 columns">
+            <div class="color__sara" title="{{profile.givenname}} {{profile.lastname}}">
+                <img class="gravatar-big" ng-src="{{mainController.userPicture(200)}}"/></div>
+        </div>
+        <div class="large-8 columns">
+            <h4>{{profile.givenname}} {{profile.lastname}}</h4>
+            <h5>{{profile.username}}</h5>
+        </div>
+    </div>
+    <div class="center">
+        <a ng-click="mainController.logout()" class="button bwarning" ng-bind="'profile.logout' | translate"></a>
+    </div>
+    <div class="row center">
+        <hr style="color:darkgray;">
+    </div>
+    <div class="row">
+        <div class="large-12 columns">
+            <h4 ng-bind="'profile.orders.history' | translate" style="padding-bottom: 10px;"></h4>
+            <div class="center">
+                <table class="niceTable">
+                    <tr>
+                        <th ng-bind="'profile.order.id' | translate"></th>
+                        <th ng-bind="'profile.order.date' | translate"></th>
+                        <th ng-bind="'profile.order.count' | translate"></th>
+                        <th ng-bind="'profile.order.actions' | translate"></th>
+                    </tr>
+                    <tr ng-repeat="order in orders">
+                        <td title="{{order.orderId}}">{{ order.orderId | ellipsis }}</td>
+                        <td style="text-align: center;">{{ order.date.substring(0, 10) }}</td>
+                        <td style="text-align: center;">{{ order.items.length}} {{'profile.items' | translate}}</td>
+                        <td style="text-align: center;">
+                            <a class="button fa fa-cloud-download bconfirm" ng-click="downloadOrder(order.orderId)"></a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
