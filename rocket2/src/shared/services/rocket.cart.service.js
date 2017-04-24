@@ -361,7 +361,7 @@ angular.module('rocketCartModule',['rocketConstantModule','satellizer','ngCookie
          * @param {callback} success
          * @returns {undefined}
          */
-        function remove(featureid, success) {
+        function remove(featureid, success,error) {
 
             if (!params.isInitialized) {
                 init();

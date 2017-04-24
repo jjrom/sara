@@ -141,7 +141,7 @@ then
     # Run grunt
     grunt --base rocket2/ --gruntfile rocket2/Gruntfile.js build
 
-    cp -a /rocket2/dist/. ${SARA_CLIENT_TARGET_DIR}
+    cp -a rocket2/dist/. ${SARA_CLIENT_TARGET_DIR}
 
   exit 0
 
