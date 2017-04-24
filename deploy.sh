@@ -127,6 +127,22 @@ then
 
   echo " ==> TODO Geomatys install under ${SARA_CLIENT_TARGET_DIR}"
 
+  # Install nodeJs in Centos
+     yum install -y gcc-c++ make
+     curl -sL https://rpm.nodesource.com/setup_6.x | sudo -E bash -
+     yum install nodejs
+
+     # Install grunt
+    npm install -g grunt-cli
+
+    # Install the npm packages
+     npm install --prefix ./rocket2/
+
+    # Run grunt
+    grunt --base rocket2/ --gruntfile rocket2/Gruntfile.js build
+
+    cp -a /rocket2/dist/. ${SARA_CLIENT_TARGET_DIR}
+
   exit 0
 
 fi
