@@ -15,7 +15,9 @@
     function CartController(ngDialog, config, rocketCart, rocketServices, restoUsersAPI) {
 
         var self = this;
+
         self.content = rocketCart.getContent();
+
 
         /*
          * Switch to feature view
@@ -53,13 +55,13 @@
          * Checkout cart content
          */
         self.checkout = function() {
-
-            rocketCart.download(function(data) {
-                self.processDownload(data.order.orderId, data.order.items, data.order.errors);
-            }, function() {
-                rocketServices.error('cart.checkout.error');
-            });
-
+            if(!angular.equals({},self.content)){
+                rocketCart.download(function(data) {
+                    self.processDownload(data.order.orderId, data.order.items, data.order.errors);
+                }, function() {
+                    rocketServices.error('cart.checkout.error');
+                });
+            }
         };
 
         /**

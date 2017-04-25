@@ -289,17 +289,17 @@ angular.module('rocketCartModule',['rocketConstantModule','satellizer','ngCookie
          */
         function intelligentClear(items) {
             var obj = {nb_deletedItems : 0};
-            // var nb_deletedItems = 0;
 
             for (var i = 0; i < items.length; i++) {
                 var item = items[i];
+                // delItemsCount(obj);
                 remove(item.id, delItemsCount(obj));
             }
             return obj.nb_deletedItems;
         }
         
         function delItemsCount(obj) {
-            obj.nb_deletedItems = obj.nb_deletedItems++;
+            obj.nb_deletedItems++;
         }
 
         /**
@@ -380,13 +380,13 @@ angular.module('rocketCartModule',['rocketConstantModule','satellizer','ngCookie
                  * Save to localStorage
                  */
                 setContentLocalStore();
-                success();
+                // success();
             } else if (params.cookieUse) {
                 /*
                  * Save to cookie
                  */
                 setCookie();
-                success();
+                // success();
             }
         }
 
