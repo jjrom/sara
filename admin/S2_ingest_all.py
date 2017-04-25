@@ -6,11 +6,10 @@ import glob
 import xml.etree.ElementTree as ET
 
 # resto S2 collection url
-restourl = 'http://localhost/resto/collections/S2'
+restourl = 'http://localhost/sara.server/1.0/collections/S2'
 username = 'admin'
 password = 'admin'
-#metadataPaths = '/g/data2/fj7/Copernicus/Sentinel-2/MSI/L1C/*/*/*/*.xml'
-metadataPaths = '/Users/jrom/*/s*.xml'
+metadataPaths = '/g/data3/fj7/Copernicus/Sentinel-2/MSI/L1C/*/*/*/*.xml'
 
 # Log
 log = '/tmp/S2_ingest_all.log'
@@ -53,8 +52,6 @@ for metadataFile in files:
     # Add zip path from metadata path
     PATH = os.path.dirname(metadataFile).split('Sentinel-2')[1]
     ET.SubElement(root, 'PATH').text = PATH
- 
-    print ET.tostring(root)
 
     # Post updated metadata file to resto
     response=requests.post(restourl, data=ET.tostring(root), auth=(username, password))
@@ -62,6 +59,8 @@ for metadataFile in files:
         print >>loghand, zipfilename
         print >>loghand, response
         nfail+=1
+    else:
+        print response.text
 
     #xml.append(ET.fromstring('<IDENTIFIER>12345</IDENTIFIER>'))
     #print xml

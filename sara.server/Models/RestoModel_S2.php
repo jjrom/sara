@@ -80,51 +80,37 @@ class RestoModel_S2 extends RestoModel {
      * Generate the absolute path to zip product
      *
      * @param $properties
-     * @return string
-     */
+     *
     public function generateResourcePath($properties) {
-        $resource_path = $this->config['general']['rootPaths']['resource_path'];
-        if (isset($resource_path)) {
-            if (isset($properties['startDate'])) {
-                $dateStr = date_format(date_create($properties['startDate']),'Ymd');
-                return $resource_path . '/' . $dateStr . '/' . $properties['resource'];
-            } else {
-                return $resource_path . '/' . $properties['resource'];
-            }
-        } else {
-            return $properties['resource'];
+        if (isset($properties['path']) && isset($properties['productIdentifier'])) {
+            return $properties['path'] . '/' . $properties['productIdentifier'] . '.zip';
         }
-    }
+        return null;
+    }*/
 
     /**
      * Generate the dynamic relative path to quicklook
      *
      * @param $properties
-     * @return string relative path in the form of YYYYMMdd/quicklook_filename with YYYYMMdd is the formated startDate parameter
-     */
-   public function generateQuicklookPath($properties) {
-        if (isset($properties['startDate'])) {
-            $dateStr = date_format(date_create($properties['startDate']),'Ymd');
-            return $dateStr . '/' . $properties['quicklook'];
-        } else {
-            return $properties['quicklook'];
+     *
+    public function generateQuicklookPath($properties) {
+        if (isset($properties['path']) && isset($properties['productIdentifier'])) {
+            return $properties['path'] . '/' . $properties['productIdentifier'] . '.png';
         }
-    }
+        return null;
+    }*/
 
     /**
      * Generate the dynamic relative path to thumbnail
      *
      * @param $properties
-     * @return string relative path in the form of YYYYMMdd/thumbnail_filename with YYYYMMdd is the formated startDate parameter
-     */
+     *
     public function generateThumbnailPath($properties) {
-        if (isset($properties['startDate'])) {
-            $dateStr = date_format(date_create($properties['startDate']),'Ymd');
-            return $dateStr . '/' . $properties['thumbnail'];
-        } else {
-            return $properties['thumbnail'];
+        if (isset($properties['path']) && isset($properties['productIdentifier'])) {
+            return $properties['path'] . '/' . $properties['productIdentifier'] . '.png';
         }
-    }
+        return null;
+    }*/
     
     /**
      * Create JSON feature from xml string
@@ -139,15 +125,15 @@ class RestoModel_S2 extends RestoModel {
         /*
          * Computed from path
          */
-        $path = $dom->getElementsByTagName('PATH')->item(0)->nodeValue;
+        $path = trim($dom->getElementsByTagName('PATH')->item(0)->nodeValue);
         $explodedPath = explode('/', $path);
-        $instrument = $explodedPath[0];
-        $processingLevel = $explodedPath[1];
-        $productType = 'S2' . $explodedPath[1] . substr($processingLevel, 1);
+        $instrument = $explodedPath[1];
+        $processingLevel = $explodedPath[2];
+        $productType = 'S2' . $instrument . substr($processingLevel, 1);
         $time = $dom->getElementsByTagName('ACQUISITION_TIME')->item(0);
         $zipFile = $dom->getElementsByTagName('ZIPFILE')->item(0);
         $processingInfo = $dom->getElementsByTagName('ESA_PROCESSING')->item(0);
-        $polygon = RestoGeometryUtil::wktPolygonToArray($dom->getElementsByTagName('ESA_TILEOUTLINE_FOOTPRINT_WKT')->item(0)->nodeValue);
+        $polygon = RestoGeometryUtil::wktPolygonToArray(trim($dom->getElementsByTagName('ESA_TILEOUTLINE_FOOTPRINT_WKT')->item(0)->nodeValue));
         
         /*
          * Initialize feature
@@ -159,20 +145,20 @@ class RestoModel_S2 extends RestoModel {
                 'coordinates' => array($polygon),
             ),
             'properties' => array(
-                'productIdentifier' => $dom->getElementsByTagName('IDENTIFIER')->item(0)->nodeValue,
-                'startDate' => RestoUtil::formatTimestamp($time->getAttribute('start_datetime_utc')),
-                'completionDate' => RestoUtil::formatTimestamp($time->getAttribute('stop_datetime_utc')),
-                'platform' =>  $dom->getElementsByTagName('SATELLITE')->item(0)->getAttribute('name'),
-                'relativeOrbitNumber' => $dom->getElementsByTagName('ORBIT_NUMBERS')->item(0)->nodeValue,
-                'resourceSize' => $zipFile->getAttribute('size_bytes'),
-                'resourceChecksum' => 'md5:' . $zipFile->getAttribute('md5_local'),
+                'productIdentifier' => trim($dom->getElementsByTagName('IDENTIFIER')->item(0)->nodeValue),
+                'startDate' => RestoUtil::formatTimestamp(trim($time->getAttribute('start_datetime_utc'))),
+                'completionDate' => RestoUtil::formatTimestamp(trim($time->getAttribute('stop_datetime_utc'))),
+                'platform' =>  trim($dom->getElementsByTagName('SATELLITE')->item(0)->getAttribute('name')),
+                'relativeOrbitNumber' => trim($dom->getElementsByTagName('ORBIT_NUMBERS')->item(0)->nodeValue),
+                'resourceSize' => trim($zipFile->getAttribute('size_bytes')),
+                'resourceChecksum' => 'md5:' . trim($zipFile->getAttribute('md5_local')),
                 'productType' => $productType,
                 'processingLevel' => $processingLevel,
                 'instrument'=> $instrument,
-                'cloudCover' => $dom->getElementsByTagName('ESA_CLOUD_COVER')->item(0)->getAttribute('percentage'),
+                'cloudCover' => trim($dom->getElementsByTagName('ESA_CLOUD_COVER')->item(0)->getAttribute('percentage')),
                 'path' => $path,
-                'softwareVersion' => $processingInfo->getAttribute('software_version'),
-                'processingTime' => RestoUtil::formatTimestamp($processingInfo->getAttribute('processingtime_utc'))
+                'softwareVersion' => trim($processingInfo->getAttribute('software_version')),
+                'processingTime' => RestoUtil::formatTimestamp(trim($processingInfo->getAttribute('processingtime_utc')))
             )
         );
 

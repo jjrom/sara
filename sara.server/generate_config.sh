@@ -48,7 +48,7 @@ cat << EOF
 return array(
     'general' => array(
         'title' => 'sara',
-        'rootEndpoint' => '${SARA_SERVER_VERSION_ENDPOINT}',
+        'rootEndpoint' => '${SARA_SERVER_SUB}${SARA_SERVER_VERSION_ENDPOINT}',
         'languages' => array('en'),
         'osDescription' => array(
             'en' => array(

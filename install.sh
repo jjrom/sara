@@ -101,6 +101,10 @@ cat <<EOF > /etc/nginx/default.d/sara.conf
       rewrite ^/sara.server/1.0/(.*)\$ /sara.server/1.0/index.php?RESToURL=\$1 last; break;
     }
   }
+  # Quicklooks and zip files
+  location ${SARA_DATA_URL} {
+    alias ${DATA_ROOT_PATH};
+  }
   location ~ /\.ht {
     deny all;
   }

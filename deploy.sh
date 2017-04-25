@@ -106,15 +106,15 @@ then
   chown -R ${WWW_USER} ${SARA_SERVER_ENDPOINT}
 
   echo " ==> Install S1 collection"
-  curl -X POST -H "Content-Type: application/json" -d @${SRC_DIR}/sara.server/collections/S1.json ${SERVER_PROTOCOL}://${RESTO_ADMIN_USER}:${RESTO_ADMIN_PASSWORD}@${SARA_SERVER_URL}${SARA_SERVER_VERSION_ENDPOINT}/collections
+  curl -X POST -H "Content-Type: application/json" -d @${SRC_DIR}/sara.server/collections/S1.json ${SERVER_PROTOCOL}://${RESTO_ADMIN_USER}:${RESTO_ADMIN_PASSWORD}@${SARA_SERVER_URL}${SARA_SERVER_SUB}${SARA_SERVER_VERSION_ENDPOINT}/collections
   echo ""
 
   echo " ==> Install S2 collection"
-  curl -X POST -H "Content-Type: application/json" -d @${SRC_DIR}/sara.server/collections/S2.json ${SERVER_PROTOCOL}://${RESTO_ADMIN_USER}:${RESTO_ADMIN_PASSWORD}@${SARA_SERVER_URL}${SARA_SERVER_VERSION_ENDPOINT}/collections
+  curl -X POST -H "Content-Type: application/json" -d @${SRC_DIR}/sara.server/collections/S2.json ${SERVER_PROTOCOL}://${RESTO_ADMIN_USER}:${RESTO_ADMIN_PASSWORD}@${SARA_SERVER_URL}${SARA_SERVER_SUB}${SARA_SERVER_VERSION_ENDPOINT}/collections
   echo ""
 
   echo " ==> Install S3 collection"
-  curl -X POST -H "Content-Type: application/json" -d @${SRC_DIR}/sara.server/collections/S3.json ${SERVER_PROTOCOL}://${RESTO_ADMIN_USER}:${RESTO_ADMIN_PASSWORD}@${SARA_SERVER_URL}${SARA_SERVER_VERSION_ENDPOINT}/collections
+  curl -X POST -H "Content-Type: application/json" -d @${SRC_DIR}/sara.server/collections/S3.json ${SERVER_PROTOCOL}://${RESTO_ADMIN_USER}:${RESTO_ADMIN_PASSWORD}@${SARA_SERVER_URL}${SARA_SERVER_SUB}${SARA_SERVER_VERSION_ENDPOINT}/collections
   echo ""
   
   echo " Done !"

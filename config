@@ -1,9 +1,14 @@
 ## SARA configuration
 SERVER_PROTOCOL=http
-SARA_SERVER_URL=localhost/sara.server
+SARA_SERVER_URL=localhost
+SARA_SERVER_SUB=/sara.server
 SARA_SERVER_TARGET_DIR=/usr/share/nginx/html/sara.server
 SARA_SERVER_VERSION_ENDPOINT=/1.0
 SARA_CLIENT_TARGET_DIR=/usr/share/nginx/html/sara.client
+
+# WARNING ! The trailing "/" is mandatory
+SARA_DATA_URL=/data/
+DATA_ROOT_PATH=/g/data3/fj7/Copernicus/
 
 ## Email configuration 
 CONTACT_NAME=somebody
