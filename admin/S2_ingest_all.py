@@ -1,15 +1,27 @@
 #!/usr/bin/env python
 
+import sys
 import os
 import requests
 import glob
 import xml.etree.ElementTree as ET
 
+# First argument is mandatory - config file
+if len(sys.argv) != 2:
+    print "Usage: " + sys.argv[0] + " <path to config file>"
+    sys.exit()
+
+config = {}
+with open(sys.argv[1]) as configFile:
+    for line in configFile:
+        name, var = line.partition("=")[::2]
+        config[name.strip()] = var.rstrip()
+
 # resto S2 collection url
-restourl = 'http://localhost/sara.server/1.0/collections/S2'
-username = 'admin'
-password = 'admin'
-metadataPaths = '/g/data3/fj7/Copernicus/Sentinel-2/MSI/L1C/*/*/*/*.xml'
+restourl = config['SERVER_PROTOCOL'] + '://' + config['SARA_SERVER_URL'] + config['SARA_SERVER_SUB'] + config['SARA_SERVER_VERSION_ENDPOINT'] + '/collections/S2'
+username = config['RESTO_ADMIN_USER']
+password = config['RESTO_ADMIN_PASSWORD']
+metadataPaths = config['DATA_ROOT_PATH'] + 'Sentinel-2/MSI/L1C/*/*/*/*.xml'
 
 # Log
 log = '/tmp/S2_ingest_all.log'
