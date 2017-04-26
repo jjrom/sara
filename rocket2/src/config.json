@@ -1,1 +1,15 @@
-{}
+{
+  "restoServerUrl": "https://resto.mapshup.com/2.2/",
+  "contactEmail": "somebody@localhost",
+  "cartSynchronization": true,
+  "detectLanguage": false,
+  "availableLanguages": ["en"],
+  "maxRecords": 20,
+  "auth": {
+  },
+  "map": {
+    "background": {
+      "source": "OSM"
+    }
+  }
+}

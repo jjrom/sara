@@ -18,7 +18,6 @@ angular.module('app', [
     'app.components.header',
     'rocketCacheServiceModule',
     'app.components.main',
-    'rocketConstantModule',
     'restoFeatureAPIModule',
     'app.components.left.menu',
     'restoCartAPIModule',
@@ -228,7 +227,7 @@ angular.module('app', [
  */
 function bootstrap(config) {
 
-    // TODO handle configuration value here...
+    angular.module('app').constant('config',config);
 
     // Bootstrap Angular application module.
     angular.bootstrap(window.document, ['app']);

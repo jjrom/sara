@@ -1,4 +1,4 @@
-angular.module('rocketServicesModule',['rocketConstantModule','angular-growl','pascalprecht.translate','ui.router'])
+angular.module('rocketServicesModule',['angular-growl','pascalprecht.translate','ui.router'])
         .factory('rocketServices', rocketServices);
 
 
