@@ -21,7 +21,7 @@ with open(sys.argv[1]) as configFile:
 restourl = config['SERVER_PROTOCOL'] + '://' + config['SARA_SERVER_URL'] + config['SARA_SERVER_SUB'] + config['SARA_SERVER_VERSION_ENDPOINT'] + '/collections/S2'
 username = config['RESTO_ADMIN_USER']
 password = config['RESTO_ADMIN_PASSWORD']
-metadataPaths = config['DATA_ROOT_PATH'] + 'Sentinel-2/MSI/L1C/*/*/*/*.xml'
+metadataPaths = config['DATA_ROOT_PATH'] + 'Sentinel-2/MSI/L1C/'
 
 # Log
 log = '/tmp/S2_ingest_all.log'
@@ -47,59 +47,34 @@ loghand = open(log,'w')
 #        </AUSCOPHUB_SAFE_FILEDESCRIPTION>
 #  
 # 
-files = glob.glob(metadataPaths)
-print >> loghand, "# of files", len(files)
+for year in ['2015' '2016', '2017']:
+    for month in ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']:
 
-nfail=0
-for metadataFile in files:
+        files = glob.glob(metadataPaths + year + '/' + year + '-' + month + '/*/*.xml')
+        print >> loghand, "# of files", len(files)
 
-    # Read metadata XML
-    tree = ET.parse(metadataFile)
-    root = tree.getroot()
+        nfail=0
+        for metadataFile in files:
 
-    # Add identifier from metadata file name
-    IDENTIFIER = os.path.basename(metadataFile)[:-4]
-    ET.SubElement(root, 'IDENTIFIER').text = IDENTIFIER
+            # Read metadata XML
+            tree = ET.parse(metadataFile)
+            root = tree.getroot()
 
-    # Add zip path from metadata path
-    PATH = os.path.dirname(metadataFile).split('Sentinel-2')[1]
-    ET.SubElement(root, 'PATH').text = PATH
+            # Add identifier from metadata file name
+            IDENTIFIER = os.path.basename(metadataFile)[:-4]
+            ET.SubElement(root, 'IDENTIFIER').text = IDENTIFIER
 
-    # Post updated metadata file to resto
-    response=requests.post(restourl, data=ET.tostring(root), auth=(username, password))
-    if '200' in response.text:
-        print >>loghand, zipfilename
-        print >>loghand, response
-        nfail+=1
-    else:
-        print response.text
+            # Add zip path from metadata path
+            PATH = os.path.dirname(metadataFile).split('Sentinel-2')[1]
+            ET.SubElement(root, 'PATH').text = PATH
 
-    #xml.append(ET.fromstring('<IDENTIFIER>12345</IDENTIFIER>'))
-    #print xml
-    #del mf
-    # Load zip file
-    #zf = zipfile.ZipFile(zipfilename, 'r')
-    #filenames = [zi.filename for zi in zf.infolist()]
-    #safeDirName = [fn for fn in filenames if fn.endswith('.SAFE/')][0]
-    #bn = safeDirName.replace('.SAFE/', '')
-    ## Find meta file
-    ## The meta filename is, rather ridiculously, named something slightly different
-    ## inside the SAFE directory, so we have to construct that name.
-    #metafilename = bn.replace('PRD', 'MTD').replace('MSIL1C', 'SAFL1C') + ".xml"
-    #fullmetafilename = safeDirName + metafilename
-    #if fullmetafilename not in filenames:
-    #    # We have a new format package, in which the meta filename is constant.
-    #    fullmetafilename = safeDirName + 'MTD_MSIL1C.xml'
-    #mf = zf.open(fullmetafilename)
-    #xmlStr = mf.read()
-    #del mf
-
-    ## Post request
-    #response=requests.post(restourl, data=xmlStr, auth=(username, password))
-    #if '200' in response.text:
-    #    print >>loghand, zipfilename
-    #    print >>loghand, response
-    #    nfail+=1
+            # Post updated metadata file to resto
+            response=requests.post(restourl, data=ET.tostring(root), auth=(username, password))
+            if '200' in response.text:
+                print >>loghand, response
+                nfail+=1
+            else:
+                print response.text
 
 print >>loghand, "# of failed post:", nfail
 loghand.close()
