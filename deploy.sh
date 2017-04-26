@@ -145,20 +145,9 @@ then
     # Generate the client configuration from config file
     echo "============================================================================"
 
-	json -I -f rocket2/src/config.json -e 'this.restoServerUrl="'${SERVER_PROTOCOL}'/'${SARA_SERVER_URL}'/'${SARA_SERVER_VERSION_ENDPOINT}'"'
+	json -I -f rocket2/src/config.json -e 'this.restoServerUrl="'${SERVER_PROTOCOL}'://'${SARA_SERVER_URL}${SARA_SERVER_VERSION_ENDPOINT}'"'
 
 	json -I -f rocket2/src/config.json -e 'this.contactEmail="'${CONTACT_EMAIL}'"'
-
-
-
-
-
-
-
-
-
-
-
 
 
 
