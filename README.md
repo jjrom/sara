@@ -36,6 +36,7 @@ We suppose that the sources will be stored under $SARA_SRC
 ### Initialize sources repository
 
 **These command should be launch to initialize the SARA sources (i.e. for an install from scratch)**
+**These command needs a valid account on the private https://github.com/jjrom/sara.git directory**
 
 	# Clone repository to "sara" directory
     git clone https://github.com/jjrom/sara.git $SARA_SRC
@@ -48,20 +49,17 @@ We suppose that the sources will be stored under $SARA_SRC
     git submodule init
     git submodule update
 
+### Platform initialization
 
-## Post installation configuration
+**These command are run only once**
 
+    # Install CentOS packages and configure postgres/nginx services
+    ./01_install_packages.sh config
 
-Start nginx on reboot
+    # Install itag - [WARNING] this is quite long !
+    ./02_install_itag.sh config  
 
-    chkconfig --add nginx
-    chkconfig --levels 235 nginx on
+    # Install resto
+    ./03_install_resto.sh config 
 
-Start php-fpm on reboot
-
-    chkconfig --add php-fpm
-    chkconfig --levels 235 php-fpm on
-
-
-
-
+           
