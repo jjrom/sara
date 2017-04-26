@@ -70,6 +70,17 @@ yum -y install git wget unzip nginx postgresql95-server postgresql95 postgresql9
 yum clean all
 pip install requests
 
+echo " >>> Install nodejs for Web client generation"
+yum install -y gcc-c++ make
+curl -sL https://rpm.nodesource.com/setup_6.x | sudo -E bash -
+yum install -y nodejs
+
+# Install grunt
+npm install -g grunt-cli
+
+# install node json tool
+npm install -g json
+
 echo " >>> Initialize postgres database"
 service postgresql-9.5 initdb
 

@@ -41,5 +41,5 @@ MAPSERVER_URL=https://maps.snapplanet.io
 MAPFILES_DIR=/home/maps/tmp.mapfiles
 MAPFILES_DISPLAY_DIR=/data/tmp.mapfiles
 
-CLIENT_ENDPOINT_RESET_PASSWORD=http://localhost/#/resetPassword
-CLIENT_ENDPOINT_HTML_SEARCH_URL=http://localhost/#/search
+CLIENT_ENDPOINT_RESET_PASSWORD=http://localhost/sara.client/#/resetPassword
+CLIENT_ENDPOINT_HTML_SEARCH_URL=http://localhost/sara.client/#/search
