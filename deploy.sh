@@ -128,6 +128,7 @@ then
   echo " ==> TODO Geomatys install under ${SARA_CLIENT_TARGET_DIR}"
 
   # Install nodeJs in Centos
+
      yum install -y gcc-c++ make
      curl -sL https://rpm.nodesource.com/setup_6.x | sudo -E bash -
      yum install nodejs
@@ -135,8 +136,31 @@ then
      # Install grunt
     npm install -g grunt-cli
 
+    # install node json tool
+    npm install -g json
+
     # Install the npm packages
      npm install --prefix ./rocket2/
+
+    # Generate the client configuration from config file
+    echo "============================================================================"
+
+	json -I -f rocket2/src/config.json -e 'this.restoServerUrl="'${SERVER_PROTOCOL}'/'${SARA_SERVER_URL}'/'${SARA_SERVER_VERSION_ENDPOINT}'"'
+
+	json -I -f rocket2/src/config.json -e 'this.contactEmail="'${CONTACT_EMAIL}'"'
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     # Run grunt
     grunt --base rocket2/ --gruntfile rocket2/Gruntfile.js build
