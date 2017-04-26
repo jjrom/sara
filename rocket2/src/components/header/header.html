@@ -20,9 +20,13 @@
             <li ng-if="mainController.isAuthenticated()" ui-sref="profile" class="link link--signup">{{mainController.userMail()}}</li>
         </ul>
     </div>
+
     <div class="hide-for-large-up">
         <ul class="nav__content">
-            <li ng-click="mainController.toggleLeftMenu()" class="link link--showmenu fa fa-2x fa-bars" ng-class="{'fa-bars':!mainController.leftMenuIsVisible(), 'fa-close':mainController.leftMenuIsVisible()}"></li>
+            <li ng-click="mainController.toggleLeftMenu()"
+                class="link link--showmenu fa fa-2x fa-bars"
+                ng-class="{'fa-bars':!mainController.leftMenuIsVisible(), 'fa-close':mainController.leftMenuIsVisible()}"
+                style="font-size: xx-large;"></li>
         </ul>
     </div>
 </nav>
