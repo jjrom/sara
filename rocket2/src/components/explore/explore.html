@@ -146,21 +146,14 @@
                                ng-bind="'search.resetfilters'|translate | uppercase">
                             </a>
                         </span>
-                        <span ng-click="exploreCtrl.reset()" class="pull-left hidden-xs">
-                            <a class="button bcancel margin-top-20"
-                               style="background-color: rgba(215, 215, 215, 1); color : #666666; padding-top:20px;
-                                padding-bottom : 20px; padding-left: 60px; padding-right:10px;
-                                margin-right: -5px; margin-left: 15px;"
+
+                        <span ng-click="exploreCtrl.reset()"
+                              class="pull-left hidden-xs">
+                            <a id="areset" class="button bcancel margin-top-20"
                                ng-bind="'search.resetfilters'|translate | uppercase">
                             </a>
 
-                            <i style="background-color: rgba(215, 215, 215, 1);
-                                color : #666666; padding-bottom: 20px;
-                                padding-top: 14px;
-                                padding-right: 60px;
-                                padding-left: 11px;
-                                margin-left: 0px;
-                                font-size: x-large;"
+                            <i id="ireset"
                                class="fa fa-repeat" aria-hidden="true"></i>
                         </span>
 
@@ -172,22 +165,11 @@
                         </span>
                         <span ng-click="exploreCtrl.search()" class="pull-right hidden-xs">
 
-                            <a class="button bconfirm margin-top-20"
-                               style="background-color: green;
-                                padding-top:20px;
-                                padding-bottom : 20px; padding-left: 130px; padding-right:10px;
-                                margin-right: -5px;"
+                            <a id="Asearch" class="button bconfirm margin-top-20"
                                ng-bind="'search.updatelist'|translate | uppercase">
                             </a>
 
-                            <i style="background-color: green;
-                                color : white; padding-bottom: 20px;
-                                padding-top: 14px;
-                                padding-right: 130px;
-                                padding-left: 11px;
-                                margin-left: 0px;
-                                margin-right: 15px;
-                                font-size: x-large;"
+                            <i id="Isearch"
                                class="fa fa-search" aria-hidden="true"></i>
                         </span>
                     </div>
