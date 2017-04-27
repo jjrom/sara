@@ -62,5 +62,5 @@ for year in ['2015', '2016', '2017']:
             ET.SubElement(root, 'PATH').text = PATH
 
             # Post updated metadata file to resto
-            response=requests.post(restourl, data=ET.tostring(root), auth=(username, password))
+            print requests.post(restourl, data=ET.tostring(root), auth=(username, password))
             
