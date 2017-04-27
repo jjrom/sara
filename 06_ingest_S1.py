@@ -18,7 +18,7 @@ with open(sys.argv[1]) as configFile:
         config[name.strip()] = var.rstrip()
 
 # resto S2 collection url
-restourl = config['SERVER_PROTOCOL'] + '://' + config['SARA_SERVER_URL'] + config['SARA_SERVER_SUB'] + config['SARA_SERVER_VERSION_ENDPOINT'] + '/collections/S2'
+restourl = config['SERVER_PROTOCOL'] + '://' + config['SARA_SERVER_URL'] + config['SARA_SERVER_SUB'] + config['SARA_SERVER_VERSION_ENDPOINT'] + '/collections/S1'
 username = config['RESTO_ADMIN_USER']
 password = config['RESTO_ADMIN_PASSWORD']
 
@@ -60,7 +60,7 @@ for productType in ['GRD', 'SLC']:
                 ET.SubElement(root, 'IDENTIFIER').text = IDENTIFIER
 
                 # Add zip path from metadata path
-                PATH = os.path.dirname(metadataFile).split('Sentinel-2')[1]
+                PATH = os.path.dirname(metadataFile).split('Sentinel-1')[1]
                 ET.SubElement(root, 'PATH').text = PATH
 
                 # Post updated metadata file to resto
