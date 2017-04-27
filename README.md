@@ -62,4 +62,15 @@ We suppose that the sources will be stored under $SARA_SRC
     # Install resto
     ./03_install_resto.sh config 
 
+
+## FAQ
+
+### Delete a collection
+
+    # Delete S1 collection - must be empty !
+    curl -X DELETE http://admin:admin@localhost/sara.server/1.0/collections/S1
+
+    
+
+
            
