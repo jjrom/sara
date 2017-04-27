@@ -149,7 +149,7 @@ class RestoModel_S2 extends RestoModel {
                 'startDate' => RestoUtil::formatTimestamp(trim($time->getAttribute('start_datetime_utc'))),
                 'completionDate' => RestoUtil::formatTimestamp(trim($time->getAttribute('stop_datetime_utc'))),
                 'platform' =>  trim($dom->getElementsByTagName('SATELLITE')->item(0)->getAttribute('name')),
-                'relativeOrbitNumber' => trim($dom->getElementsByTagName('ORBIT_NUMBERS')->item(0)->nodeValue),
+                'orbitNumber' => trim($dom->getElementsByTagName('ORBIT_NUMBERS')->item(0)->getAttribute('relative')),
                 'resourceSize' => trim($zipFile->getAttribute('size_bytes')),
                 'resourceChecksum' => 'md5:' . trim($zipFile->getAttribute('md5_local')),
                 'productType' => $productType,

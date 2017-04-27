@@ -21,11 +21,6 @@ with open(sys.argv[1]) as configFile:
 restourl = config['SERVER_PROTOCOL'] + '://' + config['SARA_SERVER_URL'] + config['SARA_SERVER_SUB'] + config['SARA_SERVER_VERSION_ENDPOINT'] + '/collections/S2'
 username = config['RESTO_ADMIN_USER']
 password = config['RESTO_ADMIN_PASSWORD']
-metadataPaths = config['DATA_ROOT_PATH'] + 'Sentinel-2/MSI/L1C/'
-
-# Log
-log = '/tmp/S2_ingest_all.log'
-loghand = open(log,'w')
 
 # Select XML metadata files to post
 #  Input metadata is an XML file provided by Geoscience Australia
@@ -47,13 +42,11 @@ loghand = open(log,'w')
 #        </AUSCOPHUB_SAFE_FILEDESCRIPTION>
 #  
 # 
-for year in ['2015' '2016', '2017']:
+for year in ['2015', '2016', '2017']:
     for month in ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']:
 
-        files = glob.glob(metadataPaths + year + '/' + year + '-' + month + '/*/*.xml')
-        print >> loghand, "# of files", len(files)
-
-        nfail=0
+        files = glob.glob(config['DATA_ROOT_PATH'] + 'Sentinel-2/MSI/L1C/' + year + '/' + year + '-' + month + '/*/*.xml')
+        
         for metadataFile in files:
 
             # Read metadata XML
@@ -70,11 +63,4 @@ for year in ['2015' '2016', '2017']:
 
             # Post updated metadata file to resto
             response=requests.post(restourl, data=ET.tostring(root), auth=(username, password))
-            if '200' in response.text:
-                print >>loghand, response
-                nfail+=1
-            else:
-                print response.text
-
-print >>loghand, "# of failed post:", nfail
-loghand.close()
+            

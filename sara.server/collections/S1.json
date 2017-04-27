@@ -13,5 +13,10 @@
             "Query": "Australia",
             "Attribution": "Copernicus Sentinel data 2017"
         }
+    },
+    "propertiesMapping":{
+        "quicklook" : "http://localhost/data/Sentinel-1{:path:}/{:productIdentifier:}.png",
+        "thumbnail" : "http://localhost/data/Sentinel-1{:path:}/{:productIdentifier:}.png",
+        "resource" : "/g/data3/fj7/Sentinel-1{:path:}/{:productIdentifier:}.zip"
     }
 }

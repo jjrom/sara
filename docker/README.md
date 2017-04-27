@@ -1,6 +1,6 @@
 # SARA - docker installation
 
-Complete build of SARA application through docker installation for test purpose
+Mimic SARA installation on CentOS platform through docker for test/validation purpose
 
 ## Building docker file
 	
@@ -32,6 +32,33 @@ Within the docker image, launch the following
 	host    all             all             ::1/128                 trust
 	EOF
 
+	# Configure nginx
+	cat <<EOF > /etc/nginx/default.d/sara.conf
+	  location ~ \.php\$ {
+	      include /etc/nginx/fastcgi_params;
+	      fastcgi_param   SCRIPT_FILENAME  \$document_root\$fastcgi_script_name;
+	      fastcgi_split_path_info ^(.+\.php)(/.+)\$;
+	      fastcgi_pass  127.0.0.1:9000;
+	      fastcgi_index index.php;
+	  }
+	  location /sara.server/1.0/ {
+	    if (!-e \$request_filename) {
+	      rewrite ^/sara.server/1.0/(.*)\$ /sara.server/1.0/index.php?RESToURL=\$1 last; break;
+	    }
+	  }
+	  # Quicklooks and zip files
+	  location /data/ {
+	    alias /g/data3/fj7/Copernicus/;
+	  }
+	  location ~ /\.ht {
+	    deny all;
+	  }
+	  # Protect config files
+	  location ~* ^config.\.php\$ {
+	    return 404;
+	  }
+	EOF
+
 	# Start postgres service
 	service postgresql-9.5 start
 
@@ -44,10 +71,10 @@ Within the docker image, launch the following
 	export SARA_HOME=/sara
 	cd $SARA_HOME
 
-	# Install iTag database (First time only)
-	./install.sh -t itag
+    # Install itag - [WARNING] this is quite long !
+    ./02_install_itag.sh config  
 
-	# Install resto database (first time only)
-	./install.sh -t resto
-		
+    # Install resto
+    ./03_install_resto.sh config 
+    
 
