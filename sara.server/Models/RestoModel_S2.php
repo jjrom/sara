@@ -77,42 +77,6 @@ class RestoModel_S2 extends RestoModel {
     }
 
     /**
-     * Generate the absolute path to zip product
-     *
-     * @param $properties
-     *
-    public function generateResourcePath($properties) {
-        if (isset($properties['path']) && isset($properties['productIdentifier'])) {
-            return $properties['path'] . '/' . $properties['productIdentifier'] . '.zip';
-        }
-        return null;
-    }*/
-
-    /**
-     * Generate the dynamic relative path to quicklook
-     *
-     * @param $properties
-     *
-    public function generateQuicklookPath($properties) {
-        if (isset($properties['path']) && isset($properties['productIdentifier'])) {
-            return $properties['path'] . '/' . $properties['productIdentifier'] . '.png';
-        }
-        return null;
-    }*/
-
-    /**
-     * Generate the dynamic relative path to thumbnail
-     *
-     * @param $properties
-     *
-    public function generateThumbnailPath($properties) {
-        if (isset($properties['path']) && isset($properties['productIdentifier'])) {
-            return $properties['path'] . '/' . $properties['productIdentifier'] . '.png';
-        }
-        return null;
-    }*/
-    
-    /**
      * Create JSON feature from xml string
      * 
      * @param {String} $xml : $xml string
