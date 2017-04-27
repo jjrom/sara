@@ -49,9 +49,14 @@ We suppose that the sources will be stored under $SARA_SRC
     git submodule init
     git submodule update
 
+### Prepare configuration file
+
+The most important file is ${SARA_SRC}/config - it contains all the configuration parameters as a key/value pair form.
+
+
 ### Platform initialization
 
-**These command are run only once**
+**[IMPORTANT] These commands are run only once**
 
     # Install CentOS packages and configure postgres/nginx services
     ./01_install_packages.sh config
@@ -62,15 +67,61 @@ We suppose that the sources will be stored under $SARA_SRC
     # Install resto
     ./03_install_resto.sh config 
 
+### Server and client deployment
+
+**[IMPORTANT] These commands should be run each time a new version is delivered or the configuration changes**
+
+    # Deploy server
+    ./04_deploy_server.sh config  
+
+    # Deploy client
+    ./05_deploy_client.sh config 
+
+## Ingest Sentinels products
+
+**[IMPORTANT] These commands should be run only once to initialize database with existing Sentinels products**
+
+    # Ingest Sentinel-1 products
+    ./06_ingest_S1.py config  
+
+    # Ingest Sentinel-2 products
+    ./07_ingest_S2.py config  
+
+    # Ingest Sentinel-3 products
+    ./08_ingest_S3.py config  
 
 ## FAQ
 
-### Delete a collection
+### How to i delete a collection ?
 
-    # Delete S1 collection - must be empty !
+Only empty collection can be deleted to avoid accidental deletion.
+[Note] Deletion can be done "on the fly" i.e. no need to stop server - modification are propagated immediately
+
+    # Delete Sentinel-1 collection - must be empty !
     curl -X DELETE http://admin:admin@localhost/sara.server/1.0/collections/S1
 
-    
+    # Delete Sentinel-2 collection - must be empty !
+    curl -X DELETE http://admin:admin@localhost/sara.server/1.0/collections/S2
+
+    # Delete Sentinel-3 collection - must be empty !
+    curl -X DELETE http://admin:admin@localhost/sara.server/1.0/collections/S3
+
+### How to update collection description
+
+This command is useful if you change the propertiesMapping in JSON collection descriptor file.
+[Note] Update can be done "on the fly" i.e. no need to stop server - modification are propagated immediately
+
+    # Update Sentinel-1 collection
+    curl -X PUT -H "Content-Type: application/json" -d @/path/to/new/S1.json http://admin:admin@localhost/sara.server/1.0/collections/S1
+
+    # Update Sentinel-2 collection
+    curl -X PUT -H "Content-Type: application/json" -d @/path/to/new/S1.json http://admin:admin@localhost/sara.server/1.0/collections/S2
+
+    # Update Sentinel-3 collection
+    curl -X PUT -H "Content-Type: application/json" -d @/path/to/new/S1.json http://admin:admin@localhost/sara.server/1.0/collections/S3
+
+
+
 
 
            

@@ -1,16 +1,77 @@
-## SARA configuration
+#####################################
+#        SARA configuration         #
+#####################################
+
+##
+# Endpoint to resto API is built with the following format
+#
+#  ${SERVER_PROTOCOL}://${SARA_SERVER_URL}${SARA_SERVER_SUB}${SARA_SERVER_VERSION_ENDPOINT}
+#
+# Thus default values gives:
+#
+#  http://localhost/sara.server/1.0
+##
 SERVER_PROTOCOL=http
 SARA_SERVER_URL=localhost
 SARA_SERVER_SUB=/sara.server
-SARA_SERVER_TARGET_DIR=/usr/share/nginx/html/sara.server
 SARA_SERVER_VERSION_ENDPOINT=/1.0
+
+##
+# Absolute paths of the target directory where server and client are deployed
+# These paths are accessible by nginx and aliased accordingly in nginx conf
+##
+SARA_SERVER_TARGET_DIR=/usr/share/nginx/html/sara.server
 SARA_CLIENT_TARGET_DIR=/usr/share/nginx/html/sara.client
 
+##
+# Client configuration
+##
+CLIENT_ENDPOINT_RESET_PASSWORD=http://localhost/sara.client/#/resetPassword
+CLIENT_ENDPOINT_HTML_SEARCH_URL=http://localhost/sara.client/#/search
+
+##
+# Copernicus data repository
+# The DATA_ROOT_PATH is the absolute path to the Copernicus directory
+# The SARA_DATA_URL is the alias name in nginx to the DATA_ROOT_PATH
+##
 # WARNING ! The trailing "/" is mandatory
 SARA_DATA_URL=/data/
 DATA_ROOT_PATH=/g/data3/fj7/Copernicus/
 
-## Email configuration 
+##
+# resto/itag configuration
+# !!! DO NOT TOUCH THIS VALUES !!!!
+##
+SARA_DB_NAME=sara
+SARA_DB_SCHEMA_NAME=resto
+# CentOS 6 comes with PHP 5.3.3 - bcrypt cannot be used 
+USE_BCRYPT=NO
+UPLOAD_DIRECTORY=/tmp/resto_uploads
+
+##
+# Admin and database users configuration
+# [WARNING] Names should be leaved untouched, but password should definitively be changed for security reason
+##
+
+DB_SUPERUSER=postgres
+RESTO_USER=resto
+RESTO_PASSWORD=resto
+ITAG_USER=itag
+ITAG_PASSWORD=itag
+RESTO_ADMIN_USER=admin
+RESTO_ADMIN_PASSWORD=admin
+
+# The passphrase is used to encrypt token
+PASSPHRASE=thisisapassphrase
+
+# Directory where itag data are downloaded during installation
+# This directory should be removed after iTag installation
+ITAG_DIR=/tmp/itag
+
+##
+# Email configuration 
+# Used by resto to send registration confirmation and reset password link
+##
 CONTACT_NAME=somebody
 CONTACT_EMAIL=saracontact@ga.gov.au
 SMTP_HOST=xxx.xxxx
@@ -18,28 +79,3 @@ SMTP_PORT=465
 SMTP_SECURE_PROTOCOL=ssl
 SMTP_USER=admin@snapplanet.io
 SMTP_PASSWORD=password
-
-## resto/itag configuration
-
-# CentOS 6 comes with PHP 5.3.3 - bcrypt cannot be used :(
-USE_BCRYPT=NO
-
-PASSPHRASE=thisisapassphrase
-UPLOAD_DIRECTORY=/tmp/resto_uploads
-SARA_DB_NAME=sara
-SARA_DB_SCHEMA_NAME=resto
-DB_SUPERUSER=postgres
-RESTO_USER=resto
-RESTO_PASSWORD=resto
-RESTO_ADMIN_USER=admin
-RESTO_ADMIN_PASSWORD=admin
-ITAG_DIR=/tmp/itag
-ITAG_USER=itag
-ITAG_PASSWORD=itag
-
-MAPSERVER_URL=https://maps.snapplanet.io
-MAPFILES_DIR=/home/maps/tmp.mapfiles
-MAPFILES_DISPLAY_DIR=/data/tmp.mapfiles
-
-CLIENT_ENDPOINT_RESET_PASSWORD=http://localhost/sara.client/#/resetPassword
-CLIENT_ENDPOINT_HTML_SEARCH_URL=http://localhost/sara.client/#/search
