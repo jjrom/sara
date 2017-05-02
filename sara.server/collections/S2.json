@@ -2,6 +2,10 @@
     "name": "S2",
     "model": "RestoModel_S2",
     "status": "public",
+    "rights":{
+        "download":1,
+        "visualize":1
+    },
     "osDescription": {
         "en": {
             "ShortName": "Sentinel-2",
