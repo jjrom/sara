@@ -95,7 +95,7 @@ return array(
         'senderName' => '${CONTACT_NAME}',
         'senderEmail' => '${CONTACT_EMAIL}',
 	      'smtp' => array(
-            'activate' => true,
+            'activate' => false,
             'host' => '${SMTP_HOST}',
             'port' => ${SMTP_PORT},
             'secure' => '${SMTP_SECURE_PROTOCOL}', // one of 'ssl' or 'tls'
