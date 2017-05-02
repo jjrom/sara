@@ -437,6 +437,8 @@ angular.module('app.component.explore',[])
                         }
                     }
                 } else {
+                    self.params.orbitDirection = "";
+                    self.params.polarisation = "";
                     self.statistics = null;
                 }
             }, function () {
