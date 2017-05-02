@@ -64,7 +64,7 @@ return array(
         ),
         'debug' => false,
         'timezone' => 'Europe/Paris',
-        'protocol' => 'https',
+        'protocol' => 'http',
         'storeQuery' => true,
         'sharedLinkDuration' => 86400,
         'tokenDuration' => 604800,
@@ -73,7 +73,7 @@ return array(
         'resetPasswordUrl' => '${CLIENT_ENDPOINT_RESET_PASSWORD}',
         'htmlSearchUrl' => '${CLIENT_ENDPOINT_HTML_SEARCH_URL}',
         'uploadDirectory' => '${UPLOAD_DIRECTORY}',
-        'streamMethod' => 'nginx',
+        'streamMethod' => 'php',
         'userAutoValidation' => true,
         'corsWhiteList' => array(
             'null',
