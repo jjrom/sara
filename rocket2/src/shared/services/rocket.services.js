@@ -104,7 +104,7 @@ rocketServices.$inject = ['$auth', '$translate', '$state', '$timeout', 'config',
          * @param {Object} params
          */
         function getMetalinkUrl(params) {
-            return restoEndPoint() + '/users/' + params.userid + '/orders/' + params.orderId + '.meta4';
+            return restoEndPoint() + '/user/orders/' + params.orderId + '.meta4';
         }
 
         /**

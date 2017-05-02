@@ -25,7 +25,7 @@ restoCartAPI.$inject = ['$http', 'rocketServices'];
          */
         function add(params, callback, error) {
             $http({
-                url: rocketServices.restoEndPoint() + '/users/' + params.userid + '/cart' + (params.clear ? '?_clear=1' : ''),
+                url: rocketServices.restoEndPoint() + '/user/cart' + (params.clear ? '?_clear=1' : ''),
                 method: 'POST',
                 data: params.items,
                 async:params.hasOwnProperty('async') ? params.async : true
@@ -49,7 +49,7 @@ restoCartAPI.$inject = ['$http', 'rocketServices'];
          */
         function remove(params, callback, error) {
             $http({
-                url: rocketServices.restoEndPoint() + '/users/' + params.userid + '/cart/' + params.featureid,
+                url: rocketServices.restoEndPoint() + '/user/cart/' + params.featureid,
                 method: 'DELETE'
             }).
             success(function (result) {
@@ -70,7 +70,7 @@ restoCartAPI.$inject = ['$http', 'rocketServices'];
          */
         function get(params, callback, error) {
             $http({
-                url: rocketServices.restoEndPoint() + '/users/' + params.userid + '/cart',
+                url: rocketServices.restoEndPoint() + '/user/cart',
                 method: 'GET'
             }).
             success(function (result) {
@@ -90,7 +90,7 @@ restoCartAPI.$inject = ['$http', 'rocketServices'];
          */
         function placeOrder(params, success, error) {
             $http({
-                url: rocketServices.restoEndPoint() + '/users/' + params.userid + '/orders' + (params.fromCart ? '?_fromCart=1' : ''),
+                url: rocketServices.restoEndPoint() + '/user/orders' + (params.fromCart ? '?_fromCart=1' : ''),
                 method: 'POST',
                 data: params.items || null
             })
