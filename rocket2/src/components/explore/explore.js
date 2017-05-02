@@ -420,6 +420,8 @@ angular.module('app.component.explore',[])
         };
 
         self.initForCollection = function () {
+
+            // cleanParams(self.params);
             /*
              * Get Data for collection
              */
@@ -434,11 +436,12 @@ angular.module('app.component.explore',[])
                             self.statistics = data.collections[i].statistics.facets;
                         }
                     }
+                } else {
+                    self.statistics = null;
                 }
             }, function () {
                 rocketServices.success('error.server.connect');
             });
-
         };
 
         /**
