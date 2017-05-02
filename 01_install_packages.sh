@@ -86,9 +86,9 @@ service postgresql-9.5 initdb
 
 echo " >>> Update /var/lib/pgsql/9.5/data/pg_hba.conf to allow trusted local connection"
 cat <<EOF > /var/lib/pgsql/9.5/data/pg_hba.conf
-local   all             all                                     trust
-host    all             all             127.0.0.1/32            trust
-host    all             all             ::1/128                 trust
+local   all             all                                      trust
+host    all             all             127.0.0.1/32             trust
+host    all             all             ::1/128                  trust
 EOF
 
 echo " >>> Create configuration file /etc/nginx/default.d/sara.conf"
