@@ -47,10 +47,6 @@ class RestoModel_S3 extends RestoModel {
         'baselineCollection' => array(
             'name' => 'baselinecollection',
             'type' => 'TEXT'
-        ),
-        'path' => array(
-            'name' => 'path',
-            'type' => 'TEXT'
         )
     );
 
@@ -128,14 +124,14 @@ class RestoModel_S3 extends RestoModel {
                 'absoluteOrbitNumber' => trim($orbits->getAttribute('absolute')),
                 'frame' => trim($orbits->getAttribute('frame')),
                 'cycle' => trim($orbits->getAttribute('cycle')),
+                'resource' => $path,
                 'resourceSize' => trim($zipFile->getAttribute('size_bytes')),
                 'resourceChecksum' => 'md5:' . trim($zipFile->getAttribute('md5_local')),
                 'productType' => $productType,
                 'processingLevel' => 'LEVEL-1',
                 'instrument'=> $instrument,
                 'processingTime' => RestoUtil::formatTimestamp(trim($processingInfo->getAttribute('processingtime_utc'))),
-                'baselineCollection' => trim($processingInfo->getAttribute('baselinecollection')),
-                'path' => $path
+                'baselineCollection' => trim($processingInfo->getAttribute('baselinecollection'))
             )
         );
 

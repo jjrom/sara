@@ -36,10 +36,6 @@ class RestoModel_S2 extends RestoModel {
         'processingTime' => array(
             'name' => 'processingtime',
             'type' => 'TIMESTAMP'
-        ),
-        'path' => array(
-            'name' => 'path',
-            'type' => 'TEXT'
         )
     );
 
@@ -114,13 +110,13 @@ class RestoModel_S2 extends RestoModel {
                 'completionDate' => RestoUtil::formatTimestamp(trim($time->getAttribute('stop_datetime_utc'))),
                 'platform' =>  trim($dom->getElementsByTagName('SATELLITE')->item(0)->getAttribute('name')),
                 'orbitNumber' => trim($dom->getElementsByTagName('ORBIT_NUMBERS')->item(0)->getAttribute('relative')),
+                'resource' => $path,
                 'resourceSize' => trim($zipFile->getAttribute('size_bytes')),
                 'resourceChecksum' => 'md5:' . trim($zipFile->getAttribute('md5_local')),
                 'productType' => $productType,
                 'processingLevel' => $processingLevel,
                 'instrument'=> $instrument,
                 'cloudCover' => trim($dom->getElementsByTagName('ESA_CLOUD_COVER')->item(0)->getAttribute('percentage')),
-                'path' => $path,
                 'softwareVersion' => trim($processingInfo->getAttribute('software_version')),
                 'processingTime' => RestoUtil::formatTimestamp(trim($processingInfo->getAttribute('processingtime_utc')))
             )

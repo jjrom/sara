@@ -40,10 +40,6 @@ class RestoModel_S1 extends RestoModel {
         'absoluteOrbitNumber' => array(
             'name' => 'absoluteorbitnumber',
             'type' => 'NUMERIC'
-        ),
-        'path' => array(
-            'name' => 'path',
-            'type' => 'TEXT'
         )
     );
 
@@ -119,14 +115,14 @@ class RestoModel_S1 extends RestoModel {
                 'platform' =>  trim($dom->getElementsByTagName('SATELLITE')->item(0)->getAttribute('name')),
                 'orbitNumber' => trim($orbits->getAttribute('relative')),
                 'absoluteOrbitNumber' => trim($orbits->getAttribute('absolute')),
+                'resource' => $path
                 'resourceSize' => trim($zipFile->getAttribute('size_bytes')),
                 'resourceChecksum' => 'md5:' . trim($zipFile->getAttribute('md5_local')),
                 'productType' => $productType,
                 'processingLevel' => 'LEVEL-1',
                 'instrument'=> $instrument,
                 'polarisation' => trim($dom->getElementsByTagName('POLARISATION')->item(0)->getAttribute('values')),
-                'swath' => trim($dom->getElementsByTagName('SWATH')->item(0)->getAttribute('values')),
-                'path' => $path
+                'swath' => trim($dom->getElementsByTagName('SWATH')->item(0)->getAttribute('values'))
             )
         );
 

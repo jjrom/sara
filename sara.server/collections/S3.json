@@ -15,8 +15,8 @@
         }
     },
     "propertiesMapping":{
-        "quicklook" : "http://130.56.243.96/data/Sentinel-3{:path:}/{:productIdentifier:}.png",
-        "thumbnail" : "http://130.56.243.96/data/Sentinel-3{:path:}/{:productIdentifier:}.png",
-        "resource" : "/g/data3/fj7/Sentinel-3{:path:}/{:productIdentifier:}.zip"
+        "quicklook" : "http://130.56.243.96/data/Sentinel-3{:resource:}/{:productIdentifier:}.png",
+        "thumbnail" : "http://130.56.243.96/data/Sentinel-3{:resource:}/{:productIdentifier:}.png",
+        "resource" : "/g/data3/fj7/Sentinel-3{:resource:}/{:productIdentifier:}.zip"
     }
 }
