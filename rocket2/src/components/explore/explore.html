@@ -75,16 +75,8 @@
                             <option value="">-----</option>
                         </select>
                     </div>
-                    <!-- Platform section-->
-                    <div class="large-6 columns">
-                        {{ ::'platform'| translate | uppercase }}
-                        <select ng-model="exploreCtrl.params.platform" style="background-color: #F2F2F2; border-top-width: 2px; border-top-color: #666666;"
-                                ng-options="name as name for (name, count) in exploreCtrl.statistics.platform">
-                            <option value="">-----</option>
-                        </select>
-                    </div>
                     <!-- Instrument section-->
-                    <div class="large-6 columns">
+                    <div class="large-12 columns">
                         {{ ::'instrument'| translate | uppercase }}
                         <select ng-model="exploreCtrl.params.instrument" style="background-color: #F2F2F2; border-top-width: 2px; border-top-color: #666666;"
                                 ng-options="name as name for (name, count) in exploreCtrl.statistics.instrument">
@@ -108,7 +100,7 @@
                         </select>
                     </div>
                     <!--Orbit direction-->
-                    <div class="large-12 columns">
+                    <div ng-if="exploreCtrl.params.collection === 'S1'" class="large-12 columns">
                         {{'Orbit Direction'| translate | uppercase }}
                         <select ng-model="exploreCtrl.params.orbitDirection" style="background-color: #F2F2F2; border-top-width: 2px; border-top-color: #666666;"
                                 ng-options="name as name for (name, count) in exploreCtrl.orbitDirections">
@@ -117,7 +109,7 @@
                         </select>
                     </div>
                     <!--Polarization-->
-                    <div ng-if="exploreCtrl.params.collection === 'S1' || exploreCtrl.params.platform === 'S1A' || exploreCtrl.params.platform === 'S1B'"
+                    <div ng-if="exploreCtrl.params.collection === 'S1'"
                          class="large-12 columns">
                         {{'PolariSation'| translate | uppercase }}
                         <select ng-model="exploreCtrl.params.polarisation" style="background-color: #F2F2F2; border-top-width: 2px; border-top-color: #666666;"
