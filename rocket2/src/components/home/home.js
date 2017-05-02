@@ -30,7 +30,7 @@ function HomeController(rocketServices, rocketCache, restoCollectionsAPI) {
      */
     var self = this;
     self.viewProduct = function (featureId, collectionName) {
-        rocketServices.go('feature', {
+        rocketServices.go('result', {
                 collectionName: collectionName,
                 featureId: featureId
             },
