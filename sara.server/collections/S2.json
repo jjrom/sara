@@ -21,6 +21,6 @@
     "propertiesMapping":{
         "quicklook" : "http://130.56.243.96/data/Sentinel-2{:resource:}/{:productIdentifier:}.png",
         "thumbnail" : "http://130.56.243.96/data/Sentinel-2{:resource:}/{:productIdentifier:}.png",
-        "resource" : "/g/data3/fj7/Sentinel-2{:resource:}/{:productIdentifier:}.zip"
+        "resource" : "/g/data3/fj7/Copernicus/Sentinel-2{:resource:}/{:productIdentifier:}.zip"
     }
 }
