@@ -139,6 +139,7 @@
     "search.resetfilters": "Reset search criteria",
     "search.activate.polygonDrawning": "DRAW AN AREA OF INTEREST",
     "search.deactivate.polygonDrawning": "Stop draw",
+    "search.cancel.polygonDrawning" : "Cancel draw",
     "search.reset.PolygonDrawning": "Reset spatial selection",
     "search.tip.1": "Please select search criterias. You can also draw a geographic search area, click on the button at the left and begin to draw.",
     "search.tip.2": "If you want, you can enter your search in the full text bar on the top of the page. For example 'Between novembre 2010 and june 2015'.",
