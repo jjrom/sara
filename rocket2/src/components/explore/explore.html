@@ -120,7 +120,7 @@
 
                 </form>
                 <!--Part of search Buttons-->
-                <div class="large-12">
+                <div class="col-lg-12">
                     <div class="center">
                         <a class="button margin-top-20"
                            style="background-color: #1e364e; padding:20px 60px;"
@@ -130,40 +130,20 @@
                 </div>
 
 
-                <div class="large-12">
-                    <div class="center">
-                        <span ng-click="exploreCtrl.reset()" class="visible-xs">
-                            <a class="button margin-top-20"
-                               style="background-color: rgba(215, 215, 215, 1); color : #666666; padding:20px 60px;"
-                               ng-bind="'search.resetfilters'|translate | uppercase">
-                            </a>
-                        </span>
+                <div class="col-lg-12">
+                    <div class="row">
+                        <button id ="rest_criteria_explore" ng-click="exploreCtrl.reset()"
+                                class="col-lg-6 col-xs-12 col-sm-5 col-md-5">
+                            <a ng-bind="'search.resetfilters'|translate | uppercase"></a>
+                            <i class="fa fa-repeat" aria-hidden="true"></i>
+                        </button>
 
-                        <span ng-click="exploreCtrl.reset()"
-                              class="pull-left hidden-xs">
-                            <a id="areset" class="button bcancel margin-top-20"
-                               ng-bind="'search.resetfilters'|translate | uppercase">
-                            </a>
+                        <button id="search_button_explore" ng-click="exploreCtrl.search()"
+                                class="col-lg-offset-1 col-lg-5 col-xs-12 col-sm-offset-2 col-sm-5 col-md-offset-2 col-md-5">
+                            <a ng-bind="'search.updatelist'|translate | uppercase"></a>
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </button>
 
-                            <i id="ireset"
-                               class="fa fa-repeat" aria-hidden="true"></i>
-                        </span>
-
-                        <span ng-click="exploreCtrl.search()" class="visible-xs">
-                            <a class="button margin-top-20"
-                               style="background-color: green; padding:20px 60px;"
-                               ng-bind="'search.updatelist'|translate | uppercase">
-                            </a>
-                        </span>
-                        <span ng-click="exploreCtrl.search()" class="pull-right hidden-xs">
-
-                            <a id="Asearch" class="button bconfirm margin-top-20"
-                               ng-bind="'search.updatelist'|translate | uppercase">
-                            </a>
-
-                            <i id="Isearch"
-                               class="fa fa-search" aria-hidden="true"></i>
-                        </span>
                     </div>
                 </div>
             </div>
