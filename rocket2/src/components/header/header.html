@@ -17,7 +17,12 @@
             <li ng-if="!mainController.isAuthenticated()" ui-sref="login" ng-bind="'header.login'| translate" class="link link--signin"></li>
             <li ng-if="!mainController.isAuthenticated()" ui-sref="register" class="link link--signup" ng-bind="'header.signup'| translate"></li>
             <li ng-if="mainController.isAuthenticated()" ui-sref="cart" ui-sref-active="active" class="link"><span class="fa fa-shopping-cart" title="{{'header.cart' | translate}}"></span></li>
-            <li ng-if="mainController.isAuthenticated()" ui-sref="profile" class="link link--signup">{{mainController.userMail()}}</li>
+            <li ng-if="mainController.isAuthenticated()" ui-sref="profile" class="link link--signup">
+                <img style="width: 30px;
+                            height: 30px;
+                            border-radius: 50%;"
+                     ng-src="//www.gravatar.com/avatar/?d=mm&amp;s=200" src="//www.gravatar.com/avatar/?d=mm&amp;s=200">
+            </li>
         </ul>
     </div>
 
