@@ -52,6 +52,7 @@
          * @param {array} options
          */
         this.init = function (options) {
+            console.log(options);
 
             var self = this;
 
@@ -120,6 +121,12 @@
             /*
              * Initialize map
              */
+
+            var view = new window.ol.View({
+                center: options.center || [0, 0],
+                zoom: options.zoom || 2
+            });
+
             self.map = new window.ol.Map({
                 controls: window.ol.control.defaults().extend(controls),
                 interactions: window.ol.interaction.defaults({
@@ -140,11 +147,10 @@
                 loadTilesWhileInteracting: true,
                 //renderer: ['canvas', 'webgl', 'DOM'],
                 target: self.target,
-                view: new window.ol.View({
-                    center: [0, 0],
-                    zoom: 2
-                })
+                view: view
             });
+
+
 
 
             if (options.drawendCallback) {

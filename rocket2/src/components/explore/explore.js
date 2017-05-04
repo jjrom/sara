@@ -40,6 +40,8 @@ angular.module('app.component.explore',[])
         // nb of items in current collection
         self.count = 0;
 
+        // self.cloudCover = 0;
+
         $scope.$on('$locationChangeSuccess', function () {
             self.view($location.search().view, false);
         });
@@ -54,6 +56,15 @@ angular.module('app.component.explore',[])
                 }
             }
             self.search();
+        };
+
+        self.changeCloudCover = function () {
+            if(angular.isUndefined(self.cloudCover)){
+                self.cloudCover = 100;
+            } else {
+                self.params.cloudCover = self.cloudCover+"]";
+            }
+
         };
 
         /**
@@ -662,6 +673,8 @@ angular.module('app.component.explore',[])
          */
         var menuConfig = {
             target: 'staticmap',
+            zoom : 5,
+            center : [2.348, 48.853],
             close: {
                 title: 'Close'
             },
@@ -721,8 +734,12 @@ angular.module('app.component.explore',[])
             hilite: true,
             map3D: false,
             fullScreen: false,
-            menuConfig: menuConfig
+            menuConfig: menuConfig,
+            zoom : 5,
+            center : [2.348, 48.853]
         });
+
+        console.debug('rocket map',rocketMap);
 
         /*
          * Hide map - CESIUM bug needs to switch to 2D

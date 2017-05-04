@@ -117,6 +117,19 @@
                             <option value="">-----</option>
                         </select>
                     </div>
+                    <!--CloudCover-->
+                    <div ng-if="exploreCtrl.params.collection === 'S2'" class="large-12 columns">
+                        {{'label.cloud.cover'| translate | uppercase }}
+                        <input type="number"
+                               max="100"
+                               min="0"
+                               ng-model="exploreCtrl.cloudCover"
+                               ng-change="exploreCtrl.changeCloudCover()"
+                               placeholder="{{'label.cloud.cover.placeholder' | translate}}"
+                               style="background-color: #F2F2F2;
+                               border-top-width: 2px;
+                               border-top-color: #666666;"/>
+                    </div>
 
                 </form>
                 <!--Part of search Buttons-->

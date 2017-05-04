@@ -232,5 +232,7 @@
     "label.register.intended" : "-- choose Intended usage -- ",
     "label.register.intended.placeholder" : "Write your Intended usage",
     "label.register.domain" : "-- Choose Domain -- ",
-    "label.register.domain.placeholder" : "Write your Domain"
+    "label.register.domain.placeholder" : "Write your Domain",
+    "label.cloud.cover" : "Cloud Cover",
+    "label.cloud.cover.placeholder" : "Maximum cloud cover percentage between 0 & 100"
 }
