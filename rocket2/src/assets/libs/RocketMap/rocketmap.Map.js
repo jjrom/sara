@@ -52,7 +52,7 @@
          * @param {array} options
          */
         this.init = function (options) {
-            console.log(options);
+            // console.log(options);
 
             var self = this;
 
@@ -149,7 +149,7 @@
                 target: self.target,
                 view: view
             });
-
+            // view.fit(this.getExtent(),[500,600]);
 
 
 

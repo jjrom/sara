@@ -216,12 +216,6 @@ angular.module('app.component.explore',[])
             return null;
         };
 
-
-        self.test = function () {
-            console.debug('start date',self.params.startDate);
-        };
-
-
         /**
          * Get features
          *
@@ -245,14 +239,12 @@ angular.module('app.component.explore',[])
             restoCollectionsAPI.search(_params, function (data) {
                 self.analyze = data.properties.query.analysis.analyze;
 
-                console.debug('analyze',self.analyze);
+                // console.debug('analyze',self.analyze);
 
                 if(self.analyze.When.times){
                     self.params.startDate = self.analyze.When.times[0]['time:start'].substring(0,10);
                     self.params.completionDate = self.analyze.When.times[0]['time:end'].substring(0,10);
                 }
-
-
 
 
                 return self.updateSearchContext(data, append);
@@ -756,7 +748,7 @@ angular.module('app.component.explore',[])
             center : [2.348, 48.853]
         });
 
-        console.debug('rocket map',rocketMap);
+        // console.debug('rocket map',rocketMap);
 
         /*
          * Hide map - CESIUM bug needs to switch to 2D
