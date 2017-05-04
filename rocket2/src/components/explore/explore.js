@@ -40,7 +40,8 @@ angular.module('app.component.explore',[])
         // nb of items in current collection
         self.count = 0;
 
-        // self.cloudCover = 0;
+
+
 
         $scope.$on('$locationChangeSuccess', function () {
             self.view($location.search().view, false);
