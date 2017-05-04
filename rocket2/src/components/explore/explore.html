@@ -142,7 +142,6 @@
                     </div>
                 </div>
 
-
                 <div class="col-lg-12">
                     <div class="row">
                         <button id ="rest_criteria_explore" ng-click="exploreCtrl.reset()"
@@ -197,13 +196,13 @@
             <table class="">
                 <tr style="border-bottom: solid; text-align: center;">
                     <th style="padding-bottom: 10px; text-align: center">{{ ::'Quicklook' | translate}}</th>
-                    <th style="padding-bottom: 10px; text-align: center" ng-if="!exploreCtrl.params.collection">{{ ::'Collection' | translate}}</th>
+                    <th style="padding-bottom: 10px; text-align: center" ng-if="!params.collection">{{ ::'Collection' | translate}}</th>
                     <th style="padding-bottom: 10px; text-align: center">{{ ::'Location' | translate}}</th>
                     <th style="padding-bottom: 10px; text-align: center">{{ ::'Acquisition date' | translate}}</th>
                     <th style="padding-bottom: 10px; text-align: center">{{ ::'Platform'}}</th>
                     <th style="padding-bottom: 10px; text-align: center">{{ ::'Instrument'}}</th>
                     <th style="padding-bottom: 10px; text-align: center">{{ ::'Product type'}}</th>
-                    <th style="padding-bottom: 10px; text-align: center">{{ ::'Resolution'}}</th>
+                    <!--<th style="padding-bottom: 10px; text-align: center">{{ ::'Resolution'}}</th>-->
                     <th style="padding-bottom: 10px; text-align: center">{{ ::'Orbit number'}}</th>
                     <th style="padding-bottom: 10px; text-align: center">{{ ::'Processing level'}}</th>
                     <th style="padding-bottom: 10px; text-align: center">{{ ::'Sensor mode'}}</th>
@@ -221,7 +220,7 @@
                     <td style="padding: 10px 0px 10px 0px;">{{ ::feature.properties.platform}}</td>
                     <td style="padding: 10px 0px 10px 0px;">{{ ::feature.properties.instrument}}</td>
                     <td style="padding: 10px 0px 10px 0px;">{{ ::feature.properties.productType}}</td>
-                    <td style="padding: 10px 0px 10px 0px;">{{ ::feature.properties.resolution}} m</td>
+                    <!--<td style="padding: 10px 0px 10px 0px;">{{ ::feature.properties.resolution}} m</td>-->
                     <td style="padding: 10px 0px 10px 0px;">{{ ::feature.properties.orbitNumber}}</td>
                     <td style="padding: 10px 0px 10px 0px;">{{ ::feature.properties.processingLevel}}</td>
                     <td style="padding: 10px 0px 10px 0px;">{{ ::feature.properties.sensorMode}}</td>
