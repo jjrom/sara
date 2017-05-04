@@ -17,10 +17,33 @@
     function registerController($scope, rocketServices, restoUsersAPI) {
         var self = this;
 
+        $scope.topics = {
+            intended : "",
+            domain : ""
+        };
+
+        $scope.otherTopics ={
+            domainOther : "",
+            intendedOther : ""
+        };
+
         // Object to bind all the form fields
         $scope.registration = {};
 
         $scope.signup = function () {
+
+            if($scope.topics.intended === 'Other' && $scope.topics.domain === 'Other'){
+                $scope.registration.topics = $scope.otherTopics.intendedOther+'|'+$scope.otherTopics.domainOther;
+            }
+            else if($scope.topics.intended === 'Other' && $scope.topics.domain !== 'Other'){
+                $scope.registration.topics = $scope.otherTopics.intendedOther+'|'+$scope.topics.domain;
+            } else if($scope.topics.intended !== 'Other' && $scope.topics.domain === 'Other'){
+                $scope.registration.topics = $scope.topics.intended+'|'+$scope.otherTopics.domainOther;
+            }
+            else {
+                $scope.registration.topics = $scope.topics.intended+'|'+$scope.topics.domain;
+            }
+
             restoUsersAPI.signup($scope.registration,
                 function(result) {
                     rocketServices.go('home', null, {

@@ -227,5 +227,10 @@
     "oragnisationName": "Entity",
 
 
-    "error3000": "Cannot create user - user already exists"
+    "error3000": "Cannot create user - user already exists",
+    "label.choose.country" : "-- Choose a country --",
+    "label.register.intended" : "-- choose Intended usage -- ",
+    "label.register.intended.placeholder" : "Write your Intended usage",
+    "label.register.domain" : "-- Choose Domain -- ",
+    "label.register.domain.placeholder" : "Write your Domain"
 }

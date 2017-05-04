@@ -24,7 +24,8 @@
                    placeholder="{{'register.lastName' | translate}}"/>
         </div>
         <div class="large-6 columns">
-            <select name="country" ng-model="registration.country" class="form-control">
+            <select name="country" required ng-model="registration.country" class="form-control">
+                <option value="" translate="label.choose.country"></option>
                 <option value="AD">Andorra</option>
                 <option value="AF">Afghanistan</option>
                 <option value="AG">Antigua and Barbuda</option>
@@ -286,10 +287,37 @@
             <input type="text" name="organization" ng-model="registration.organization" class="form-control"
                    placeholder="{{'register.organization' | translate}}"/>
         </div>
-        <div class="large-12 columns">
-            <input type="text" name="topics" ng-model="registration.topics" class="form-control"
-                   placeholder="{{'register.topics' | translate}}"/>
+        <!--Intended usage part-->
+        <div class="large-6 columns">
+            <select name="intended" required ng-model="topics.intended" class="form-control">
+                <option value="" translate="label.register.intended"></option>
+                <option value="Research">Research</option>
+                <option value="Commercial">Commercial</option>
+                <option value="Education">Education</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <input ng-if="topics.intended === 'Other'" required type="text" name="intended" ng-model="otherTopics.intendedOther" class="form-control"
+                   ng-change="show()"
+                   placeholder="{{'label.register.intended.placeholder' | translate}}"/>
         </div>
+        <!--Domain-->
+        <div class="large-6 columns">
+            <select name="domain" required ng-model="topics.domain" class="form-control">
+                <option value="" translate="label.register.domain"></option>
+                <option value="Atmosphere">Atmosphere</option>
+                <option value="Emergency">Emergency</option>
+                <option value="Marine">Marine</option>
+                <option value="Land">Land</option>
+                <option value="Security">Security</option>
+                <option value="Climate">Climate</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <input ng-if="topics.domain === 'Other'" required type="text" name="domain" ng-model="otherTopics.domainOther" class="form-control"
+                   placeholder="{{'label.register.domain.placeholder' | translate}}"/>
+        </div>
+
         <div class="large-6 columns">
             <input type="email" name="email" ng-model="registration.email" class="form-control" required="required"
                    placeholder="{{'email' | translate}}"/>
