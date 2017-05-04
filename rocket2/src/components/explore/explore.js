@@ -42,7 +42,6 @@ angular.module('app.component.explore',[])
 
 
 
-
         $scope.$on('$locationChangeSuccess', function () {
             self.view($location.search().view, false);
         });
@@ -217,6 +216,12 @@ angular.module('app.component.explore',[])
             return null;
         };
 
+
+        self.test = function () {
+            console.debug('start date',self.params.startDate);
+        };
+
+
         /**
          * Get features
          *
@@ -238,6 +243,18 @@ angular.module('app.component.explore',[])
             }
 
             restoCollectionsAPI.search(_params, function (data) {
+                self.analyze = data.properties.query.analysis.analyze;
+
+                console.debug('analyze',self.analyze);
+
+                if(self.analyze.When.times){
+                    self.params.startDate = self.analyze.When.times[0]['time:start'].substring(0,10);
+                    self.params.completionDate = self.analyze.When.times[0]['time:end'].substring(0,10);
+                }
+
+
+
+
                 return self.updateSearchContext(data, append);
             }, function () {
                 rocketServices.error('search.error');
@@ -255,7 +272,6 @@ angular.module('app.component.explore',[])
          * @returns {boolean}
          */
         self.updateSearchContext = function (data, append) {
-
             /*
              * Update search info
              */
