@@ -75,6 +75,15 @@ then
 else
   ${SRC_DIR}/resto/_install/installDB.sh -d ${SARA_DB_NAME} -S ${SARA_DB_SCHEMA_NAME} -u ${RESTO_USER} -p ${RESTO_PASSWORD} -s ${DB_SUPERUSER}
 fi
+
+echo "====> Update database for Sentinel-3"
+psql -U ${DB_SUPERUSER} -d ${SARA_DB_NAME} << EOF
+INSERT INTO ${SARA_DB_SCHEMA_NAME}.keywords (name, value, lang, type) VALUES ('s3', 'S3A|S3B','**', 'platform');
+INSERT INTO ${SARA_DB_SCHEMA_NAME}.keywords (name, value, lang, type) VALUES ('s3A', 'S3A','**', 'platform');
+INSERT INTO ${SARA_DB_SCHEMA_NAME}.keywords (name, value, lang, type) VALUES ('s3B', 'S3B','**', 'platform');
+INSERT INTO ${SARA_DB_SCHEMA_NAME}.keywords (name, value, lang, type) VALUES ('sentinel3', 'S3A|S3B','**', 'platform');
+INSERT INTO ${SARA_DB_SCHEMA_NAME}.keywords (name, value, lang, type) VALUES ('sentinel-3', 'S3A|S3B','**', 'platform');
+EOF
 if [ "${USE_BCRYPT}" == "YES" ]
 then
   echo "====> Create admin user ${RESTO_ADMIN_USER} **WITH** bcrypt hashing"
