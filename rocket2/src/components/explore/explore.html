@@ -15,6 +15,13 @@
 
             <h3>{{'search.over' | translate}} {{exploreCtrl.count}} {{'search.products' | translate}}</h3>
         </div>
+        <div class="large-12 columns center" ng-if="exploreCtrl.analysis">
+            <!--@hb Sara Title part-->
+            <p ng-bind="' The query is : ' + exploreCtrl.analysis.query" class="chicago" style="font-size: large"></p>
+            <h6><b>WHEN : </b>{{exploreCtrl.analysis.analyze.When | json}}</h6>
+            <h6><b>WHERE : </b>{{exploreCtrl.analysis.analyze.Where | json}}</h6>
+            <h6><b>WHAT : </b>{{exploreCtrl.analysis.analyze.What | json}}</h6>
+        </div>
 
         <div class="large-12 columns" style="padding-top: 10px;">
             <!--@hb The half of the page for the form & buttons-->

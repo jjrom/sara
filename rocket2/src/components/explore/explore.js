@@ -239,13 +239,15 @@ angular.module('app.component.explore',[])
             }
 
             restoCollectionsAPI.search(_params, function (data) {
-                self.analyze = data.properties.query.analysis.analyze;
 
-                // console.debug('analyze',self.analyze);
+                self.analysis = data.properties.query.analysis;
 
-                if(self.analyze.When.times){
-                    self.params.startDate = self.analyze.When.times[0]['time:start'].substring(0,10);
-                    self.params.completionDate = self.analyze.When.times[0]['time:end'].substring(0,10);
+                console.debug('analyze',self.analysis);
+                console.log(data);
+
+                if(self.analysis.analyze.When.times){
+                    self.params.startDate = self.analysis.analyze.When.times[0]['time:start'].substring(0,10);
+                    self.params.completionDate = self.analysis.analyze.When.times[0]['time:end'].substring(0,10);
                 }
 
 
