@@ -61,6 +61,8 @@ angular.module('app.component.explore',[])
         self.changeCloudCover = function () {
             if(angular.isUndefined(self.cloudCover)){
                 self.cloudCover = 100;
+            } else if(self.cloudCover === null){
+                delete self.params.cloudCover;
             } else {
                 self.params.cloudCover = self.cloudCover+"]";
             }
@@ -281,7 +283,8 @@ angular.module('app.component.explore',[])
              */
             self.features = append === false ? data.features : self.features.concat(data.features);
 
-            self.resultCounter.start = self.maxRecords * self.params.page - self.maxRecords;
+            self.resultCounter.start = self.maxRecords * self.params.page - self.maxRecords+1;
+
             self.resultCounter.end = self.maxRecords * self.params.page - self.maxRecords + data.features.length;
 
             /*
