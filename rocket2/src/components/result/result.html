@@ -205,9 +205,11 @@
             <table class="niceTable">
                 <tbody>
                     <tr ng-repeat="(name,property) in resultCtrl.feature.properties"
-                        ng-if="resultCtrl.showProperty(property) && name !== 'thumbnail' && name !== 'quicklook' && name !== 'resolution'">
+                        ng-if="resultCtrl.showProperty(property) && name !== 'thumbnail' && name !== 'quicklook' && name !== 'resolution' && name !== 'snowCover'">
                         <td ng-bind="'{{ name | translate }}'"> </td>
-                        <td>{{ property }} </td>
+                        <td ng-if="name !== 'orbitNumber'">{{ property }} </td>
+                        <td ng-if="name === 'orbitNumber' && property === 0">-</td>
+                        <td ng-if="name === 'orbitNumber' && property !== 0">{{ property }} </td>
                     </tr>
                 </tbody>
             </table>
