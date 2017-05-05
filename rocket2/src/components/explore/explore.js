@@ -748,7 +748,7 @@ angular.module('app.component.explore',[])
             center : [2.348, 48.853]
         });
 
-        // console.debug('rocket map',rocketMap);
+        console.debug('rocket map',rocketMap);
 
         /*
          * Hide map - CESIUM bug needs to switch to 2D

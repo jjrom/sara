@@ -222,7 +222,10 @@
                     <td style="padding: 10px 0px 10px 0px;">{{ ::feature.properties.instrument}}</td>
                     <td style="padding: 10px 0px 10px 0px;">{{ ::feature.properties.productType}}</td>
                     <!--<td style="padding: 10px 0px 10px 0px;">{{ ::feature.properties.resolution}} m</td>-->
-                    <td style="padding: 10px 0px 10px 0px;">{{ ::feature.properties.orbitNumber}}</td>
+                    <td ng-if="::feature.properties.orbitNumber !== 0" style="padding: 10px 0px 10px 0px;">{{ ::feature.properties.orbitNumber}}</td>
+                    <td ng-if="::feature.properties.orbitNumber === 0" style="padding: 10px 0px 10px 0px;">-</td>
+
+
                     <td style="padding: 10px 0px 10px 0px;">{{ ::feature.properties.processingLevel}}</td>
                     <td style="padding: 10px 0px 10px 0px;">{{ ::feature.properties.sensorMode}}</td>
                     <td style="text-align: center; padding: 10px 0px 10px 0px;" >

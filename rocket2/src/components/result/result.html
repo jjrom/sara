@@ -151,24 +151,13 @@
                         {{resultCtrl.feature.properties.startDate}}</a></td>
                 </tr>
                 <tr>
-                    <td><span class="light">{{'resolution' | uppercase}}</span> :</td>
-                    <td>{{resultCtrl.feature.properties.resolution}} m</td>
-                </tr>
-                <tr>
-                    <td><span class="light">{{'snowCover' | uppercase}}</span> :</td>
-                    <td>{{resultCtrl.feature.properties.snowCover}} %</td>
-                </tr>
-                <tr>
                     <td><span class="light">{{'cloudCover' | uppercase}}</span> :</td>
                     <td>{{resultCtrl.feature.properties.cloudCover}} %</td>
                 </tr>
                 <tr>
-                    <td><span class="light">{{'waterCover' | uppercase}}</span> :</td>
-                    <td>{{resultCtrl.feature.properties.waterCover}} %</td>
-                </tr>
-                <tr>
                     <td><span class="light">{{'orbitNumber' | uppercase}}</span> :</td>
-                    <td>{{resultCtrl.feature.properties.orbitNumber}}</td>
+                    <td ng-if="resultCtrl.feature.properties.orbitNumber !== 0">{{resultCtrl.feature.properties.orbitNumber}}</td>
+                    <td ng-if="resultCtrl.feature.properties.orbitNumber === 0">-</td>
                 </tr>
                 </tbody>
             </table>
@@ -213,11 +202,10 @@
         <!-- Properties -->
         <div class="row padded margin-top-10 margin-bottom-20 bglight tableContainer">
             <h5 style="color: white; background-color: #1e364e;" ng-bind="'properties' | translate"></h5>
-
             <table class="niceTable">
                 <tbody>
                     <tr ng-repeat="(name,property) in resultCtrl.feature.properties"
-                        ng-if="resultCtrl.showProperty(property) && name !== 'thumbnail' && name !== 'quicklook'">
+                        ng-if="resultCtrl.showProperty(property) && name !== 'thumbnail' && name !== 'quicklook' && name !== 'resolution'">
                         <td ng-bind="'{{ name | translate }}'"> </td>
                         <td>{{ property }} </td>
                     </tr>
