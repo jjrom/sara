@@ -1,21 +1,18 @@
 <div class="content">
 
-    <!-- Metadata view -->
-    <div id="panel-metadata" ng-show="exploreCtrl.showMetadata" class="ng-hide rocket-panel"></div>
-
     <!-- List view -->
     <div id="panel-list" ng-show="exploreCtrl.showList" class="ng-hide rocket-panel panel-list">
         <h1 class="center color__sara collection">{{exploreCtrl.friendlyName}}</h1>
 
         <!--The title of explore Page-->
-        <div class="large-12 columns center" ng-if="exploreCtrl.features.length === 0">
+        <div class="col-lg-12 columns center" ng-if="exploreCtrl.features.length === 0">
             <!--@hb Sara Title part-->
             <p ng-bind="'home.subtitle'|translate"
                class="chicago" style="font-size: x-large" ></p>
 
             <h3>{{'search.over' | translate}} {{exploreCtrl.count}} {{'search.products' | translate}}</h3>
         </div>
-        <div class="large-12 columns center" ng-if="exploreCtrl.analysis">
+        <div class="col-lg-12 columns center" ng-if="exploreCtrl.analysis && exploreCtrl.analysis.query !== null ">
             <!--@hb Sara Title part-->
             <p ng-bind="' The query is : ' + exploreCtrl.analysis.query" class="chicago" style="font-size: large"></p>
             <h6><b>WHEN : </b>{{exploreCtrl.analysis.analyze.When | json}}</h6>
@@ -23,9 +20,9 @@
             <h6><b>WHAT : </b>{{exploreCtrl.analysis.analyze.What | json}}</h6>
         </div>
 
-        <div class="large-12 columns" style="padding-top: 10px;">
+        <div class="col-lg-12" style="padding-top: 10px;">
             <!--@hb The half of the page for the form & buttons-->
-            <div class="large-6 columns">
+            <div class="col-lg-6">
                 <!--@hb Part of Explore Form-->
                 <form class="search-list margin-top-10">
 
@@ -141,33 +138,36 @@
                 </form>
                 <!--Part of search Buttons-->
                 <div class="col-lg-12">
-                    <div class="center">
-                        <a class="button margin-top-20"
-                           style="background-color: #1e364e; padding:20px 60px;"
+                    <div class="row">
+                        <div class="center">
+                        <a class="margin-top-20 col-lg-offset-2 col-lg-8 col-md-6 col-sm-offset-3 col-sm-6  col-xs-12 "
+                           style="background-color: #1e364e; padding:20px 60px; margin-bottom: 20px; color: white;
+                           font-size: 1rem;"
                            ng-click="exploreCtrl.activatePolygonDrawning()">
-                            {{exploreCtrl.polygonDrawningActivated === true ? 'search.cancel.polygonDrawning' : 'search.activate.polygonDrawning'| translate}}</a>
+                            {{exploreCtrl.polygonDrawningActivated === true ? 'search.cancel.polygonDrawning' : 'search.activate.polygonDrawning'| translate}}
+                        </a>
+                        </div>
                     </div>
                 </div>
 
                 <div class="col-lg-12">
-                    <div class="row">
+                    <div class="row" style="display: -webkit-box;display: -webkit-flex;display: -ms-flexbox;display:flex;flex-wrap: wrap;">
                         <button id ="rest_criteria_explore" ng-click="exploreCtrl.reset()"
-                                class="col-lg-6 col-xs-12 col-sm-5 col-md-5">
+                                class="col-lg-5 col-xs-12 col-sm-5 col-md-5">
                             <a ng-bind="'search.resetfilters'|translate | uppercase"></a>
                             <i class="fa fa-repeat" aria-hidden="true"></i>
                         </button>
 
                         <button id="search_button_explore" ng-click="exploreCtrl.search()"
-                                class="col-lg-offset-1 col-lg-5 col-xs-12 col-sm-offset-2 col-sm-5 col-md-offset-2 col-md-5">
-                            <a ng-bind="'search.updatelist'|translate | uppercase"></a>
+                                class="col-lg-5 col-xs-12 col-sm-offset-2 col-sm-5 col-md-offset-2 col-md-5">
+                            <a>{{'search.updatelist'|translate | uppercase}}</a>
                             <i class="fa fa-search" aria-hidden="true"></i>
                         </button>
-
                     </div>
                 </div>
             </div>
             <!--Map Part-->
-            <div class="large-6 columns" style="">
+            <div class="col-lg-6" style="">
                 <div>
                     <div id="staticmap"></div>
                 </div>
@@ -183,7 +183,7 @@
         </div>
 
         <!-- The search result section-->
-        <div class="large-12 columns tableContainer margin-top-10 center" style="padding-bottom:100px;"
+        <div class="col-lg-12 tableContainer margin-top-10 center" style="padding-bottom:100px;"
              ng-if="exploreCtrl.features.length > 0">
             <!--Number of products section-->
             <!--{{exploreCtrl.features}}-->
