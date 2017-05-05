@@ -8,6 +8,8 @@
   "auth": {
   },
   "map": {
+    "center" :[14568286.15, -3033021.27],
+    "zoom" :4,
     "background": {
       "source": "OSM"
     }

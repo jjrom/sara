@@ -242,9 +242,6 @@ angular.module('app.component.explore',[])
 
                 self.analysis = data.properties.query.analysis;
 
-                console.debug('analyze',self.analysis);
-                console.log(data);
-
                 if(self.analysis.analyze.When.times){
                     self.params.startDate = self.analysis.analyze.When.times[0]['time:start'].substring(0,10);
                     self.params.completionDate = self.analysis.analyze.When.times[0]['time:end'].substring(0,10);
@@ -687,7 +684,7 @@ angular.module('app.component.explore',[])
          */
         var menuConfig = {
             target: 'staticmap',
-            zoom : 5,
+            zoom : 2,
             center : [2.348, 48.853],
             close: {
                 title: 'Close'
@@ -748,12 +745,13 @@ angular.module('app.component.explore',[])
             hilite: true,
             map3D: false,
             fullScreen: false,
-            menuConfig: menuConfig,
-            zoom : 5,
-            center : [2.348, 48.853]
+            menuConfig: menuConfig
         });
 
-        console.debug('rocket map',rocketMap);
+        rocketMap.map.setView(new ol.View({
+            zoom : config.map.zoom,
+            center : config.map.center
+        }));
 
         /*
          * Hide map - CESIUM bug needs to switch to 2D

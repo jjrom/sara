@@ -52,7 +52,6 @@
          * @param {array} options
          */
         this.init = function (options) {
-            // console.log(options);
 
             var self = this;
 
@@ -276,7 +275,7 @@
 
         /*
          * Resize extent to be in max extent
-         * 
+         *
          * @param {array} extent
          * @param {array} maxExtent
          * @returns {Object.rocketmap.Map.constrainedExtent.extent}
@@ -321,7 +320,7 @@
 
         /**
          * Add a WMS layer to map
-         * 
+         *
          * @param {Object} feature
          */
         this.addProductLayer = function (feature) {
@@ -364,7 +363,7 @@
 
         /**
          * Remove a WMS layer from map
-         * 
+         *
          * @param {string} id : Feature id
          */
         this.removeProductLayer = function (id) {
@@ -376,13 +375,13 @@
 
         /**
          * Update features layer
-         * 
+         *
          * @param {Object} features - Feature array
          * @param {Object} options :
-         *              
+         *
          *              {
          *                  append: // true to add features to existing features
-         *              } 
+         *              }
          */
         this.updateLayer = function (features, options) {
 
@@ -415,7 +414,7 @@
 
         /**
          * Check that map panel is visible
-         * 
+         *
          * @returns {boolean}
          */
         this.isVisible = function () {
@@ -427,7 +426,7 @@
 
         /**
          * Return current map extent in EPSG:4326 projection
-         * 
+         *
          * @returns {array}
          */
         this.getExtent = function () {
@@ -443,7 +442,7 @@
 
         /**
          * Activate polygon drawning
-         * 
+         *
          * @param {function} drawendCallback
          * @returns {undefined}
          */
@@ -501,7 +500,7 @@
 
         /**
          * Deactivate polygon drawning
-         * 
+         *
          * @returns {undefined}
          */
         this.deactivatePolygonDrawning = function () {
@@ -513,7 +512,7 @@
 
         /*
          * Rest drawned polygon
-         * 
+         *
          * @returns {undefined}
          */
         this.resetDrawnedOverlay = function () {
@@ -525,7 +524,7 @@
 
         /**
          * Add a feature to the drawnable overlay
-         * 
+         *
          * @param {array} polyCoords
          * @returns {undefined}
          */
