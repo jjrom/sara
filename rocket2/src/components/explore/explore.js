@@ -260,6 +260,23 @@ angular.module('app.component.explore',[])
                     self.params.startDate = self.analysis.analyze.When.times[0]['time:start'].substring(0,10);
                     self.params.completionDate = self.analysis.analyze.When.times[0]['time:end'].substring(0,10);
                 }
+
+
+                if(self.analysis.analyze.What['eo:platform'] === "S1A|S1B"){
+                    self.params.collection = "S1";
+                }
+
+                if(self.analysis.analyze.What['eo:platform'] === "S2A|S2B"){
+                    self.params.collection = "S2";
+                }
+
+                if(self.analysis.analyze.What['eo:platform'] === "S3A|S3B"){
+                    self.params.collection = "S3";
+                }
+
+
+
+
                 return self.updateSearchContext(data, append);
             }, function () {
                 rocketServices.error('search.error');
