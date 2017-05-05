@@ -312,7 +312,7 @@
                             {
                                 id:window.rocketmap.Util.getId(),
                                 text:'<span class="fa fa-3x fa-cloud-download"></span>',
-                                title:self.menuConfig['download']['title'],
+                                title:'Download',
                                 callback:self.menuConfig['download']['callback'],
                                 feature:feature
                             }

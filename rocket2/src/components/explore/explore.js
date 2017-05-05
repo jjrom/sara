@@ -166,11 +166,16 @@ angular.module('app.component.explore',[])
          * Launch search on resto
          */
         self.search = function () {
+
+            delete self.params.q;
+
             self.initSearchContext();
 
             $location.search($.extend(self.getSearchParams(), {
                 view: $location.search().view
             }));
+
+
             self.getFeatures(false);
         };
 
@@ -255,10 +260,6 @@ angular.module('app.component.explore',[])
                     self.params.startDate = self.analysis.analyze.When.times[0]['time:start'].substring(0,10);
                     self.params.completionDate = self.analysis.analyze.When.times[0]['time:end'].substring(0,10);
                 }
-
-                console.log(self.analysis);
-
-
                 return self.updateSearchContext(data, append);
             }, function () {
                 rocketServices.error('search.error');
@@ -701,7 +702,7 @@ angular.module('app.component.explore',[])
                 title: 'Close'
             },
             viewMetadata: {
-                title: 'View metadata',
+                title: 'Download',
                 callback: function (feature) {
                     if (feature) {
                         rocketServices.go('result', {

@@ -23,11 +23,12 @@
                 <span ng-if="exploreCtrl.analysis.analyze.When.month || exploreCtrl.analysis.analyze.When.season">
                     {{ exploreCtrl.getKeyValueWhen(exploreCtrl.analysis.analyze.When) | translate}}
                 </span>
-
-
-                <br>{{exploreCtrl.analysis.analyze.When | json}}
             </h6>
-            <h6><b>WHERE : </b> {{exploreCtrl.analysis.analyze.Where[0].name}} , {{exploreCtrl.analysis.analyze.Where[0].country}}</h6>
+            <h6><b>WHERE : </b>
+                <span ng-if="exploreCtrl.analysis.analyze.Where[0].name">
+                    {{exploreCtrl.analysis.analyze.Where[0].name}}</span>
+                    <span ng-if="exploreCtrl.analysis.analyze.Where[0].country">, {{exploreCtrl.analysis.analyze.Where[0].country}}</span>
+            </h6>
             <h6>
                 <b>WHAT : </b>
                 <span ng-repeat="term in exploreCtrl.analysis.analyze.What.searchTerms">
