@@ -128,6 +128,15 @@ angular.module('app.component.explore',[])
 
         };
 
+        self.getKeyValueWhen = function (obj) {
+            var key = Object.keys(obj)[0];
+            return key+':'+obj[key];
+        };
+
+        self.cleanDateString = function (stringDate) {
+            return stringDate.substring(0,10);
+        };
+
         /**
          * Open dialog with search filters information
          */
@@ -246,6 +255,8 @@ angular.module('app.component.explore',[])
                     self.params.startDate = self.analysis.analyze.When.times[0]['time:start'].substring(0,10);
                     self.params.completionDate = self.analysis.analyze.When.times[0]['time:end'].substring(0,10);
                 }
+
+                console.log(self.analysis);
 
 
                 return self.updateSearchContext(data, append);

@@ -14,10 +14,26 @@
         </div>
         <div class="col-lg-12 columns center" ng-if="exploreCtrl.analysis && exploreCtrl.analysis.query !== null " style="padding-top: 10px;">
             <!--@hb Sara Title part-->
-            <p ng-bind="' The query is : ' + exploreCtrl.analysis.query" class="chicago" style="font-size: large"></p>
-            <h6><b>WHEN : </b>{{exploreCtrl.analysis.analyze.When | json}}</h6>
-            <h6><b>WHERE : </b>{{exploreCtrl.analysis.analyze.Where | json}}</h6>
-            <h6><b>WHAT : </b>{{exploreCtrl.analysis.analyze.What | json}}</h6>
+            <p ng-bind="' The query is : ' + exploreCtrl.analysis.query" class="chicago" style="font-size: x-large"></p>
+            <p class="chicago" style="font-size: medium">We understood : </p>
+            <h6><b>WHEN : </b>
+                <span ng-if="exploreCtrl.analysis.analyze.When.times">
+                    <b>From</b>  {{exploreCtrl.cleanDateString(exploreCtrl.analysis.analyze.When.times[0]['time:start'])}}  <b>to</b>  {{exploreCtrl.cleanDateString(exploreCtrl.analysis.analyze.When.times[0]['time:end'])}}
+                </span>
+                <span ng-if="exploreCtrl.analysis.analyze.When.month || exploreCtrl.analysis.analyze.When.season">
+                    {{ exploreCtrl.getKeyValueWhen(exploreCtrl.analysis.analyze.When) | translate}}
+                </span>
+
+
+                <br>{{exploreCtrl.analysis.analyze.When | json}}
+            </h6>
+            <h6><b>WHERE : </b> {{exploreCtrl.analysis.analyze.Where[0].name}} , {{exploreCtrl.analysis.analyze.Where[0].country}}</h6>
+            <h6>
+                <b>WHAT : </b>
+                <span ng-repeat="term in exploreCtrl.analysis.analyze.What.searchTerms">
+                    {{term | translate}}
+                </span>
+            </h6>
         </div>
 
         <div class="col-lg-12" style="padding-top: 10px;">
