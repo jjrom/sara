@@ -12,7 +12,7 @@
 
             <h3>{{'search.over' | translate}} {{exploreCtrl.count}} {{'search.products' | translate}}</h3>
         </div>
-        <div class="col-lg-12 columns center" ng-if="exploreCtrl.analysis && exploreCtrl.analysis.query !== null ">
+        <div class="col-lg-12 columns center" ng-if="exploreCtrl.analysis && exploreCtrl.analysis.query !== null " style="padding-top: 10px;">
             <!--@hb Sara Title part-->
             <p ng-bind="' The query is : ' + exploreCtrl.analysis.query" class="chicago" style="font-size: large"></p>
             <h6><b>WHEN : </b>{{exploreCtrl.analysis.analyze.When | json}}</h6>
