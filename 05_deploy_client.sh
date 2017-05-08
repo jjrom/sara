@@ -61,17 +61,17 @@ fi
 echo " ==> Installing client under ${SARA_CLIENT_TARGET_DIR}"
 
 # Install the npm packages
-npm install --prefix ./rocket2/
+npm install --prefix ./sara.client/
 
 # Generate the client configuration from config file
 echo "============================================================================"
-json -I -f rocket2/src/config.json -e 'this.restoServerUrl="'${SERVER_PROTOCOL}'://'${SARA_SERVER_URL}${SARA_SERVER_SUB}${SARA_SERVER_VERSION_ENDPOINT}'/"'
-json -I -f rocket2/src/config.json -e 'this.contactEmail="'${CONTACT_EMAIL}'"'
+json -I -f sara.client/src/config.json -e 'this.restoServerUrl="'${SERVER_PROTOCOL}'://'${SARA_SERVER_URL}${SARA_SERVER_SUB}${SARA_SERVER_VERSION_ENDPOINT}'/"'
+json -I -f sara.client/src/config.json -e 'this.contactEmail="'${CONTACT_EMAIL}'"'
 
 # Run grunt
-grunt --base rocket2/ --gruntfile rocket2/Gruntfile.js build
+grunt --base sara.client/ --gruntfile sara.client/Gruntfile.js build
 
-cp -a rocket2/dist/. ${SARA_CLIENT_TARGET_DIR}
+cp -a sara.client/dist/. ${SARA_CLIENT_TARGET_DIR}
 
 echo " ==> Set ${SARA_CLIENT_TARGET_DIR} rights to ${WWW_USER}"
 chown -R ${WWW_USER} ${SARA_CLIENT_TARGET_DIR}
