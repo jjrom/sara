@@ -35,7 +35,9 @@
                     {{term | translate}}
                 </span>
                 <span ng-if="exploreCtrl.analysis.analyze.What['eo:platform']" >
-                    {{exploreCtrl.analysis.analyze.What}}
+                    <span ng-if="exploreCtrl.analysis.analyze.What['eo:platform'] === 'S1A|S1B'">Sentinel 1</span>
+                    <span ng-if="exploreCtrl.analysis.analyze.What['eo:platform'] === 'S2A|S2B'">Sentinel 2</span>
+                    <span ng-if="exploreCtrl.analysis.analyze.What['eo:platform'] === 'S3A|S3B'">Sentinel 3</span>
                 </span>
             </h6>
         </div>
