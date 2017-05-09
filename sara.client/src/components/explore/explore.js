@@ -274,6 +274,12 @@ angular.module('app.component.explore',[])
                     self.params.collection = "S3";
                 }
 
+                // Handle the case of instrument
+
+                if(self.analysis.analyze.What['eo:instrument']){
+                    self.params.instrument = self.analysis.analyze.What['eo:instrument'];
+                }
+
 
 
 
