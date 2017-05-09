@@ -116,7 +116,7 @@
                     <div class="large-12 columns" style="margin-top : 10px;">
                         {{ ::'collection'| translate | uppercase }}
                         <select ng-model="exploreCtrl.params.collection" style="background-color: #F2F2F2; border-top-width: 2px; border-top-color: #666666;"
-                                ng-options="name as name for (name, count) in exploreCtrl.globalStatistics.collection  track by name"
+                                ng-options="name as name for (name, count) in exploreCtrl.globalStatistics.collection"
                                 ng-change="exploreCtrl.initForCollection()">
                             <option value="">-----</option>
                         </select>
