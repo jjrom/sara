@@ -34,6 +34,9 @@
                 <span ng-repeat="term in exploreCtrl.analysis.analyze.What.searchTerms">
                     {{term | translate}}
                 </span>
+                <span ng-if="exploreCtrl.analysis.analyze.What['eo:platform']" >
+                    {{exploreCtrl.analysis.analyze.What}}
+                </span>
             </h6>
         </div>
 
