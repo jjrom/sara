@@ -1,6 +1,6 @@
 {
-  "restoServerUrl": "https://resto.mapshup.com/2.2/",
-  "contactEmail": "somebody@localhost",
+  "restoServerUrl": "http://130.56.243.96/sara.server/1.0/",
+  "contactEmail": "saracontact@ga.gov.au",
   "cartSynchronization": true,
   "detectLanguage": false,
   "availableLanguages": ["en"],

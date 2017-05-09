@@ -270,8 +270,7 @@ angular.module('app.component.explore',[])
                     self.params.collection = "S2";
                 }
 
-                if(self.analysis.analyze.What['eo:platform'] === "S3|S3A|S3B"){
-                    console.log(self.analysis.analyze.What['eo:platform']);
+                if(self.analysis.analyze.What['eo:platform'] === "S3A|S3B"){
                     self.params.collection = "S3";
                 }
 
