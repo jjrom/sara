@@ -34,6 +34,9 @@
                 <span ng-repeat="term in exploreCtrl.analysis.analyze.What.searchTerms">
                     {{term | translate}}
                 </span>
+                <span ng-if="exploreCtrl.analysis.analyze.What['eo:platform']" >
+                    {{exploreCtrl.analysis.analyze.What}}
+                </span>
             </h6>
         </div>
 
@@ -113,16 +116,16 @@
                         </datepicker>
                     </div>
                     <!-- Collection section-->
-                    <div class="large-12 columns" style="margin-top : 10px;">
+                    <div class="col-lg-12" style="margin-top : 10px;">
                         {{ ::'collection'| translate | uppercase }}
                         <select ng-model="exploreCtrl.params.collection" style="background-color: #F2F2F2; border-top-width: 2px; border-top-color: #666666;"
-                                ng-options="name as name for (name, count) in exploreCtrl.globalStatistics.collection  track by name"
+                                ng-options="name as name for (name, count) in exploreCtrl.globalStatistics.collection"
                                 ng-change="exploreCtrl.initForCollection()">
                             <option value="">-----</option>
                         </select>
                     </div>
                     <!-- Instrument section-->
-                    <div class="large-12 columns">
+                    <div class="col-lg-12">
                         {{ ::'instrument'| translate | uppercase }}
                         <select ng-model="exploreCtrl.params.instrument" style="background-color: #F2F2F2; border-top-width: 2px; border-top-color: #666666;"
                                 ng-options="name as name for (name, count) in exploreCtrl.statistics.instrument">
@@ -130,7 +133,7 @@
                         </select>
                     </div>
                     <!--Product name-->
-                    <div class="large-6 columns">
+                    <div class="col-lg-6">
                         {{'product Name'| translate | uppercase }}
                         <select ng-model="exploreCtrl.params.productType" style="background-color: #F2F2F2; border-top-width: 2px; border-top-color: #666666;"
                                 ng-options="name as name for (name, count) in exploreCtrl.statistics.productType">
@@ -138,7 +141,7 @@
                         </select>
                     </div>
                     <!--Sensor mode-->
-                    <div class="large-6 columns">
+                    <div class="col-lg-6">
                         {{'sensorMode'| translate | uppercase }}
                         <select ng-model="exploreCtrl.params.sensorMode" style="background-color: #F2F2F2; border-top-width: 2px; border-top-color: #666666;"
                                 ng-options="name as name for (name, count) in exploreCtrl.statistics.sensorMode">
@@ -146,7 +149,7 @@
                         </select>
                     </div>
                     <!--Orbit direction-->
-                    <div ng-if="exploreCtrl.params.collection === 'S1'" class="large-12 columns">
+                    <div ng-if="exploreCtrl.params.collection === 'S1'" class="col-lg-12">
                         {{'Orbit Direction'| translate | uppercase }}
                         <select ng-model="exploreCtrl.params.orbitDirection" style="background-color: #F2F2F2; border-top-width: 2px; border-top-color: #666666;"
                                 ng-options="name as name for (name, count) in exploreCtrl.orbitDirections">
@@ -156,7 +159,7 @@
                     </div>
                     <!--Polarization-->
                     <div ng-if="exploreCtrl.params.collection === 'S1'"
-                         class="large-12 columns">
+                         class="col-lg-12">
                         {{'PolariSation'| translate | uppercase }}
                         <select ng-model="exploreCtrl.params.polarisation" style="background-color: #F2F2F2; border-top-width: 2px; border-top-color: #666666;"
                                 ng-options="name as name for (name, count) in exploreCtrl.polarisations">
@@ -164,7 +167,7 @@
                         </select>
                     </div>
                     <!--CloudCover-->
-                    <div ng-if="exploreCtrl.params.collection === 'S2'" class="large-12 columns">
+                    <div ng-if="exploreCtrl.params.collection === 'S2'" class="col-lg-12">
                         {{'label.cloud.cover'| translate | uppercase }}
                         <input type="number"
                                max="100"

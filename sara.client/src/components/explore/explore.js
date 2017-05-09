@@ -414,6 +414,7 @@ angular.module('app.component.explore',[])
              * Assign state values to scope
              */
             for (var param in $state.params) {
+
                 if (typeof ($state.params[param]) !== 'undefined' && param !== 'collection' && param !== 'view') {
                     launchSearch = true;
                 }
@@ -423,34 +424,38 @@ angular.module('app.component.explore',[])
                 } else if (param !== 'view') {
                     self.params[param] = self.params[param] ? self.params[param] : $state.params[param];
                 }
+
             }
+
 
             /*
              * Get collections
              */
             restoCollectionsAPI.getCollections(function (data) {
+                console.debug(data);
                 /*
                  * Is a collection selected ?
                  */
-                if (self.params && self.params.collection) {
-                    var length = data.collections.length;
-                    for (var i = 0; i < length; i++) {
-                        if (data.collections[i].name === self.params.collection) {
-                            self.count = data.synthesis.statistics.facets.collection[self.params.collection];
-                            self.statistics = data.collections[i].statistics.facets;
-                            if (data.collections[i].osDescription) {
-                                self.friendlyName = data.collections[i].osDescription.LongName;
-                                self.Description = data.collections[i].osDescription.Description;
-                            }
-                        }
-                    }
-                } else {
+                // if (self.params && self.params.collection) {
+                //     console.log("here");
+                //     var length = data.collections.length;
+                //     for (var i = 0; i < length; i++) {
+                //         if (data.collections[i].name === self.params.collection) {
+                //             self.count = data.synthesis.statistics.facets.collection[self.params.collection];
+                //             self.statistics = data.collections[i].statistics.facets;
+                //             if (data.collections[i].osDescription) {
+                //                 self.friendlyName = data.collections[i].osDescription.LongName;
+                //                 self.Description = data.collections[i].osDescription.Description;
+                //             }
+                //         }
+                //     }
+                // } else {
                     self.statistics = data.synthesis.statistics.facets;
                     self.globalStatistics = data.synthesis.statistics.facets;
                     if (data.synthesis.statistics.count){
                         self.count = data.synthesis.statistics.count;
                     }
-                }
+                // }
             }, function () {
                 rocketServices.success('error.server.connect');
             });
