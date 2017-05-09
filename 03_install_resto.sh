@@ -83,6 +83,9 @@ INSERT INTO ${SARA_DB_SCHEMA_NAME}.keywords (name, value, lang, type) VALUES ('s
 INSERT INTO ${SARA_DB_SCHEMA_NAME}.keywords (name, value, lang, type) VALUES ('s3B', 'S3B','**', 'platform');
 INSERT INTO ${SARA_DB_SCHEMA_NAME}.keywords (name, value, lang, type) VALUES ('sentinel3', 'S3A|S3B','**', 'platform');
 INSERT INTO ${SARA_DB_SCHEMA_NAME}.keywords (name, value, lang, type) VALUES ('sentinel-3', 'S3A|S3B','**', 'platform');
+INSERT INTO ${SARA_DB_SCHEMA_NAME}.keywords (name, value, lang, type) VALUES ('olci', 'OLCI','**','instrument');
+INSERT INTO ${SARA_DB_SCHEMA_NAME}.keywords (name, value, lang, type) VALUES ('c-sar', 'C-SAR','**','instrument');
+--DELETE FROM ${SARA_DB_SCHEMA_NAME}.keywords where type='landuse';
 EOF
 if [ "${USE_BCRYPT}" == "YES" ]
 then
