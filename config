@@ -40,8 +40,8 @@ DATA_ROOT_PATH=/g/data3/fj7/Copernicus/
 
 ##
 # resto/itag configuration
-# !!! DO NOT TOUCH THIS VALUES !!!!
 ##
+POSTGRESQL_DATA_DIRECTORY=/var/lib/pgsql/9.5/data
 SARA_DB_NAME=sara
 SARA_DB_SCHEMA_NAME=resto
 # CentOS 6 comes with PHP 5.3.3 - bcrypt cannot be used 
