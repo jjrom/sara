@@ -65,7 +65,7 @@
                 }
             }
 
-            return rocketServices.translate('nicedate', [ymd[0], rocketServices.translate('month' + ymd[1]), day]) + ' - ' + input.split('T')[1].substring(0,8);
+            return rocketServices.translate('nicedate', [ymd[0], rocketServices.translate('month:' + ymd[1]), day]) + ' - ' + input.split('T')[1].substring(0,8);
         };
     }
 
