@@ -5,9 +5,9 @@
         <h1 class="center color__sara collection">{{exploreCtrl.friendlyName}}</h1>
 
         <!--The title of explore Page-->
-        <div class="col-lg-12 columns center" ng-if="exploreCtrl.features.length === 0 && !exploreCtrl.analysis">
+        <div class="col-lg-12 columns center">
             <!--@hb Sara Title part-->
-            <p ng-bind="'home.subtitle'|translate"
+            <p ng-bind="'home.subtitle'|translate" ng-if="exploreCtrl.features.length === 0 && !exploreCtrl.analysis"
                class="chicago" style="font-size: x-large" ></p>
 
             <h3>{{'search.over' | translate}} {{exploreCtrl.count}} {{'search.products' | translate}}</h3>
