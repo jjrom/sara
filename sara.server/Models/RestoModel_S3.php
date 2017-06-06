@@ -126,7 +126,7 @@ class RestoModel_S3 extends RestoModel {
                 'cycle' => trim($orbits->getAttribute('cycle')),
                 'resource' => $path,
                 'resourceSize' => trim($zipFile->getAttribute('size_bytes')),
-                'resourceChecksum' => 'md5:' . trim($zipFile->getAttribute('md5_local')),
+                'resourceChecksum' => 'md5=' . trim($zipFile->getAttribute('md5_local')),
                 'productType' => $productType,
                 'processingLevel' => 'LEVEL-1',
                 'instrument'=> $instrument,
