@@ -68,6 +68,9 @@ PASSPHRASE=thisisapassphrase
 # This directory should be removed after iTag installation
 ITAG_DIR=/tmp/itag
 
+######################################################
+# UNUSUED FOR SARA - JUST LEAVE THESE VALUES UNTOUCHED
+#######################################################
 ##
 # Email configuration 
 # Used by resto to send registration confirmation and reset password link
