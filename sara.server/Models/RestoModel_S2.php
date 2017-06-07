@@ -87,14 +87,21 @@ class RestoModel_S2 extends RestoModel {
          */
         $path = trim($dom->getElementsByTagName('PATH')->item(0)->nodeValue);
         $explodedPath = explode('/', $path);
-        $instrument = $explodedPath[1];
-        $processingLevel = $explodedPath[2];
-        $productType = 'S2' . $instrument . substr($processingLevel, 1);
         $time = $dom->getElementsByTagName('ACQUISITION_TIME')->item(0);
         $zipFile = $dom->getElementsByTagName('ZIPFILE')->item(0);
         $processingInfo = $dom->getElementsByTagName('ESA_PROCESSING')->item(0);
         $polygon = RestoGeometryUtil::wktPolygonToArray(trim($dom->getElementsByTagName('ESA_TILEOUTLINE_FOOTPRINT_WKT')->item(0)->nodeValue));
-        
+
+	/*
+         * Compatible with previous xml version
+         */
+        $instrument = trim($dom->getElementsByTagName('INSTRUMENT')->item(0)->nodeValue);
+        if ($instrument->length == 0) {$instrument = $explodedPath[1];}
+	$processingLevel = trim($dom->getElementsByTagName('PROCESSING_LEVEL')->item(0)->nodeValue);
+        if ($processingLevel->length ==0) {$processingLevel = $explodedPath[2];}
+	$productType = trim($dom->getElementsByTagName('PRODUCT_TYPE')->item(0)->nodeValue);
+        if ($productType->length ==0) {$productType = 'S2' . $instrument . substr($processingLevel, 1);}
+                
         /*
          * Initialize feature
          */

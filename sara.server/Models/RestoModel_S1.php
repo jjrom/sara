@@ -91,14 +91,21 @@ class RestoModel_S1 extends RestoModel {
          */
         $path = trim($dom->getElementsByTagName('PATH')->item(0)->nodeValue);
         $explodedPath = explode('/', $path);
-        $instrument = $explodedPath[1];
-        $productType = $explodedPath[2];
         $time = $dom->getElementsByTagName('ACQUISITION_TIME')->item(0);
         $orbits = $dom->getElementsByTagName('ORBIT_NUMBERS')->item(0);
         $zipFile = $dom->getElementsByTagName('ZIPFILE')->item(0);
         $polygon = RestoGeometryUtil::wktPolygonToArray(trim($dom->getElementsByTagName('ESA_TILEOUTLINE_FOOTPRINT_WKT')->item(0)->nodeValue));
-        
-        
+	
+	/*
+	 * Compatible with previous xml version
+	 */
+	$instrument = trim($dom->getElementsByTagName('INSTRUMENT')->item(0)->nodeValue);
+        if ($instrument->length == 0) {$instrument = $explodedPath[1];}
+        $productType = trim($dom->getElementsByTagName('PRODUCT_TYPE')->item(0)->nodeValue);
+        if ($productType->length ==0) {$productType = $explodedPath[2];}
+        $processingLevel = trim($dom->getElementsByTagName('PROCESSING_LEVEL')->item(0)->nodeValue);
+	if ($processingLevel->length ==0) {$processingLevel = 'LEVEL-1';}
+
         /*
          * Initialize feature
          */
@@ -119,7 +126,7 @@ class RestoModel_S1 extends RestoModel {
                 'resourceSize' => trim($zipFile->getAttribute('size_bytes')),
                 'resourceChecksum' => 'md5=' . trim($zipFile->getAttribute('md5_local')),
                 'productType' => $productType,
-                'processingLevel' => 'LEVEL-1',
+                'processingLevel' => $processingLevel,
                 'instrument'=> $instrument,
                 'polarisation' => trim($dom->getElementsByTagName('POLARISATION')->item(0)->getAttribute('values')),
                 'swath' => trim($dom->getElementsByTagName('SWATH')->item(0)->getAttribute('values'))
