@@ -68,15 +68,15 @@ PASSPHRASE=thisisapassphrase
 # This directory should be removed after iTag installation
 ITAG_DIR=/tmp/itag
 
-######################################################
-# UNUSUED FOR SARA - JUST LEAVE THESE VALUES UNTOUCHED
-#######################################################
 ##
 # Email configuration 
 # Used by resto to send registration confirmation and reset password link
 ##
 CONTACT_NAME=SARA
 CONTACT_EMAIL=earth.observation@ga.gov.au
+######################################################
+# UNUSUED FOR SARA - JUST LEAVE BELOW VALUES UNTOUCHED
+#######################################################
 SMTP_HOST=xxx.xxxx
 SMTP_PORT=465
 SMTP_SECURE_PROTOCOL=ssl
