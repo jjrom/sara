@@ -114,6 +114,12 @@ class RestoModel_S3 extends RestoModel {
         $processingLevel = trim($dom->getElementsByTagName('PROCESSING_LEVEL')->item(0)->nodeValue);
         if ($processingLevel->length ==0) {$processingLevel = 'LEVEL-1';}
 
+	/*
+	 * Not all products have frame number
+	 */
+	$frame = trim($orbits->getAttribute('frame'));
+	if ($frame->length ==0){$frame = -1;}
+ 
         /*
          * Initialize feature
          */
@@ -130,7 +136,7 @@ class RestoModel_S3 extends RestoModel {
                 'platform' =>  trim($dom->getElementsByTagName('SATELLITE')->item(0)->getAttribute('name')),
                 'orbitNumber' => trim($orbits->getAttribute('relative')),
                 'absoluteOrbitNumber' => trim($orbits->getAttribute('absolute')),
-                'frame' => trim($orbits->getAttribute('frame')),
+                'frame' => $frame,
                 'cycle' => trim($orbits->getAttribute('cycle')),
                 'resource' => $path,
                 'resourceSize' => trim($zipFile->getAttribute('size_bytes')),
