@@ -40,6 +40,10 @@ class RestoModel_S1 extends RestoModel {
         'absoluteOrbitNumber' => array(
             'name' => 'absoluteorbitnumber',
             'type' => 'NUMERIC'
+	),
+	'orbitDirection' => array(
+            'name' => 'orbitDirection',
+            'type' => 'TEXT'
         )
     );
 
@@ -51,6 +55,21 @@ class RestoModel_S1 extends RestoModel {
      */
     public function __construct() {
         parent::__construct();
+
+	$this->searchFilters['eo:orbitDirection'] = array(
+							  'key' => 'orbitDirection',
+							  'osKey' => 'orbitDirection',
+							  'operation' => '=',
+            'options' => 'auto'
+							  );
+
+        $this->searchFilters['polarisation'] = array(
+						     'key' => 'polarisation',
+						     'osKey' => 'polarisation',
+						     'operation' => '=',
+            'options' => 'auto'
+						     );
+
     }
 
     /**
@@ -122,6 +141,7 @@ class RestoModel_S1 extends RestoModel {
                 'platform' =>  trim($dom->getElementsByTagName('SATELLITE')->item(0)->getAttribute('name')),
                 'orbitNumber' => trim($orbits->getAttribute('relative')),
                 'absoluteOrbitNumber' => trim($orbits->getAttribute('absolute')),
+		'orbitDirection' => ucfirst(trim($dom->getElementsByTagName('PASS')->item(0)->getAttribute('direction'))),
                 'resource' => $path,
                 'resourceSize' => trim($zipFile->getAttribute('size_bytes')),
                 'resourceChecksum' => 'md5=' . trim($zipFile->getAttribute('md5_local')),

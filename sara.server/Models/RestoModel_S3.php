@@ -118,7 +118,7 @@ class RestoModel_S3 extends RestoModel {
 	 * Not all products have frame number
 	 */
 	$frame = trim($orbits->getAttribute('frame'));
-	if ($frame->length ==0){$frame = -1;}
+	if ($frame->length ==0){$frame = null;}
  
         /*
          * Initialize feature
