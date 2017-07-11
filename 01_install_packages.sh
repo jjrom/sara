@@ -82,10 +82,13 @@ npm install -g grunt-cli
 npm install -g json
 
 echo " >>> Initialize postgres database"
+cat <<EOF > /etc/sysconfig/pgsql/postgresql-9.5
+PGDATA=${POSTGRESQL_DATA_DIRECTORY}
+EOF
 service postgresql-9.5 initdb
 
-echo " >>> Update /var/lib/pgsql/9.5/data/pg_hba.conf to allow trusted local connection"
-cat <<EOF > /var/lib/pgsql/9.5/data/pg_hba.conf
+echo " >>> Update ${POSTGRESQL_DATA_DIRECTORY}/pg_hba.conf to allow trusted local connection"
+cat <<EOF > ${POSTGRESQL_DATA_DIRECTORY}/pg_hba.conf
 local   all             all                                      trust
 host    all             all             127.0.0.1/32             trust
 host    all             all             ::1/128                  trust
