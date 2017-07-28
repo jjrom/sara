@@ -40,10 +40,10 @@ class RestoModel_S1 extends RestoModel {
         'absoluteOrbitNumber' => array(
             'name' => 'absoluteorbitnumber',
             'type' => 'NUMERIC'
-	),
-	'orbitDirection' => array(
-            'name' => 'orbitDirection',
-            'type' => 'TEXT'
+    	),
+    	'orbitDirection' => array(
+                'name' => 'orbitDirection',
+                'type' => 'TEXT'
         )
     );
 
@@ -56,19 +56,19 @@ class RestoModel_S1 extends RestoModel {
     public function __construct() {
         parent::__construct();
 
-	$this->searchFilters['eo:orbitDirection'] = array(
-							  'key' => 'orbitDirection',
-							  'osKey' => 'orbitDirection',
-							  'operation' => '=',
+        $this->searchFilters['eo:orbitDirection'] = array(
+            'key' => 'orbitDirection',
+            'osKey' => 'orbitDirection',
+            'operation' => '=',
             'options' => 'auto'
-							  );
+        );
 
         $this->searchFilters['polarisation'] = array(
-						     'key' => 'polarisation',
-						     'osKey' => 'polarisation',
-						     'operation' => '=',
+            'key' => 'polarisation',
+            'osKey' => 'polarisation',
+            'operation' => '=',
             'options' => 'auto'
-						     );
+        );
 
     }
 
@@ -115,15 +115,23 @@ class RestoModel_S1 extends RestoModel {
         $zipFile = $dom->getElementsByTagName('ZIPFILE')->item(0);
         $polygon = RestoGeometryUtil::wktPolygonToArray(trim($dom->getElementsByTagName('ESA_TILEOUTLINE_FOOTPRINT_WKT')->item(0)->nodeValue));
 	
-	/*
-	 * Compatible with previous xml version
-	 */
-	$instrument = trim($dom->getElementsByTagName('INSTRUMENT')->item(0)->nodeValue);
-        if ($instrument->length == 0) {$instrument = $explodedPath[1];}
+    	/*
+    	 * Compatible with previous xml version
+    	 */
+    	$instrument = trim($dom->getElementsByTagName('INSTRUMENT')->item(0)->nodeValue);
+        if ($instrument->length == 0) {
+            $instrument = $explodedPath[1];
+        }
+
         $productType = trim($dom->getElementsByTagName('PRODUCT_TYPE')->item(0)->nodeValue);
-        if ($productType->length ==0) {$productType = $explodedPath[2];}
+        if ($productType->length == 0) {
+            $productType = $explodedPath[2];
+        }
+
         $processingLevel = trim($dom->getElementsByTagName('PROCESSING_LEVEL')->item(0)->nodeValue);
-	if ($processingLevel->length ==0) {$processingLevel = 'LEVEL-1';}
+    	if ($processingLevel->length == 0) {
+            $processingLevel = 'LEVEL-1';
+        }
 
         /*
          * Initialize feature
@@ -141,7 +149,7 @@ class RestoModel_S1 extends RestoModel {
                 'platform' =>  trim($dom->getElementsByTagName('SATELLITE')->item(0)->getAttribute('name')),
                 'orbitNumber' => trim($orbits->getAttribute('relative')),
                 'absoluteOrbitNumber' => trim($orbits->getAttribute('absolute')),
-		'orbitDirection' => ucfirst(trim($dom->getElementsByTagName('PASS')->item(0)->getAttribute('direction'))),
+                'orbitDirection' => ucfirst(trim($dom->getElementsByTagName('PASS')->item(0)->getAttribute('direction'))),
                 'resource' => $path,
                 'resourceSize' => trim($zipFile->getAttribute('size_bytes')),
                 'resourceChecksum' => 'md5=' . trim($zipFile->getAttribute('md5_local')),
@@ -149,7 +157,8 @@ class RestoModel_S1 extends RestoModel {
                 'processingLevel' => $processingLevel,
                 'instrument'=> $instrument,
                 'polarisation' => trim($dom->getElementsByTagName('POLARISATION')->item(0)->getAttribute('values')),
-                'swath' => trim($dom->getElementsByTagName('SWATH')->item(0)->getAttribute('values'))
+                'swath' => trim($dom->getElementsByTagName('SWATH')->item(0)->getAttribute('values')),
+                'sensorMode' => trim($dom->getElementsByTagName('MODE')->item(0)->getAttribute('value'))
             )
         );
 
