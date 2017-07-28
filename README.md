@@ -59,23 +59,26 @@ The most important file is ${SARA_SRC}/config - it contains all the configuratio
 **[IMPORTANT] These commands are run only once**
 
     # Install CentOS packages and configure postgres/nginx services
-    ./01_install_packages.sh config
+    ./01_install_packages.sh -C config
 
     # Install itag - [WARNING] this is quite long !
-    ./02_install_itag.sh config  
+    ./02_install_itag.sh -C config  
+
+    # Install itag landcover - [WARNING] this is quite long !
+    ./02bis_install_landcover.sh -C config  
 
     # Install resto
-    ./03_install_resto.sh config 
+    ./03_install_resto.sh -C config 
 
 ### Server and client deployment
 
 **[IMPORTANT] These commands should be run each time a new version is delivered or the configuration changes**
 
     # Deploy server
-    ./04_deploy_server.sh config  
+    ./04_deploy_server.sh -C config  
 
     # Deploy client
-    ./05_deploy_client.sh config 
+    ./05_deploy_client.sh -C config 
 
 ## Ingest Sentinels products
 

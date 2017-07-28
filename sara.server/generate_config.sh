@@ -150,7 +150,8 @@ return array(
                         'password' => '${ITAG_PASSWORD}'
                     ),
                     'taggers' => array(
-                        'Political' => array()
+                        'Political' => array(),
+                        'LandCover' => array()
                     )
                 )
             )
