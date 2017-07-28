@@ -63,7 +63,7 @@ return array(
             )
         ),
         'debug' => false,
-        'timezone' => 'Europe/Paris',
+        'timezone' => '${TIMEZONE}',
         'protocol' => 'http',
         'storeQuery' => true,
         'sharedLinkDuration' => 86400,

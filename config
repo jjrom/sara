@@ -75,6 +75,10 @@ ITAG_DIR=/tmp/itag
 ##
 CONTACT_NAME=SARA
 CONTACT_EMAIL=earth.observation@ga.gov.au
+
+# Timezone
+TIMEZONE=Australia/Sydney
+
 ######################################################
 # UNUSUED FOR SARA - JUST LEAVE BELOW VALUES UNTOUCHED
 #######################################################
