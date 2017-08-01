@@ -80,9 +80,7 @@
              * Initialize result vector layer
              */
             self.layer = new window.ol.layer.Vector({
-                source: new window.ol.source.Vector({
-                    wrapX : false
-                }),
+                source: new window.ol.source.Vector(),
                 style: new window.ol.style.Style({
                     fill: new window.ol.style.Fill({
                         color: 'rgba(255, 0, 255, 0.4)'

@@ -230,9 +230,7 @@
         this.createLayer = function(options) {
             options = options || {};
             return new window.ol.layer.Vector({
-                source: new window.ol.source.Vector({
-                    wrapX : false
-                }),
+                source: new window.ol.source.Vector(),
                 style: new window.ol.style.Style({
                     image: new ol.style.Circle({
                         radius: 10,

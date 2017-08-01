@@ -500,7 +500,9 @@
                     source = new window.ol.source.MapQuest({layer: 'sat'});
                     break;
                 default:
-                    source = new window.ol.source.OSM();
+                    source = new window.ol.source.OSM({
+                        wrapX: false
+                    });
             };
             
             return new window.ol.layer.Tile({
