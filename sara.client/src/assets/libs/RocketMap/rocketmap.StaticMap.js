@@ -230,7 +230,9 @@
         this.createLayer = function(options) {
             options = options || {};
             return new window.ol.layer.Vector({
-                source: new window.ol.source.Vector(),
+                source: new window.ol.source.Vector({
+                    wrapX : false
+                }),
                 style: new window.ol.style.Style({
                     image: new ol.style.Circle({
                         radius: 10,
@@ -244,7 +246,7 @@
                         color: options.strokeColor || 'orange',
                         width: options.hasOwnProperty('strokeWidth') ? options.strokeWidth : 3
                     })
-                })
+                }),
             });
         };
 
