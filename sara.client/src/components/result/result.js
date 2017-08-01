@@ -82,6 +82,7 @@ angular.module('app.components.result',[])
                     strokeColorLocation: "black",
                     interactions:true
                 });
+                console.log(self.feature);
                 self.staticMap.update({
                     type: 'FeatureCollection',
                     features: [self.feature]

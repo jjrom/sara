@@ -40,7 +40,13 @@ angular.module('app.component.explore',[])
         // nb of items in current collection
         self.count = 0;
 
-
+        var countAroundProductNumber = function (number) {
+            var digits_number = number.toString().length;
+            var x_number = Math.pow(10,digits_number-1);
+            var new_number = number / x_number;
+            new_number = new_number.toFixed(2);
+            return new_number * x_number;
+        };
 
         $scope.$on('$locationChangeSuccess', function () {
             self.view($location.search().view, false);
@@ -254,6 +260,7 @@ angular.module('app.component.explore',[])
 
             restoCollectionsAPI.search(_params, function (data) {
 
+                self.exactCount = data.properties.exactCount;
                 self.analysis = data.properties.query.analysis;
 
                 if(self.analysis.analyze.When.times){
@@ -279,9 +286,6 @@ angular.module('app.component.explore',[])
                 if(self.analysis.analyze.What['eo:instrument']){
                     self.params.instrument = self.analysis.analyze.What['eo:instrument'];
                 }
-
-
-
 
                 return self.updateSearchContext(data, append);
             }, function () {
@@ -333,7 +337,13 @@ angular.module('app.component.explore',[])
             /*
              * Get total results count
              */
-            self.resultCounter.totalResults = data.properties.totalResults;
+            if(data.properties.exactCount){
+                self.resultCounter.totalResults = data.properties.totalResults;
+            } else {
+                self.resultCounter.totalResults = countAroundProductNumber(data.properties.totalResults);
+            }
+
+
             if (self.resultCounter.totalResults < self.resultCounter.end || (self.hasNoMore && self.resultCounter.totalResults !== self.resultCounter.end)) {
                 /*
                  * totalResults is an estimation,
@@ -438,12 +448,10 @@ angular.module('app.component.explore',[])
              * Get collections
              */
             restoCollectionsAPI.getCollections(function (data) {
-                console.debug(data);
                 /*
                  * Is a collection selected ?
                  */
                 // if (self.params && self.params.collection) {
-                //     console.log("here");
                 //     var length = data.collections.length;
                 //     for (var i = 0; i < length; i++) {
                 //         if (data.collections[i].name === self.params.collection) {

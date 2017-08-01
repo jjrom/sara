@@ -10,9 +10,17 @@
             <p ng-bind="'home.subtitle'|translate" ng-if="exploreCtrl.features.length === 0 && !exploreCtrl.analysis"
                class="chicago" style="font-size: x-large" ></p>
 
-            <h3 ng-if="exploreCtrl.resultCounter.totalResults !== 0">{{'search.over' | translate}} {{exploreCtrl.resultCounter.totalResults}} {{'search.products' | translate}}</h3>
+            <!--The case of exact search-->
+            <h3 ng-if="exploreCtrl.resultCounter.totalResults !== 0 && exploreCtrl.exactCount">
+                {{'search.over' | translate}} {{exploreCtrl.resultCounter.totalResults}} {{'search.products' | translate}}</h3>
 
-            <h3 ng-if="exploreCtrl.features.length === 0 && !exploreCtrl.analysis">{{'search.over' | translate}} {{exploreCtrl.count}} {{'search.products' | translate}}</h3>
+            <!--The case of not exact search-->
+            <h3 ng-if="exploreCtrl.resultCounter.totalResults !== 0 && !exploreCtrl.exactCount">
+                {{'search.around' | translate}} {{exploreCtrl.resultCounter.totalResults}} {{'search.products' | translate}}</h3>
+
+            <h3 ng-if="exploreCtrl.features.length === 0 && !exploreCtrl.analysis">
+                {{'search.over' | translate}} {{exploreCtrl.count}} {{'search.products' | translate}}</h3>
+
         </div>
         <div class="col-lg-12 columns center" ng-if="exploreCtrl.analysis && exploreCtrl.analysis.query !== null " style="padding-top: 10px;">
             <!--@hb Sara Title part-->
