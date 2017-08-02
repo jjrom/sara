@@ -501,7 +501,7 @@
                     break;
                 default:
                     source = new window.ol.source.OSM({
-                        wrapX: false
+                        wrapX: true
                     });
             };
             

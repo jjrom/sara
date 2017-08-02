@@ -352,10 +352,13 @@ angular.module('app.component.explore',[])
                 self.resultCounter.totalResults = self.resultCounter.end;
             }
 
+
+
+
             /*
              * Update main map
              */
-            rocketMap.updateLayer(data.features, {
+            rocketMap.updateLayer(self.correctFeaturesJSON(data.features), {
                 'append': append
             });
             rocketMap.zoomOnLayer();
@@ -725,6 +728,30 @@ angular.module('app.component.explore',[])
                 return null;
             }
 
+        };
+
+        /**
+         * HACK TO FIX THE FEATURES OUT OF THE WORLD
+         * 02/08/2017
+         * @param features
+         * @returns {*}
+         */
+        self.correctFeaturesJSON = function (features) {
+            var i,k;
+            for (i = 0; i < features.length; i++) {
+                for (k = 0; k < features[i].geometry.coordinates[0].length; k++) {
+                    if(features[i].geometry.coordinates[0][k][0] > 180){
+                        features[i].geometry.coordinates[0][k][0] += 180 ;
+                        features[i].geometry.coordinates[0][k][0] %= 360 ;
+                        features[i].geometry.coordinates[0][k][0] -= 180 ;
+                    }
+                }
+                for (k = 0; k < features[i].geometry.coordinates[0].length-1; k++) {
+                    if (Math.abs(features[i].geometry.coordinates[0][k][0] - features[i].geometry.coordinates[0][k+1][0]) > 180)
+                        features[i].geometry.coordinates[0][k+1][0] += 360;
+                }
+            }
+            return features;
         };
 
         /*
