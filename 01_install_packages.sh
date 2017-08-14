@@ -121,6 +121,9 @@ cat <<EOF > /etc/nginx/default.d/sara.conf
   }
 EOF
 
+echo " >>> Force nginx to redirect homepage to the SARA page"
+perl -i -0pe 's,(location / {\n)( *}), \1\t\#Force nginx to redirect to the SARA page \n\trewrite ^/\$ \$1/sara.client redirect;\n\2,i' /etc/nginx/conf.d/default.conf
+
 echo " >>> Start postgres database"
 service postgresql-9.5 start
 
