@@ -73,7 +73,7 @@ return array(
         'resetPasswordUrl' => '${CLIENT_ENDPOINT_RESET_PASSWORD}',
         'htmlSearchUrl' => '${CLIENT_ENDPOINT_HTML_SEARCH_URL}',
         'uploadDirectory' => '${UPLOAD_DIRECTORY}',
-        'streamMethod' => 'php',
+        'streamMethod' => 'nginx',
         'userAutoValidation' => true,
         'corsWhiteList' => array(
             'null',
@@ -108,7 +108,7 @@ return array(
         'accountActivation' => array(
             'en' => array(
                 'subject' => '[{a:1}] Activation code',
-                'message' => 'Hi,<br>You have registered an account to {a:1} application<br><br>To validate this account, <a href="{a:2}">click this link</a> <br><br>Regards<br><br>{a:1} team"'
+                'message' => 'Hi,<br>You have registered an account to use the {a:1} application<br><br>To validate this account, <a href="{a:2}">click this link</a> <br><br>Regards<br><br>{a:1} team'
             )
         ),
         'resetPassword' => array(
