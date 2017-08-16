@@ -11,7 +11,7 @@
 #
 #  http://130.56.243.96/sara.server/1.0
 ##
-SERVER_PROTOCOL=http
+SERVER_PROTOCOL=https
 SARA_SERVER_URL=copernicus-dev.nci.org.au
 SARA_SERVER_SUB=/sara.server
 SARA_SERVER_VERSION_ENDPOINT=/1.0
@@ -26,8 +26,8 @@ SARA_CLIENT_TARGET_DIR=/usr/share/nginx/html/sara.client
 ##
 # Client configuration
 ##
-CLIENT_ENDPOINT_RESET_PASSWORD=http://copernicus-dev.nci.org.au/sara.client/#/resetPassword
-CLIENT_ENDPOINT_HTML_SEARCH_URL=http://copernicus-dev.nci.org.au/sara.client/#/search
+CLIENT_ENDPOINT_RESET_PASSWORD=$SERVER_PROTOCOL://$SARA_SERVER_URL/sara.client/#/resetPassword
+CLIENT_ENDPOINT_HTML_SEARCH_URL=$SERVER_PROTOCOL://$SARA_SERVER_URL/sara.client/#/search
 
 ##
 # Copernicus data repository

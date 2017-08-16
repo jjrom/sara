@@ -65,5 +65,5 @@ for productType in ['GRD', 'SLC','OCN','RAW']:
                     ET.SubElement(root, 'PATH').text = PATH
 
                 # Post updated metadata file to resto
-                response = requests.post(restourl, data=ET.tostring(root), auth=(username, password))
+                response = requests.post(restourl, data=ET.tostring(root), auth=(username, password), verify=False)
                 print metadataFile, response.text
