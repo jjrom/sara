@@ -121,8 +121,52 @@ cat <<EOF > /etc/nginx/default.d/sara.conf
   }
 EOF
 
-echo " >>> Force nginx to redirect homepage to the SARA page"
-perl -i -0pe 's,(location / {\n)( *}), \1\t\#Force nginx to redirect to the SARA page \n\trewrite ^/\$ \$1/sara.client redirect;\n\2,i' /etc/nginx/conf.d/default.conf
+
+echo " >>> Edit configuration file /etc/nginx/conf.d/default.conf"
+cat <<EOF > /etc/nginx/conf.d/default.conf
+server {
+    listen       80 default_server;
+$(if [ "${SERVER_PROTOCOL}" == "https" ]; then
+    echo "    # Turn on SSL goodness as per - https://www.bjornjohansen.no/securing-nginx-ssl"
+    echo "    listen  	443 ssl http2;"
+    echo "    ssl_certificate_key /etc/pki/tls/private/${SARA_SERVER_URL}.key;"
+    echo "    ssl_certificate /etc/pki/tls/certs/${SARA_SERVER_URL}.crt;"
+    echo "    ssl_session_cache shared:SSL:20m;"
+    echo "    ssl_session_timeout 180m;"
+    echo "    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;"
+    echo "    ssl_prefer_server_ciphers on;"
+    echo "    ssl_ciphers ECDH+AESGCM:ECDH+AES256:ECDH+AES128:DHE+AES128:!ADH:!AECDH:!MD5;"
+    echo "    add_header Strict-Transport-Security "max-age=31536000" always;"
+else
+	echo "    listen       [::]:80 default_server;"
+fi)
+    server_name  _;
+    root         /usr/share/nginx/html;
+
+    # Load configuration files for the default server block.
+    include /etc/nginx/default.d/*.conf;
+
+    # always re-direct to the https:// link
+    location / {
+	#Force nginx to redirect to the SARA page 
+$(if [ "${SERVER_PROTOCOL}" == "https" ]; then
+    echo "	rewrite ^/$ https://$host/sara.client redirect;"
+else
+    echo "	rewrite ^/$ $1/sara.client redirect;"
+fi)
+    }
+
+    error_page 404 /404.html;
+        location = /40x.html {
+    }
+
+    error_page 500 502 503 504 /50x.html;
+        location = /50x.html {
+    }
+
+}
+EOF
+
 
 echo " >>> Start postgres database"
 service postgresql-9.5 start
