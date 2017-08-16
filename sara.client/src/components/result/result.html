@@ -27,7 +27,7 @@
         <div id="rightColumn" class="small-6 medium-6 large-8 columns">
             <!--Use the binding of collection description variable-->
             <p ng-bind-html = "resultCtrl.trustedHtml(resultCtrl.collection.osDescription.Description)"
-                    style="color: rgba(30,54,78,1); font-family: Cambria; font-size: x-large; padding: 10px;">
+                    style="color: rgba(30,54,78,1); font-family: Cambria; font-size: large; padding: 10px;">
             </p>
         </div>
 
@@ -44,7 +44,7 @@
         <div id="leftColumn" class="small-12 medium-12 large-6 columns">
             <!--Quicklook section-->
             <div class="center" style="margin-bottom:20px;">
-                <img style="max-width: 40vw;" ng-src="{{resultCtrl.feature.properties.quicklook}}" title="{{resultCtrl.feature.id}}"/>
+                <img style="max-width: 40vw;" alt="No quick-look" ng-src="{{resultCtrl.feature.properties.quicklook}}" title="{{resultCtrl.feature.id}}"/>
             </div>
         </div>
 
@@ -67,13 +67,13 @@
                         <h5><span class="fa fa-globe"></span>&nbsp;{{'feature.location' | translate}}</h5>
                         <div class="padded-left">
                             <div ng-repeat="(continent, continentValue) in resultCtrl.keywords.continent">
-                                <a ng-click="mainController.search('q', quote(continent))" class="keyword">{{continent}}</a>
+                                <a ng-click="mainController.search('q', resultCtrl.quote(continent))" class="keyword">{{continent}}</a>
                                 <div ng-repeat="(country, countryValue) in continentValue.children" class="padded-left">
-                                    <a ng-click="mainController.search('q', quote(country))" class="keyword">{{country}}</a>
+                                    <a ng-click="mainController.search('q', resultCtrl.quote(country))" class="keyword">{{country}}</a>
                                     <div ng-repeat="(region, regionValue) in countryValue.children" class="padded-left">
-                                        <a ng-click="mainController.search('q', quote(region))" class="keyword" ng-if="region !== '_all'">{{region}}</a>
+                                        <a ng-click="mainController.search('q', resultCtrl.quote(region))" class="keyword" ng-if="region !== '_all'">{{region}}</a>
                                         <div ng-repeat="(state, stateValue) in regionValue.children" class="padded-left">
-                                            <a ng-click="mainController.search('q', quote(state))" class="keyword">{{state}}</a>
+                                            <a ng-click="mainController.search('q', resultCtrl.quote(state))" class="keyword">{{state}}</a>
                                         </div>
                                     </div>
                                 </div>

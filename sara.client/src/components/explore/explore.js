@@ -765,7 +765,7 @@ angular.module('app.component.explore',[])
                 title: 'Close'
             },
             viewMetadata: {
-                title: 'Download',
+                title: 'Details',
                 callback: function (feature) {
                     if (feature) {
                         rocketServices.go('result', {
