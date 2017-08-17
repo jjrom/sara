@@ -136,7 +136,7 @@ $(if [ "${SERVER_PROTOCOL}" == "https" ]; then
     echo "    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;"
     echo "    ssl_prefer_server_ciphers on;"
     echo "    ssl_ciphers ECDH+AESGCM:ECDH+AES256:ECDH+AES128:DHE+AES128:!ADH:!AECDH:!MD5;"
-    echo "    add_header Strict-Transport-Security "max-age=31536000" always;"
+    echo "    add_header Strict-Transport-Security \"max-age=31536000\" always;"
 else
 	echo "    listen       [::]:80 default_server;"
 fi)
@@ -150,9 +150,9 @@ fi)
     location / {
 	#Force nginx to redirect to the SARA page 
 $(if [ "${SERVER_PROTOCOL}" == "https" ]; then
-    echo "	rewrite ^/$ https://$host/sara.client redirect;"
+    echo "	rewrite ^/$ https://\$host/sara.client redirect;"
 else
-    echo "	rewrite ^/$ $1/sara.client redirect;"
+    echo "	rewrite ^/$ \$1/sara.client redirect;"
 fi)
     }
 
