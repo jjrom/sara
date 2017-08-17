@@ -57,23 +57,37 @@ fi
 # Source config file
 . ${CONFIG}
 
-if [ -d "${ITAG_DIR}" ];
+LANDCOVER_DATA=${ITAG_DIR}/data
+LANDCOVER_SQL="2016.11.09-itag_landcover_curated.sql"
+
+if [ -d "${LANDCOVER_DATA}" ];
 then
-  echo "${ITAG_DIR} exits - skipping creation"
+  echo "${LANDCOVER_DATA} exits - skipping creation"
 else
-  echo "Create ${ITAG_DIR} directory"
-  mkdir -p ${ITAG_DIR}  
+  echo "Create ${LANDCOVER_DATA} directory"
+  mkdir -p ${LANDCOVER_DATA}
 fi
 
-cd ${ITAG_DIR}
-wget -O 2016.11.09-itag_landcover_curated.sql.tgz "https://www.dropbox.com/s/ceoxg0lagag3fum/2016.11.09-itag_landcover_curated.sql.tgz?dl=0"
-tar -xvzf 2016.11.09-itag_landcover_curated.sql.tgz
+
+cd ${LANDCOVER_DATA}
+if [ -f "${LANDCOVER_SQL}" ];
+then
+  echo "";
+  echo "====> Using local landcover data";
+  echo "";
+else
+  echo "";
+  echo "====> Retrieve landcover data from internet";
+  echo "";
+  wget -O ${LANDCOVER_SQL}.tgz "https://www.dropbox.com/s/ceoxg0lagag3fum/${LANDCOVER_SQL}.tgz?dl=0"
+  tar -xvzf ${LANDCOVER_SQL}.tgz
+fi
 
 psql -d itag -U ${DB_SUPERUSER} << EOF
 DELETE FROM datasources.landcover;
 EOF
 
-psql -d itag -U ${DB_SUPERUSER} -f 2016.11.09-itag_landcover_curated.sql
+psql -d itag -U ${DB_SUPERUSER} -f ${LANDCOVER_SQL}
 
 psql -d itag -U ${DB_SUPERUSER} << EOF
 ALTER TABLE landcover SET SCHEMA datasources;

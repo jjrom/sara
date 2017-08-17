@@ -60,7 +60,6 @@ fi
 
 # Paths are based on $SRCDIR
 ITAG_DATA=${ITAG_DIR}/data
-LANDCOVER_DATA=${ITAG_DIR}/landcover
 ITAG_HOME=${ITAG_DIR}/itag
 
 echo "###########################"
