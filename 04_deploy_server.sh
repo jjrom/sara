@@ -8,7 +8,7 @@
 # Date   : 2017.02.19
 #
 #
-CONFIG=config
+#CONFIG=config
 FORCE=NO
 WWW_USER=nginx:nginx
 PWD=`pwd`

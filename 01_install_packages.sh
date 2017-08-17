@@ -9,7 +9,7 @@
 #
 #
 
-CONFIG=config
+#CONFIG=config
 function showUsage {
     echo ""
     echo "   SARA - Sentinel Australia Regional Access packages installation"
@@ -167,6 +167,8 @@ fi)
 }
 EOF
 
+echo " >>> treacherous replacement of apache by nginx in /etc/passwd! "
+PASSWD_LOC=/etc/passwd; sed -i.bak -e 's,apache:x:48:48:,#apache:x:48:48:,g' -e 's,nginx:x:498:497:,nginx:x:48:48:,g'  $PASSWD_LOC
 
 echo " >>> Start postgres database"
 service postgresql-9.5 start

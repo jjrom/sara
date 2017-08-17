@@ -8,7 +8,7 @@
 # Date   : 2017.07.28
 #
 #
-CONFIG=config
+#CONFIG=config
 PWD=`pwd`
 
 function showUsage {

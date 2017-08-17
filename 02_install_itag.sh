@@ -8,7 +8,7 @@
 # Date   : 2017.02.19
 #
 #
-CONFIG=config
+#CONFIG=config
 PWD=`pwd`
 SRC_DIR=`pwd`
 

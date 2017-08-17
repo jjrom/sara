@@ -4,6 +4,8 @@ import sys
 import os
 import requests
 import glob
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 import xml.etree.ElementTree as ET
 
 # First argument is mandatory - config file

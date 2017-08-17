@@ -3,6 +3,8 @@
 import sys
 import os
 import requests
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 import glob
 import xml.etree.ElementTree as ET
 
