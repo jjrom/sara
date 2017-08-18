@@ -96,6 +96,9 @@ EOF
 
 echo " >>> Create configuration file /etc/nginx/default.d/sara.conf"
 cat <<EOF > /etc/nginx/default.d/sara.conf
+  endfile_max_chunk  2m;
+  aio                on;
+
   location ~ \.php\$ {
       include /etc/nginx/fastcgi_params;
       fastcgi_param   SCRIPT_FILENAME  \$document_root\$fastcgi_script_name;
@@ -108,7 +111,11 @@ cat <<EOF > /etc/nginx/default.d/sara.conf
       rewrite ^/sara.server/1.0/(.*)\$ /sara.server/1.0/index.php?RESToURL=\$1 last; break;
     }
   }
-  # Quicklooks and zip files
+  # path to zip files     
+  location ~ \.zip {
+    root /;     
+  }
+  # Quicklook files
   location ${SARA_DATA_URL} {
     alias ${DATA_ROOT_PATH};
   }
@@ -155,7 +162,7 @@ else
     echo "	rewrite ^/$ \$1/sara.client redirect;"
 fi)
     }
-
+	
     error_page 404 /404.html;
         location = /40x.html {
     }
@@ -167,8 +174,10 @@ fi)
 }
 EOF
 
-echo " >>> treacherous replacement of apache by nginx in /etc/passwd! "
+echo " >>> treacherous replacement of apache by nginx in /etc/passwd and change of /var/lib/nginx gid:uid to apache:apache ! "
 PASSWD_LOC=/etc/passwd; sed -i.bak -e 's,apache:x:48:48:,#apache:x:48:48:,g' -e 's,nginx:x:498:497:,nginx:x:48:48:,g'  $PASSWD_LOC
+chown -R 48:48 /var/lib/nginx/
+chown -R 48:48 /var/log/nginx/
 
 echo " >>> Start postgres database"
 service postgresql-9.5 start
