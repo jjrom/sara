@@ -137,7 +137,7 @@ $(if [ "${SERVER_PROTOCOL}" == "https" ]; then
     echo "    # Turn on SSL goodness as per - https://www.bjornjohansen.no/securing-nginx-ssl"
     echo "    listen  	443 ssl http2;"
     echo "    ssl_certificate_key /etc/pki/tls/private/${SARA_SERVER_URL}.key;"
-    echo "    ssl_certificate /etc/pki/tls/certs/${SARA_SERVER_URL}.crt;"
+    echo "    ssl_certificate /etc/pki/tls/certs/${SARA_SERVER_URL}.combined.crt;"
     echo "    ssl_session_cache shared:SSL:20m;"
     echo "    ssl_session_timeout 180m;"
     echo "    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;"
