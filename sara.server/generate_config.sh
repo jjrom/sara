@@ -64,7 +64,7 @@ return array(
         ),
         'debug' => false,
         'timezone' => '${TIMEZONE}',
-        'protocol' => 'http',
+        'protocol' => '${SERVER_PROTOCOL}',
         'storeQuery' => true,
         'sharedLinkDuration' => 86400,
         'tokenDuration' => 604800,
