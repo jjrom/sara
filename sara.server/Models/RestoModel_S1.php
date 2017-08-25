@@ -118,7 +118,7 @@ class RestoModel_S1 extends RestoModel {
         $zipFile = $dom->getElementsByTagName('ZIPFILE')->item(0);
         $footprint = trim($dom->getElementsByTagName('ESA_TILEOUTLINE_FOOTPRINT_WKT')->item(0)->nodeValue);
         if (stripos($footprint, 'MULTIPOLYGON') !== false) {
-            $polygon = RestoGeometryUtil::wktMultiPolygonToArray(trim($dom->getElementsByTagName('ESA_TILEOUTLINE_FOOTPRINT_WKT')->item(0)->nodeValue));
+	  $polygon = self::WKTMultiPolygonToArray(trim($dom->getElementsByTagName('ESA_TILEOUTLINE_FOOTPRINT_WKT')->item(0)->nodeValue));
             $footprint_type = 'MultiPolygon';
         } else {
             $polygon = RestoGeometryUtil::wktPolygonToArray(trim($dom->getElementsByTagName('ESA_TILEOUTLINE_FOOTPRINT_WKT')->item(0)->nodeValue));
@@ -175,5 +175,71 @@ class RestoModel_S1 extends RestoModel {
         return $feature;
 
     }
+
+    /**                                                                                       
+     * Returns multipolygon array from WKT polygon.                                           
+     *                                                                                        
+     * @param unknown $wktMultiPolygon WKT multipolygon                                       
+     * @throws Exception                                                                      
+     * @return multitype:NULL multipolygon array                                              
+     */                                                                                       
+    public static function WKTMultiPolygonToArray($wktMultiPolygon) {                         
+                                                                                              
+      /*                                                                                    
+       * Result                                                                             
+       */                                                                                   
+      $coordinates = array ();                                                              
+                                                                                              
+      /*                                                                                    
+       * Patterns                                                                           
+       */                                                                                   
+      $lon = $lat = '[-]?[0-9]{1,3}\.?[0-9]*';                                              
+      $values = "($lon $lat)(\s*,\s*$lon $lat)*";                                           
+      $polys = "(\(\s*$values\s*\))(\s*\)\s*,\s*\(\s*\(\s*$values\s*\))*";                  
+      $multipattern = "/^MULTIPOLYGON\s*\(\s*\(\s*($polys)\s*\)\s*\)$/i";                   
+      $pattern = "/^\(\s*($values)\s*\)$/i";                                                
+      if (preg_match($multipattern, $wktMultiPolygon, $multimatches)) {                     
+	if (count($multimatches) >= 1) {                                                  
+                                                                                              
+	  /*                                                                            
+	   * Explodes multipolygon string                                               
+	   */                                                                           
+	  $coordinates = preg_split('/\)\s*,\s*\(/', $multimatches[1]);                 
+                                                                                              
+	  /*                                                                            
+	   * For each polygon                                                           
+	   */                                                                           
+	  for ($j = 0; $j < count($coordinates); $j++) {                                
+	    error_log("Coodinates ".$coordinates[$j]);                                
+	    /*                                                                        
+	     * Checks polygon string                                                  
+	     */                                                                       
+	    if (preg_match($pattern, $coordinates[$j], $matches)) {                   
+	      if (count($matches) >= 1) {                                           
+                                                                                              
+		/*                                                                
+		 * Explodes coordinates string                                    
+		 */                                                               
+		$coordinates[$j] = explode(',', $matches[1]);                    
+                                                                                              
+		/*                                                                
+		 * For each coordinate, stores lon/lat                            
+		 */                                                               
+		for($i = 0; $i < count($coordinates[$j]); $i++) {                 
+		  $coordinates[$j][$i] = explode(' ', $coordinates[$j][$i]);    
+		}                                                                 
+	      }                                                                     
+	    }                                                                         
+	  }                                                                             
+	}                                                                                 
+      }                                                                                     
+      else {                                                                                
+	throw new Exception(__method__ . ': Invalid input WKT');                          
+      }                                                                                     
+      /*                                                                                    
+       * Returns result                                                                     
+       */                                                                                   
+      return $coordinates;                                                                  
+    }                                                                                         
 
 }
