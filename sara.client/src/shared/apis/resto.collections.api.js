@@ -196,42 +196,75 @@ function restoCollectionsAPI($http, rocketServices, rocketCache) {
          */
         function correctWrapDateLine(geometry) {
 
-            var add360, lonPrev, latPrev, lon;
+            var add360, lonPrev, latPrev, lon, lonMin, lonMax;
+            var coordinates = geometry.coordinates; 
+            var ismultipolygon = false; 
+            var widthlimit = 330; // can't have larger longitude span 
 
-            /*
-             * Multipolygon case
-             */
-            for (var i = 0, ii = geometry.coordinates.length; i < ii; i++) {
+            if (typeof coordinates[0][0][0][0] != 'undefined' ) {
+                /*
+                 * Multipolygon case, collapse first dimension
+                 */
+		coordinates = coordinates[0];
+		ismultipolygon = true;
+            }
 
-                add360 = false;
-                lonPrev = geometry.coordinates[i][0][0];
-                latPrev = geometry.coordinates[i][0][1];
+            for (var i = 0, ii = coordinates.length; i < ii; i++) {
 
+                add360 = 0;
+                lonPrev = coordinates[i][0][0];
+                latPrev = coordinates[i][0][1];
+                // lonMin and lonMax will be updated with corrected longitude
+                // Will use this to avoid going over 360 span in longitude, but may fail if the polygon doesn't start with eastern or western end
+                lonMin = lonPrev;
+                lonMax = lonPrev;
                 /*
                  * If Delta(lon(i) - lon(i - 1)) is greater than 180 degrees then add 360 to lon
                  */
-                for (var j = 1, jj = geometry.coordinates[i].length; j < jj; j++) {
-                    lon = geometry.coordinates[i][j][0];
+                for (var j = 1, jj = coordinates[i].length; j < jj; j++) {
+                    console.log("Start with Polygon "+i+" /Point "+j+" "+coordinates[i][j][0]+":"+coordinates[i][j][1]);
+                    lon = coordinates[i][j][0] + add360;
                     if (lon - lonPrev >= 180) {
                         lon = lon - 360;
-                        add360 = true;
-                    }
+                        add360 += -360;
+                    } 
                     else if (lon - lonPrev <= -180) {
                         lon = lon + 360;
-                        add360 = true;
+                        add360 += 360;                        
+                    }
+		    /*
+                     * If lon - lonMin >360 or lon - lonMax <-360, this shouldn't happen
+                     */
+		    if (lon - lonMin > widthlimit) {
+                        lon = lon -360;
+                        add360 -=360;
+                    }
+                    if (lonMax - lon > widthlimit) {
+                        lon = lon +360;
+                        add360 +=360;
                     }
                     lonPrev = lon;
-                    latPrev = geometry.coordinates[i][j][1];
-                    geometry.coordinates[i][j] = [lon, geometry.coordinates[i][j][1]];
+	       	    if (lon < lonMin) {
+			lonMin = lon;
+                    }
+                    if (lon > lonMax) {
+                        lonMax = lon;
+                    }
+                    latPrev = coordinates[i][j][1];
+                    coordinates[i][j] = [lon, coordinates[i][j][1]];
+                    console.log("Corrected to Polygon "+i+" /Point "+j+" "+lon+":"+coordinates[i][j][1]);
                 }
-
-                if (add360) {
-                    for (var j1 = 0, jj1 = geometry.coordinates[i].length; j1 < jj1; j1++) {
-                        geometry.coordinates[i][j1] = [geometry.coordinates[i][j1][0] + 360, geometry.coordinates[i][j1][1]];
+                // Avoid going to < -180
+                if (lonMin < -180  ) {
+                    for (var j1 = 0, jj1 = coordinates[i].length; j1 < jj1; j1++) {
+                        coordinates[i][j1] = [coordinates[i][j1][0] + 360, coordinates[i][j1][1]];
                     }
                 }
             }
-
+            if (ismultipolygon) {
+		coordinates = [coordinates];
+            }
+	    geometry.coordinates = coordinates;
             return geometry;
         }
     }
