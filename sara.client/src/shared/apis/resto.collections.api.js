@@ -222,7 +222,6 @@ function restoCollectionsAPI($http, rocketServices, rocketCache) {
                  * If Delta(lon(i) - lon(i - 1)) is greater than 180 degrees then add 360 to lon
                  */
                 for (var j = 1, jj = coordinates[i].length; j < jj; j++) {
-                    console.log("Start with Polygon "+i+" /Point "+j+" "+coordinates[i][j][0]+":"+coordinates[i][j][1]);
                     lon = coordinates[i][j][0] + add360;
                     if (lon - lonPrev >= 180) {
                         lon = lon - 360;
@@ -252,7 +251,6 @@ function restoCollectionsAPI($http, rocketServices, rocketCache) {
                     }
                     latPrev = coordinates[i][j][1];
                     coordinates[i][j] = [lon, coordinates[i][j][1]];
-                    console.log("Corrected to Polygon "+i+" /Point "+j+" "+lon+":"+coordinates[i][j][1]);
                 }
                 // Avoid going to < -180
                 if (lonMin < -180  ) {
