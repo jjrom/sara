@@ -4,8 +4,6 @@ import sys
 import os
 import requests
 import glob
-from requests.packages.urllib3.exceptions import InsecureRequestWarning
-requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 import xml.etree.ElementTree as ET
 
 # First argument is mandatory - config file
@@ -67,5 +65,5 @@ for productType in ['GRD', 'SLC','OCN','RAW']:
                     ET.SubElement(root, 'PATH').text = PATH
 
                 # Post updated metadata file to resto
-                response = requests.post(restourl, data=ET.tostring(root), auth=(username, password), verify=False)
+                response = requests.post(restourl, data=ET.tostring(root), auth=(username, password))
                 print metadataFile, response.text

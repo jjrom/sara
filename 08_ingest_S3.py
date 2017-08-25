@@ -3,8 +3,6 @@
 import sys
 import os
 import requests
-from requests.packages.urllib3.exceptions import InsecureRequestWarning
-requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 import glob
 import xml.etree.ElementTree as ET
 
@@ -69,5 +67,5 @@ for instrument in ['OLCI', 'SLSTR', 'SRAL']:
                     	ET.SubElement(root, 'PATH').text = PATH
 
                     # Post updated metadata file to resto
-                    response = requests.post(restourl, data=ET.tostring(root), auth=(username, password), verify=False)
+                    response = requests.post(restourl, data=ET.tostring(root), auth=(username, password))
                     print metadataFile, response.text
