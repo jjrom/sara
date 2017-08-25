@@ -358,7 +358,7 @@ angular.module('app.component.explore',[])
             /*
              * Update main map
              */
-            rocketMap.updateLayer(self.correctFeaturesJSON(data.features), {
+            rocketMap.updateLayer(data.features, {
                 'append': append
             });
             rocketMap.zoomOnLayer();
@@ -739,46 +739,16 @@ angular.module('app.component.explore',[])
         self.correctFeaturesJSON = function (features) {
             var i,k;
             for (i = 0; i < features.length; i++) {
-                var topind = -1;
-                var secind = -1;
-                var toplat = -100;
-                var seclat = -100;
                 for (k = 0; k < features[i].geometry.coordinates[0].length; k++) {
-                    if (features[i].geometry.coordinates[0][k][1] > toplat) {
-                        secind = topind;
-                        seclat = toplat;
-                        topind = k;
-                        toplat = features[i].geometry.coordinates[0][k][1];
-                    } else {
-                        if (features[i].geometry.coordinates[0][k][1] > seclat) {
-                            secind = k;
-                            seclat = features[i].geometry.coordinates[0][k][1];
-                        }
-                    }
                     if(features[i].geometry.coordinates[0][k][0] > 180){
                         features[i].geometry.coordinates[0][k][0] += 180 ;
                         features[i].geometry.coordinates[0][k][0] %= 360 ;
                         features[i].geometry.coordinates[0][k][0] -= 180 ;
                     }
                 }
-                console.log("Top 2 index "+topind+", "+secind+"; top 2 lat "+toplat+", "+seclat);
                 for (k = 0; k < features[i].geometry.coordinates[0].length-1; k++) {
-                    if (Math.abs(features[i].geometry.coordinates[0][k][0] - features[i].geometry.coordinates[0][k+1][0]) >360 ) {
-                       if (features[i].geometry.coordinates[0][k][0] > features[i].geometry.coordinates[0][k+1][0]) {
-                           features[i].geometry.coordinates[0][k+1][0] += 360;
-                       } else {
-                           features[i].geometry.coordinates[0][k+1][0] -= 360;
-                       }
-                    }
-                    if (Math.abs(features[i].geometry.coordinates[0][k][0] - features[i].geometry.coordinates[0][k+1][0]) > 180 && !(seclat>80 && (k === topind && k+1 === secind || k === secind && k+1 === topind))) {
-                        console.log("Feature "+i+" point "+k+" before:"+features[i].geometry.coordinates[0][k][0]+":"+features[i].geometry.coordinates[0][k][1]+","+features[i].geometry.coordinates[0][k+1][0]+":"+features[i].geometry.coordinates[0][k+1][1]);
-	                if (features[i].geometry.coordinates[0][k][0] > features[i].geometry.coordinates[0][k+1][0]) {
-                             features[i].geometry.coordinates[0][k+1][0] += 360;
-                        } else {
-                             features[i].geometry.coordinates[0][k+1][0] -= 360;
-                        }
-	               	console.log("Feature "+i+" point "+k+" after:"+features[i].geometry.coordinates[0][k][0]+":"+features[i].geometry.coordinates[0][k][1]+","+features[i].geometry.coordinates[0][k+1][0]+":"+features[i].geometry.coordinates[0][k+1][1]);
-                    }
+                    if (Math.abs(features[i].geometry.coordinates[0][k][0] - features[i].geometry.coordinates[0][k+1][0]) > 180)
+                        features[i].geometry.coordinates[0][k+1][0] += 360;
                 }
             }
             return features;
