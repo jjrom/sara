@@ -13,7 +13,7 @@
                 <th ng-bind="'cart.actions' | translate"></th>
             </tr>
             <tr ng-repeat="(key, item) in cartCtrl.content">
-                <td style="text-align: center;"><img class="thumbs" alt="No quick-look" ng-src="{{ ::item.properties.quicklook}}" title="{{ ::item.properties.productIdentifier }}" ng-click="cartCtrl.view(item.properties.collection, item.id)"></td>
+                <td style="text-align: center;"><img class="thumbs" alt="No quick-look" ng-src="{{ ::item.properties.thumbnail}}" title="{{ ::item.properties.productIdentifier }}" ng-click="cartCtrl.view(item.properties.collection, item.id)"></td>
                 <td>
                     <span class="light">{{'collection' | translate | uppercase}}</span> : {{ ::item.properties.collection }}<br/>
                     <span class="light">{{'location' | translate | uppercase}}</span> : {{ ::item.properties.keywords | extractlocation }}<br/>

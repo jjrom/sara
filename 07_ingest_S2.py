@@ -53,14 +53,15 @@ for year in ['2015', '2016', '2017']:
             tree = ET.parse(metadataFile)
             root = tree.getroot()
 
-            # Add identifier from metadata file name
-            IDENTIFIER = os.path.basename(metadataFile)[:-4]
-            ET.SubElement(root, 'IDENTIFIER').text = IDENTIFIER
+            if not root.find('IDENTIFIER'):
+		# Add identifier from metadata file name
+            	IDENTIFIER = os.path.basename(metadataFile)[:-4]
+            	ET.SubElement(root, 'IDENTIFIER').text = IDENTIFIER
 
-            # Add zip path from metadata path
-            PATH = os.path.dirname(metadataFile).split('Sentinel-2')[1]
-            ET.SubElement(root, 'PATH').text = PATH
+            	# Add zip path from metadata path
+            	PATH = os.path.dirname(metadataFile).split('Sentinel-2')[1]
+            	ET.SubElement(root, 'PATH').text = PATH
 
             # Post updated metadata file to resto
             response=requests.post(restourl, data=ET.tostring(root), auth=(username, password))
-            print response.text
+            print metadataFile, response.text

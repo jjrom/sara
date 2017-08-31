@@ -9,7 +9,7 @@
 #
 #
 
-CONFIG=config
+#CONFIG=config
 function showUsage {
     echo ""
     echo "   SARA - Sentinel Australia Regional Access packages installation"
@@ -96,6 +96,9 @@ EOF
 
 echo " >>> Create configuration file /etc/nginx/default.d/sara.conf"
 cat <<EOF > /etc/nginx/default.d/sara.conf
+  endfile_max_chunk  2m;
+  aio                on;
+
   location ~ \.php\$ {
       include /etc/nginx/fastcgi_params;
       fastcgi_param   SCRIPT_FILENAME  \$document_root\$fastcgi_script_name;
@@ -108,7 +111,11 @@ cat <<EOF > /etc/nginx/default.d/sara.conf
       rewrite ^/sara.server/1.0/(.*)\$ /sara.server/1.0/index.php?RESToURL=\$1 last; break;
     }
   }
-  # Quicklooks and zip files
+  # path to zip files     
+  location ~ \.zip {
+    root /;     
+  }
+  # Quicklook files
   location ${SARA_DATA_URL} {
     alias ${DATA_ROOT_PATH};
   }
@@ -120,6 +127,57 @@ cat <<EOF > /etc/nginx/default.d/sara.conf
     return 404;
   }
 EOF
+
+
+echo " >>> Edit configuration file /etc/nginx/conf.d/default.conf"
+cat <<EOF > /etc/nginx/conf.d/default.conf
+server {
+    listen       80 default_server;
+$(if [ "${SERVER_PROTOCOL}" == "https" ]; then
+    echo "    # Turn on SSL goodness as per - https://www.bjornjohansen.no/securing-nginx-ssl"
+    echo "    listen  	443 ssl http2;"
+    echo "    ssl_certificate_key /etc/pki/tls/private/${SARA_SERVER_URL}.key;"
+    echo "    ssl_certificate /etc/pki/tls/certs/${SARA_SERVER_URL}.combined.crt;"
+    echo "    ssl_session_cache shared:SSL:20m;"
+    echo "    ssl_session_timeout 180m;"
+    echo "    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;"
+    echo "    ssl_prefer_server_ciphers on;"
+    echo "    ssl_ciphers ECDH+AESGCM:ECDH+AES256:ECDH+AES128:DHE+AES128:!ADH:!AECDH:!MD5;"
+    echo "    add_header Strict-Transport-Security \"max-age=31536000\" always;"
+else
+	echo "    listen       [::]:80 default_server;"
+fi)
+    server_name  _;
+    root         /usr/share/nginx/html;
+
+    # Load configuration files for the default server block.
+    include /etc/nginx/default.d/*.conf;
+
+    # always re-direct to the https:// link
+    location / {
+	#Force nginx to redirect to the SARA page 
+$(if [ "${SERVER_PROTOCOL}" == "https" ]; then
+    echo "	rewrite ^/$ https://\$host/sara.client redirect;"
+else
+    echo "	rewrite ^/$ \$1/sara.client redirect;"
+fi)
+    }
+	
+    error_page 404 /404.html;
+        location = /40x.html {
+    }
+
+    error_page 500 502 503 504 /50x.html;
+        location = /50x.html {
+    }
+
+}
+EOF
+
+echo " >>> treacherous replacement of apache by nginx in /etc/passwd and change of /var/lib/nginx gid:uid to apache:apache ! "
+PASSWD_LOC=/etc/passwd; sed -i.bak -e 's,apache:x:48:48:,#apache:x:48:48:,g' -e 's,nginx:x:498:497:,nginx:x:48:48:,g'  $PASSWD_LOC
+chown -R 48:48 /var/lib/nginx/
+chown -R 48:48 /var/log/nginx/
 
 echo " >>> Start postgres database"
 service postgresql-9.5 start

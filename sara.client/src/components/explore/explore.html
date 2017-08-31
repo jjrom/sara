@@ -279,7 +279,7 @@
                 </tr>
                 <tr ng-repeat="feature in exploreCtrl.features">
                     <td style="text-align: center; padding: 10px 0px 10px 0px;">
-                        <img class="thumbs" alt="No quick-look" ng-src="{{ ::feature.properties.quicklook}}"
+                        <img class="thumbs" alt="No quick-look" ng-src="{{ ::feature.properties.thumbnail}}"
                              title="{{ ::feature.properties.productIdentifier }}"
                              ng-click="exploreCtrl.view('metadata', true, feature.properties.collection, feature.id)">
                     </td>

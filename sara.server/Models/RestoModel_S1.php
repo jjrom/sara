@@ -1,29 +1,32 @@
 <?php
 
 /**
- * resto Sentinel-2 single tile model .
+ * resto Sentinel-1 model .
  * 
- * Input metadata is an XML file provided by Geoscience Australia modified by python script
- * to add IDENTIFIER and PATH elements
+ * Input metadata is an XML file provided by Geoscience Australia
  *
- *  cat /g/data3/fj7/Copernicus/Sentinel-1/C-SAR/SLC/2014/2014-10/05S125E-10S130E/S1A_IW_SLC__1SSV_20141015T095954_20141015T100019_002838_003337_97EC.xml
- *  
- *         <?xml version='1.0'?>
- *         <AUSCOPHUB_SAFE_FILEDESCRIPTION>
- *             <SATELLITE name='S1A' />
- *             <CENTROID longitude='99.2799525844' latitude='-1.07725099673' />
- *             <ESA_TILEOUTLINE_FOOTPRINT_WKT>
- *                 POLYGON (([...]))
- *             </ESA_TILEOUTLINE_FOOTPRINT_WKT>
- *             <ACQUISITION_TIME start_datetime_utc='2014-10-04 23:04:48.570950' stop_datetime_utc='2014-10-04 23:05:03.324225' />
- *             <POLARISATION values='VH,VV' />
- *             <SWATH values='IW' />
- *             <ORBIT_NUMBERS relative='164' absolute='2686' />
- *             <ZIPFILE size_bytes='1005024846' md5_local='C372514F33A95DD0F5D38CCFC77E3E64' />
- *             <!-- Last elements added by python script -->
- *             <IDENTIFIER>S1A_IW_SLC__1SSV_20141015T095954_20141015T100019_002838_003337_97EC</IDENTIFIER>
- *             <PATH>/C-SAR/SLC/2014/2014-10/05S125E-10S130E</PATH>
- *         </AUSCOPHUB_SAFE_FILEDESCRIPTION>
+ *  cat /g/data3/fj7/Copernicus/Sentinel-1/C-SAR/SLC/2017/2017-08/30S135E-35S140E/S1A_IW_SLC__1SDV_20170811T201209_20170811T201239_017880_01DFBE_C3CE.xml
+ *
+ *  <?xml version='1.0'?>
+ *  <AUSCOPHUB_SAFE_FILEDESCRIPTION>
+ *    <IDENTIFIER>S1A_IW_SLC__1SDV_20170811T201209_20170811T201239_017880_01DFBE_C3CE</IDENTIFIER>
+ *    <PATH>/C-SAR/SLC/2017/2017-08/30S135E-35S140E</PATH>
+ *    <SATELLITE name='S1A' />
+ *    <INSTRUMENT>C-SAR</INSTRUMENT>
+ *    <PRODUCT_TYPE>SLC</PRODUCT_TYPE>
+ *    <PROCESSING_LEVEL>LEVEL-1</PROCESSING_LEVEL>
+ *   <CENTROID longitude='137.023498309' latitude='-30.723540327' />
+ *   <ESA_TILEOUTLINE_FOOTPRINT_WKT>
+ *     POLYGON ((138.032639 -31.912498,135.46048 -31.296803,136.042984 -29.527283,138.566879 -30.130522,138.032639 -31.912498))
+ *    </ESA_TILEOUTLINE_FOOTPRINT_WKT>
+ *    <ACQUISITION_TIME start_datetime_utc='2017-08-11 20:12:09.416341' stop_datetime_utc='2017-08-11 20:12:39.232185' />
+ *    <POLARISATION values='VH,VV' />
+ *    <SWATH values='IW1,IW2,IW3' />
+ *    <MODE value='IW' />
+ *    <ORBIT_NUMBERS relative='133' absolute='17880' />
+ *    <PASS direction='Descending' />
+ *    <ZIPFILE size_bytes='4589962599' md5_local='4F50C2E30CF82F73106F2FD9C1BE7389' />
+ *  </AUSCOPHUB_SAFE_FILEDESCRIPTION>
  * 
  */
 class RestoModel_S1 extends RestoModel {
@@ -113,7 +116,14 @@ class RestoModel_S1 extends RestoModel {
         $time = $dom->getElementsByTagName('ACQUISITION_TIME')->item(0);
         $orbits = $dom->getElementsByTagName('ORBIT_NUMBERS')->item(0);
         $zipFile = $dom->getElementsByTagName('ZIPFILE')->item(0);
-        $polygon = RestoGeometryUtil::wktPolygonToArray(trim($dom->getElementsByTagName('ESA_TILEOUTLINE_FOOTPRINT_WKT')->item(0)->nodeValue));
+        $footprint = trim($dom->getElementsByTagName('ESA_TILEOUTLINE_FOOTPRINT_WKT')->item(0)->nodeValue);
+        if (stripos($footprint, 'MULTIPOLYGON') !== false) {
+	  $polygon = self::WKTMultiPolygonToArray(trim($dom->getElementsByTagName('ESA_TILEOUTLINE_FOOTPRINT_WKT')->item(0)->nodeValue));
+            $footprint_type = 'MultiPolygon';
+        } else {
+            $polygon = RestoGeometryUtil::wktPolygonToArray(trim($dom->getElementsByTagName('ESA_TILEOUTLINE_FOOTPRINT_WKT')->item(0)->nodeValue));
+            $footprint_type = 'Polygon';
+        }
 	
     	/*
     	 * Compatible with previous xml version
@@ -139,7 +149,7 @@ class RestoModel_S1 extends RestoModel {
         $feature = array(
             'type' => 'Feature',
             'geometry' => array(
-                'type' => 'Polygon',
+                'type' => $footprint_type,
                 'coordinates' => array($polygon),
             ),
             'properties' => array(
@@ -165,5 +175,71 @@ class RestoModel_S1 extends RestoModel {
         return $feature;
 
     }
+
+    /**                                                                                       
+     * Returns multipolygon array from WKT polygon.                                           
+     *                                                                                        
+     * @param unknown $wktMultiPolygon WKT multipolygon                                       
+     * @throws Exception                                                                      
+     * @return multitype:NULL multipolygon array                                              
+     */                                                                                       
+    public static function WKTMultiPolygonToArray($wktMultiPolygon) {                         
+                                                                                              
+      /*                                                                                    
+       * Result                                                                             
+       */                                                                                   
+      $coordinates = array ();                                                              
+                                                                                              
+      /*                                                                                    
+       * Patterns                                                                           
+       */                                                                                   
+      $lon = $lat = '[-]?[0-9]{1,3}\.?[0-9]*';                                              
+      $values = "($lon $lat)(\s*,\s*$lon $lat)*";                                           
+      $polys = "(\(\s*$values\s*\))(\s*\)\s*,\s*\(\s*\(\s*$values\s*\))*";                  
+      $multipattern = "/^MULTIPOLYGON\s*\(\s*\(\s*($polys)\s*\)\s*\)$/i";                   
+      $pattern = "/^\(\s*($values)\s*\)$/i";                                                
+      if (preg_match($multipattern, $wktMultiPolygon, $multimatches)) {                     
+	if (count($multimatches) >= 1) {                                                  
+                                                                                              
+	  /*                                                                            
+	   * Explodes multipolygon string                                               
+	   */                                                                           
+	  $coordinates = preg_split('/\)\s*,\s*\(/', $multimatches[1]);                 
+                                                                                              
+	  /*                                                                            
+	   * For each polygon                                                           
+	   */                                                                           
+	  for ($j = 0; $j < count($coordinates); $j++) {                                
+	    error_log("Coodinates ".$coordinates[$j]);                                
+	    /*                                                                        
+	     * Checks polygon string                                                  
+	     */                                                                       
+	    if (preg_match($pattern, $coordinates[$j], $matches)) {                   
+	      if (count($matches) >= 1) {                                           
+                                                                                              
+		/*                                                                
+		 * Explodes coordinates string                                    
+		 */                                                               
+		$coordinates[$j] = explode(',', $matches[1]);                    
+                                                                                              
+		/*                                                                
+		 * For each coordinate, stores lon/lat                            
+		 */                                                               
+		for($i = 0; $i < count($coordinates[$j]); $i++) {                 
+		  $coordinates[$j][$i] = explode(' ', $coordinates[$j][$i]);    
+		}                                                                 
+	      }                                                                     
+	    }                                                                         
+	  }                                                                             
+	}                                                                                 
+      }                                                                                     
+      else {                                                                                
+	throw new Exception(__method__ . ': Invalid input WKT');                          
+      }                                                                                     
+      /*                                                                                    
+       * Returns result                                                                     
+       */                                                                                   
+      return $coordinates;                                                                  
+    }                                                                                         
 
 }

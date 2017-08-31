@@ -8,7 +8,7 @@
 # Date   : 2017.02.19
 #
 #
-CONFIG=config
+#CONFIG=config
 WWW_USER=nginx:nginx
 PWD=`pwd`
 SRC_DIR=`pwd`

@@ -358,7 +358,7 @@ angular.module('app.component.explore',[])
             /*
              * Update main map
              */
-            rocketMap.updateLayer(self.correctFeaturesJSON(data.features), {
+            rocketMap.updateLayer(data.features, {
                 'append': append
             });
             rocketMap.zoomOnLayer();
@@ -765,7 +765,7 @@ angular.module('app.component.explore',[])
                 title: 'Close'
             },
             viewMetadata: {
-                title: 'Download',
+                title: 'Details',
                 callback: function (feature) {
                     if (feature) {
                         rocketServices.go('result', {

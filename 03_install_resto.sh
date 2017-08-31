@@ -8,7 +8,7 @@
 # Date   : 2017.02.19
 #
 #
-CONFIG=config
+#CONFIG=config
 FORCE=NO
 WWW_USER=www-data:www-data
 SRC_DIR=`pwd`

@@ -45,7 +45,7 @@ password = config['RESTO_ADMIN_PASSWORD']
 #  
 #
 for instrument in ['OLCI', 'SLSTR', 'SRAL']:
-    for productType in ['OL_1_EFR___', 'OL_1_ERR___', 'SR_1_SRA___', 'SR_1_SRA_A_', 'SR_1_SRA_BS', 'SR_2_LAN___', 'SR_2_WAT___']:
+    for productType in ['OL_1_EFR___', 'OL_1_ERR___', 'SL_1_RBT___', 'SL_2_LST___', 'SL_2_WST__', 'SR_1_SRA___', 'SR_1_SRA_A_', 'SR_1_SRA_BS', 'SR_2_LAN___', 'SR_2_WAT___']:
         for year in ['2014', '2015', '2016', '2017']:
             for month in ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']:
 
@@ -57,14 +57,15 @@ for instrument in ['OLCI', 'SLSTR', 'SRAL']:
                     tree = ET.parse(metadataFile)
                     root = tree.getroot()
 
-                    # Add identifier from metadata file name
-                    IDENTIFIER = os.path.basename(metadataFile)[:-4]
-                    ET.SubElement(root, 'IDENTIFIER').text = IDENTIFIER
+	            if not root.find('IDENTIFIER'):
+		        # Add identifier from metadata file name
+                    	IDENTIFIER = os.path.basename(metadataFile)[:-4]
+                    	ET.SubElement(root, 'IDENTIFIER').text = IDENTIFIER
 
-                    # Add zip path from metadata path
-                    PATH = os.path.dirname(metadataFile).split('Sentinel-3')[1]
-                    ET.SubElement(root, 'PATH').text = PATH
+                    	# Add zip path from metadata path
+                    	PATH = os.path.dirname(metadataFile).split('Sentinel-3')[1]
+                    	ET.SubElement(root, 'PATH').text = PATH
 
                     # Post updated metadata file to resto
                     response = requests.post(restourl, data=ET.tostring(root), auth=(username, password))
-                    print response.text
+                    print metadataFile, response.text
