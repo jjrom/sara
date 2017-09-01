@@ -96,11 +96,11 @@ class RestoModel_S2 extends RestoModel {
          * Compatible with previous xml version
          */
         $instrument = trim($dom->getElementsByTagName('INSTRUMENT')->item(0)->nodeValue);
-        if ($instrument->length == 0) {$instrument = $explodedPath[1];}
+        if (empty($instrument)) {$instrument = $explodedPath[1];}
 	$processingLevel = trim($dom->getElementsByTagName('PROCESSING_LEVEL')->item(0)->nodeValue);
-        if ($processingLevel->length ==0) {$processingLevel = $explodedPath[2];}
+        if (empty($processingLevel)) {$processingLevel = $explodedPath[2];}
 	$productType = trim($dom->getElementsByTagName('PRODUCT_TYPE')->item(0)->nodeValue);
-        if ($productType->length ==0) {$productType = 'S2' . $instrument . substr($processingLevel, 1);}
+        if (empty($productType)) {$productType = 'S2' . $instrument . substr($processingLevel, 1);}
                 
         /*
          * Initialize feature

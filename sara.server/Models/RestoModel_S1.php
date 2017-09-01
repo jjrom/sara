@@ -129,17 +129,17 @@ class RestoModel_S1 extends RestoModel {
     	 * Compatible with previous xml version
     	 */
     	$instrument = trim($dom->getElementsByTagName('INSTRUMENT')->item(0)->nodeValue);
-        if ($instrument->length == 0) {
+        if (empty($instrument)) {
             $instrument = $explodedPath[1];
         }
 
         $productType = trim($dom->getElementsByTagName('PRODUCT_TYPE')->item(0)->nodeValue);
-        if ($productType->length == 0) {
+        if (empty($productType)) {
             $productType = $explodedPath[2];
         }
 
         $processingLevel = trim($dom->getElementsByTagName('PROCESSING_LEVEL')->item(0)->nodeValue);
-    	if ($processingLevel->length == 0) {
+    	if (empty($processingLevel)) {
             $processingLevel = 'LEVEL-1';
         }
 
