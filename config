@@ -9,7 +9,7 @@
 #
 # Thus default values gives:
 #
-#  http://130.56.243.96/sara.server/1.0
+#  https://copernicus-dev.nci.org.au/sara.server/1.0
 ##
 SERVER_PROTOCOL=https
 SARA_SERVER_URL=copernicus-dev.nci.org.au
