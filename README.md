@@ -2,43 +2,25 @@
 
 ## Description
 
-Three environments
+The Sentinel Australia Regional Access (SARA) is the data access portal for Australian Copernicus Regional Data Hub. It provides free access to data from all Sentinel satellites for the South-East Asia and South Pacific region.
+This repository contains the codebase for SARA, including customized installations of resto, itag and rocket.
 
-* copernicus-dev (copernicus-dev.nci.org.au)
-* copernicus-test (copernicus-test.nci.org.au)
-* copernicus-prod (copernicus.nci.org.au)
- 
-All VMs are CentOS 6. Jerome, Hilmi and Thomas will have root on the copernicus-dev and copernicus-test VMs.
- 
-Jerome, Hilmi and Thomas will use copernicus-dev as their sandbox
- 
-Jerome and Geomatsys on completing a development cycle will deploy a complete solution into copernicus-test. Once a test cycle is complete, install scripts are then used for copernicus-prod (production).
- 
-copernicus-dev and copernicus-test will be firewalled to 193.54.123.223 and 194.199.172.* for ssh access and HTTP/S access.
- 
-Fang and Joseph will install copernicus-prod (copernicus.nci.org.au). Joseph and Fang will have root on copernicus-prod. Prior to general release HTTP/S will be firewalled to 193.54.123.223, 194.199.172.* and GA/NCI network ranges.
- 
-All VMs will have read-only NFS access to /g/data2/fj7/Copernicus which is where all our Sentinel-1,2,3 data resides.
- 
-It would be good to know how to monitor the whole stack once it has gone into production i.e. log locations and error messages to look out for, and corrective actions to take. 
 
 ## Installation
 
-Connect to development server
-
-	ssh root@130.56.243.96
+Follow instructions below to install SARA on a CentOS 6 VM.
 
 We suppose that the sources will be stored under $SARA_SRC
 
     mkdir -v /root/sara/src
-	export SARA_SRC=/root/sara/src/sara
+    export SARA_SRC=/root/sara/src/sara
 
 ### Initialize sources repository
 
-**These command should be launch to initialize the SARA sources (i.e. for an install from scratch)**
-**These command needs a valid account on the private https://github.com/jjrom/sara.git directory**
+**These command should be executed to initialize the SARA sources (i.e. for an installation from scratch)**
+**These command needs access to the https://github.com/jjrom/sara.git directory**
 
-	# Clone repository to "sara" directory
+    # Clone repository to "sara" directory
     git clone https://github.com/jjrom/sara.git $SARA_SRC
 
     # Avoid to ask for password everytime you update the local repository
@@ -61,10 +43,10 @@ The most important file is ${SARA_SRC}/config - it contains all the configuratio
     # Install CentOS packages and configure postgres/nginx services
     ./01_install_packages.sh -C config
 
-    # Install itag - [WARNING] this is quite long !
+    # Install itag - [WARNING] this can take quite a long time!
     ./02_install_itag.sh -C config  
 
-    # Install itag landcover - [WARNING] this is quite long !
+    # Install itag landcover - [WARNING] this can take quite a long time!
     ./02bis_install_landcover.sh -C config  
 
     # Install resto
@@ -95,7 +77,7 @@ The most important file is ${SARA_SRC}/config - it contains all the configuratio
 
 ## FAQ
 
-### How to i delete a collection ?
+### How to delete a collection ?
 
 Only empty collection can be deleted to avoid accidental deletion.
 [Note] Deletion can be done "on the fly" i.e. no need to stop server - modification are propagated immediately
@@ -122,9 +104,4 @@ This command is useful if you change the propertiesMapping in JSON collection de
 
     # Update Sentinel-3 collection
     curl -X PUT -H "Content-Type: application/json" -d @/path/to/new/S1.json http://admin:admin@localhost/sara.server/1.0/collections/S3
-
-
-
-
-
-           
+ 
