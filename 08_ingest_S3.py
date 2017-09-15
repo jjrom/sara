@@ -52,20 +52,6 @@ for instrument in ['OLCI', 'SLSTR', 'SRAL']:
                 files = glob.glob(config['DATA_ROOT_PATH'] + 'Sentinel-3/' + instrument + '/' + productType + '/' + year + '/' + year + '-' + month + '/*/*.xml')
                 
                 for metadataFile in files:
-
-                    # Read metadata XML
-                    tree = ET.parse(metadataFile)
-                    root = tree.getroot()
-
-	            if not root.find('IDENTIFIER'):
-		        # Add identifier from metadata file name
-                    	IDENTIFIER = os.path.basename(metadataFile)[:-4]
-                    	ET.SubElement(root, 'IDENTIFIER').text = IDENTIFIER
-
-                    	# Add zip path from metadata path
-                    	PATH = os.path.dirname(metadataFile).split('Sentinel-3')[1]
-                    	ET.SubElement(root, 'PATH').text = PATH
-
-                    # Post updated metadata file to resto
-                    response = requests.post(restourl, data=ET.tostring(root), auth=(username, password))
-                    print metadataFile, response.text
+                    with open(metadataFile) as mf:                                                       
+                        response = requests.post(restourl, data=mf.read(), auth=(username, password))    
+                    print metadataFile, response.text                                                    

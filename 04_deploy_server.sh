@@ -88,6 +88,9 @@ ${SRC_DIR}/sara.server/generate_config.sh -C ${CONFIG} > ${SARA_SERVER_ENDPOINT}
 echo " ==> Set ${SARA_SERVER_ENDPOINT} rights to ${WWW_USER}"
 chown -R ${WWW_USER} ${SARA_SERVER_ENDPOINT}
 
+echo " ==> Update st_splitdateline function"
+${SRC_DIR}/sara.server/update_splitdateline.sh -d ${SARA_DB_NAME} -u ${DB_SUPERUSER}
+
 echo " ==> Update property mappings for collections"
 
 # change JSON file properties

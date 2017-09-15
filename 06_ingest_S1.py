@@ -48,22 +48,10 @@ for productType in ['GRD', 'SLC','OCN','RAW']:
         for month in ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']:
 
             files = glob.glob(config['DATA_ROOT_PATH'] + 'Sentinel-1/C-SAR/' + productType + '/' + year + '/' + year + '-' + month + '/*/*.xml')
-            
+
             for metadataFile in files:
-
-                # Read metadata XML
-                tree = ET.parse(metadataFile)
-                root = tree.getroot()
-
-                if not root.find('IDENTIFIER'):
-                    # Add identifier from metadata file name
-                    IDENTIFIER = os.path.basename(metadataFile)[:-4]
-                    ET.SubElement(root, 'IDENTIFIER').text = IDENTIFIER
-
-                    # Add zip path from metadata path
-                    PATH = os.path.dirname(metadataFile).split('Sentinel-1')[1]
-                    ET.SubElement(root, 'PATH').text = PATH
-
+                
                 # Post updated metadata file to resto
-                response = requests.post(restourl, data=ET.tostring(root), auth=(username, password))
+                with open(metadataFile) as mf:
+                    response = requests.post(restourl, data=mf.read(), auth=(username, password))
                 print metadataFile, response.text

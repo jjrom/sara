@@ -209,8 +209,7 @@ class RestoModel_S1 extends RestoModel {
 	  /*                                                                            
 	   * For each polygon                                                           
 	   */                                                                           
-	  for ($j = 0; $j < count($coordinates); $j++) {                                
-	    error_log("Coodinates ".$coordinates[$j]);                                
+	  for ($j = 0; $j < count($coordinates); $j++) {
 	    /*                                                                        
 	     * Checks polygon string                                                  
 	     */                                                                       
