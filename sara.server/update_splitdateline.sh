@@ -58,13 +58,18 @@ DECLARE
   line_geom GEOMETRY;
   lastx FLOAT;
   lasty FLOAT;
-  xmin FLOAT := 360;
-  xmax FLOAT := -360;
+--  xmin FLOAT := 360;
+--  xmax FLOAT := -360;
   xp FLOAT;
   yp FLOAT;
   xoffset FLOAT :=0;
-  -- Maximum range in longitude; seems to work for Sentinel-3
-  xrangelimit FLOAT :=330;
+  -- Maximum eastward(westward) longitude change when going eastward(westward); seems to work for Sentinel-3
+  -- Also used to check if a change-in-direction, close to either north or south pole, has already occurred 
+  xgaplimit FLOAT :=60;
+  -- Sentinel-3 polygon crossing north pole starts eastward; a polygon crossing south pole starts westward
+  eastward INTEGER :=0;
+  -- Only check above for first such big gap
+  firstgap BOOLEAN :=TRUE;
   pp INTEGER;
   nn INTEGER;
   -- Densify polygon when necessary
@@ -75,7 +80,8 @@ DECLARE
 BEGIN
 
   -- Works for SRID 4326; Polygon and Multipolygons;
-  -- Sentinel-3 large polygons ordered west to east;
+  -- Sentinel-3 large polygons ordered west to east (CCW), close to north pole;
+  -- Sentinel-3 large polygons ordered east to west (CCW), close to south pole;
 
   -- Extract vertices from polygon or multipolygons 
   SELECT INTO multi_line_geom ST_Boundary(geom_in);
@@ -86,8 +92,8 @@ BEGIN
     SELECT INTO line_geom ST_GeometryN(multi_line_geom, pp); 
     lastx := ST_X(ST_PointN(line_geom,1));
     lasty := ST_Y(ST_PointN(line_geom,1));
-    xmin := lastx;
-    xmax := lastx;
+--    xmin := lastx;
+--    xmax := lastx;
 
     -- Loop through points to eliminate discontinuity
     FOR nn IN 2 .. ST_NPoints(line_geom) LOOP
@@ -104,13 +110,17 @@ BEGIN
       END IF;
 
       -- However, the polygon may be sparsely defined close to the poles
-      -- So, impose a limit on the longitude range
-      IF (xp - xmin > xrangelimit) THEN
+      IF firstgap and ((xp - lastx > xgaplimit and eastward <0) or (lastx - xp > xgaplimit and eastward >0)) THEN              
+        firstgap := FALSE;
+      -- If there's no big gap yet
+      ELSIF (xp - lastx > xgaplimit and eastward >0 and firstgap) THEN 
         xp := xp -360;
         xoffset := xoffset - 360;
-      ELSIF (xmax - xp > xrangelimit) THEN
+        firstgap := FALSE;
+      ELSIF (lastx -xp > xgaplimit and eastward <0 and firstgap) THEN
         xp := xp+360;
         xoffset := xoffset+360;
+        firstgap := FALSE;
       END IF;
 
       -- If the gap is too big, will add a point in between
@@ -118,21 +128,31 @@ BEGIN
       IF (ABS(xp - lastx) > 180) THEN
         insertx := (xp + lastx)/2;
         IF yp > 0 THEN 
-          inserty := GREATEST(yp, lasty, 89.9);
+          inserty := GREATEST(yp, lasty, 90.);
         ELSE
-          inserty := LEAST(yp, lasty, -89.9);
+          inserty := LEAST(yp, lasty, -90.);
         END IF;
         insertn := nn-1;
       END IF;
 
       -- Continue to go through the points
       SELECT INTO line_geom ST_SetPoint(line_geom,nn-1,ST_MakePoint(xp,yp));
-      IF (xp < xmin) THEN
-        xmin := xp;
+
+--      IF (xp < xmin) THEN
+--        xmin := xp;
+--      END IF;
+--      IF (xp > xmax) THEN
+--        xmax := xp;
+--      END IF;
+
+      -- Determine if tracing eastward or westward
+      -- In the initial track
+      IF (eastward = 0 and lastx -xp >0.1) THEN
+        eastward := -1;
+      ELSIF (eastward = 0 and xp-lastx > 0.1) THEN
+        eastward := 1;
       END IF;
-      IF (xp > xmax) THEN
-        xmax := xp;
-      END IF;
+
       lastx := xp;
       lasty := yp;
     END LOOP;
@@ -166,6 +186,11 @@ BEGIN
   END LOOP;
 
   RETURN multi_geom_out;
+
+-- If any of above failed, revert to use original polygon
+-- This prevents ingestion error, but may potentially lead to incorrect spatial query.
+EXCEPTION  WHEN OTHERS THEN
+  RETURN geom_in;
 
 END;
 \$\$ LANGUAGE 'plpgsql';
