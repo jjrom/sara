@@ -92,6 +92,11 @@ BEGIN
     SELECT INTO line_geom ST_GeometryN(multi_line_geom, pp); 
     lastx := ST_X(ST_PointN(line_geom,1));
     lasty := ST_Y(ST_PointN(line_geom,1));
+    -- reset values
+    xoffset := 0;
+    insertn := -1;
+    eastward := 0;
+    firstgap := TRUE;
 --    xmin := lastx;
 --    xmax := lastx;
 
@@ -110,7 +115,7 @@ BEGIN
       END IF;
 
       -- However, the polygon may be sparsely defined close to the poles
-      IF firstgap and ((xp - lastx > xgaplimit and eastward <0) or (lastx - xp > xgaplimit and eastward >0)) THEN              
+      IF firstgap and ((xp - lastx > xgaplimit and eastward <0) or (lastx - xp > xgaplimit and eastward >0)) THEN
         firstgap := FALSE;
       -- If there's no big gap yet
       ELSIF (xp - lastx > xgaplimit and eastward >0 and firstgap) THEN 

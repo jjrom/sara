@@ -195,11 +195,15 @@ function restoCollectionsAPI($http, rocketServices, rocketCache) {
          * @param {array} geometry
          */
         function correctWrapDateLine(geometry) {
-
-            var add360, lonPrev, latPrev, lon, lonMin, lonMax;
+	    /*
+	     * Algorithm below is similar to that implemented in sara st_splitdateline 
+	     */
+            var add360, lonPrev, latPrev, lon, lonMin;
             var coordinates = geometry.coordinates; 
             var ismultipolygon = false; 
-            var widthlimit = 330; // can't have larger longitude span 
+            var xgaplimit = 60;
+            var firstgap = true;
+            var eastward = 0;
 
             if (typeof coordinates[0][0][0][0] != 'undefined' ) {
                 /*
@@ -214,10 +218,10 @@ function restoCollectionsAPI($http, rocketServices, rocketCache) {
                 add360 = 0;
                 lonPrev = coordinates[i][0][0];
                 latPrev = coordinates[i][0][1];
-                // lonMin and lonMax will be updated with corrected longitude
-                // Will use this to avoid going over 360 span in longitude, but may fail if the polygon doesn't start with eastern or western end
+                firstgap = true; //reset
+                eastward = 0;
                 lonMin = lonPrev;
-                lonMax = lonPrev;
+
                 /*
                  * If Delta(lon(i) - lon(i - 1)) is greater than 180 degrees then add 360 to lon
                  */
@@ -232,22 +236,28 @@ function restoCollectionsAPI($http, rocketServices, rocketCache) {
                         add360 += 360;                        
                     }
 		    /*
-                     * If lon - lonMin >360 or lon - lonMax <-360, this shouldn't happen
+                     * This part deals with polygons sparsely defined close to the poles
                      */
-		    if (lon - lonMin > widthlimit) {
-                        lon = lon -360;
-                        add360 -=360;
-                    }
-                    if (lonMax - lon > widthlimit) {
+                    if (firstgap && ((lon - lonPrev > xgaplimit && eastward < 0) || (lonPrev - lon > xgaplimit && eastward >0))) {
+                        firstgap = false;
+                    } else if (lon - lonPrev > xgaplimit && eastward >0 && firstgap) {
+			lon = lon - 360;
+                        add360 += -360;
+                        firstgap = false;
+		    } else if (lonPrev - lon > xgaplimit && eastward < 0 && firstgap) {
                         lon = lon +360;
                         add360 +=360;
+                        fistgap = false;
+                    }
+                    // starting eastward or westward?
+                    if (eastward === 0 && lonPrev - lon >0.1) {
+                        eastward = -1;
+                    } else if (eastward === 0 && lon - lonPrev > 0.1) {
+                        eastward = 1;
                     }
                     lonPrev = lon;
 	       	    if (lon < lonMin) {
 			lonMin = lon;
-                    }
-                    if (lon > lonMax) {
-                        lonMax = lon;
                     }
                     latPrev = coordinates[i][j][1];
                     coordinates[i][j] = [lon, coordinates[i][j][1]];
