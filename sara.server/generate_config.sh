@@ -87,7 +87,8 @@ return array(
         'port' => 5432,
         'resultsPerPage' => 20,
       	'sortKeys' => array('startdate'),
-      	'hashing' => 'sha1',
+        'hashing' => 'crypt',
+        'hashsalt' => '${RESTO_SALT}',
         'user' => '${RESTO_USER}',
         'password' => '${RESTO_PASSWORD}'
     ),

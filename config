@@ -55,6 +55,7 @@ UPLOAD_DIRECTORY=/tmp/resto_uploads
 ##
 
 DB_SUPERUSER=postgres
+RESTO_SALT=saltforcrypt
 RESTO_USER=resto
 RESTO_PASSWORD=resto
 ITAG_USER=itag
